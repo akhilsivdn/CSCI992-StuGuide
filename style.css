@@ -1,0 +1,225 @@
+html,
+body {
+  margin: 0;
+}
+
+#App {
+  font-family: sans-serif;
+
+  /* Give app full page to work with */
+  
+}
+
+
+/*Header styles*/
+.headerContainer{
+  width:100%;
+  height: 85px;
+  background: lightblue
+}
+
+.left{
+  float:left;
+  /* width:100px; */
+  padding: 0px 15px 0px 0px;
+}
+
+.right{
+  float:right;
+  padding:15px 10px 0px 0px;
+}
+
+.center{
+  margin: 0 auto;
+  /* width: 100px; */
+  display: flex;
+}
+
+.change .bar1 {
+  -webkit-transform: rotate(-51deg) translate(-11px, 11px);
+  transform: rotate(-51deg) translate(-11px, 11px);
+}
+
+.change .bar2 {
+  opacity: 0;
+}
+
+.change .bar3 {
+  -webkit-transform: rotate(45deg) translate(-10px, -15px);
+  transform: rotate(45deg) translate(-10px, -15px)
+}
+
+.title{
+  color:black;
+  padding: 6px 0px 10px 35px !important;
+  /* text-align: -webkit-left; */
+  /* vertical-align: middle; */
+  /* display: inline-block; */
+  font-size: 50px;
+  font-weight: 500;
+}
+
+.barContainer{
+ padding: 15px 0px 20px 10px;
+}
+
+.bar1, .bar2, .bar3 {
+  width: 45px;
+  height: 5px;
+  background-color: black;
+  margin: 12px 0;
+  transition: 0.4s;
+}
+
+.titleLink{
+  color:black !important;
+  text-decoration: none !important;
+}
+
+/*End - Header styles*/
+
+
+
+/*HomeContent section*/
+
+.weatherDiv{
+  float: right;
+  display: flex;
+}
+
+.mapStyle{
+  width: 50% !important;
+  height: 50% !important;
+}
+
+.buttonClass{
+  bottom: 0;
+  float: right;
+}
+
+.abc{
+  display: flex;
+  overflow: scroll;
+}
+
+.eventdetail{
+  margin-top: 25px;
+  text-align: center;
+}
+
+ .event{
+  width: 220px;
+  border: black;
+  border-style: solid;
+} 
+
+
+
+/*End - HomeContent section*/
+
+
+/*Login, Register pages*/
+
+.loginSection{
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction:column;
+}
+
+.inputfield{
+  border-bottom-color: bisque;
+  border-right: none;
+  border-left: none;
+  border-top: none;
+  outline: none;
+  text-align: center;
+}
+
+.pos{
+  margin-top: 25%;
+  width: 100%;
+}
+
+/*End = Login, Register pages*/
+.block {
+  width: 100px;
+  /*float: left;*/
+    display: inline-block;
+    zoom: 1;
+}
+
+#page-wrap {
+  text-align: center;
+
+  /* Prevent sidebar from showing a scrollbar on page */
+  overflow: auto;
+}
+
+/* Individual item */
+.bm-item {
+  display: inline-block;
+
+  /* Our sidebar item styling */
+  text-decoration: none;
+  margin-bottom: 10px;
+  color: #d1d1d1;
+  transition: color 0.2s;
+}
+
+/* Change color on hover */
+.bm-item:hover {
+  color: white;
+}
+
+/* The rest copied directly from react-burger-menu docs */
+
+/* Position and sizing of burger button */
+.bm-burger-button {
+  position: fixed;
+  width: 36px;
+  height: 30px;
+  left: 36px;
+  top: 36px;
+}
+
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+  background: #373a47;
+}
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+  height: 24px;
+  width: 24px;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+  background: #bdc3c7;
+}
+
+/* General sidebar styles */
+.bm-menu {
+  background: #373a47;
+  padding: 2.5em 1.5em 0;
+  font-size: 1.15em;
+}
+
+/* Morph shape necessary with bubble or elastic */
+.bm-morph-shape {
+  fill: #373a47;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+  color: #b8b7ad;
+}
+
+/* Styling of overlay */
+.bm-overlay {
+  background: rgba(0, 0, 0, 0.3);
+}
