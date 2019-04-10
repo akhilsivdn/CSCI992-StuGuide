@@ -24,7 +24,7 @@ export class MoreEventComponent extends React.Component {
             <div>{this.state.data.description.text}</div>
             <hr />
             <hr />
-            <a href={this.state.data.url}>Book Now</a>
+            <a target="_blank"  href={this.state.data.url}>Book Now</a>
         </div>
         );
     }

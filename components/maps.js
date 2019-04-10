@@ -1,21 +1,18 @@
 import React, { Component } from 'react';
-import { GoogleApiWrapper } from 'google-maps-react';
-import GoogleMapReact from 'google-map-react';
-
-
+import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
 
 export class MapComponent extends Component {
-  
-  constructor() {
-    super()
+
+  constructor(props) {
+    super(props)
 
     this.state = {
       latitude: '',
       longitude: '',
     }
   }
-  
-  componentDidMount() {
+
+  componentWillMount() {
     this.getMyLocation()
   }
 
@@ -30,20 +27,33 @@ export class MapComponent extends Component {
       }, (error) => {
         this.setState({ latitude: 'err-latitude', longitude: 'err-longitude' })
       })
+
+      console.log(this.state.latitude);
+      console.log(this.state.longitude);
     }
   }
 
 
   render() {
+
     return (
-      <div style={{ height: '50vh', width: '100%' , clear:'both'}}>
-         <GoogleMapReact
-          bootstrapURLKeys={{ key: 'AIzaSyBi99vISytb1d0NAogNjpwgGy_wElH2ly0'}}
+      <div style={{ height: '50vh', width: '100%', clear: 'both', position: 'relative' }}>
+
+        <Map
+          google={this.props.google}
           center={{
             lat: this.state.latitude,
             lng: this.state.longitude
           }}
-          defaultZoom={14}></GoogleMapReact>
+          zoom={this.props.zoom}>
+
+          {this.props.markers.map(marker => (
+            <Marker key={marker.id} id={marker.id}
+              position={{ lat: marker.latitude, lng: marker.longitude }}
+            />
+          ))}
+
+        </Map>
       </div>
     );
   }

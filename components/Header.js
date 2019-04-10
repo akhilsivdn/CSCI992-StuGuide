@@ -24,7 +24,6 @@ export class Header extends React.Component{
     showMyComponent(){
         return false;
     }
-
    
     render(){
         return(

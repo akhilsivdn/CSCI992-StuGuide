@@ -3,7 +3,7 @@ import { render } from "react-dom";
 
 import { Header } from "./components/Header";
 import {LandingComponent }  from "./components/landing";
-import { SearchComponent } from "./components/search";
+import  SearchComponent  from "./components/search";
 import { LoginComponent } from "./components/login";
 import {RegisterComponent} from "./components/register";
 import { MoreEventComponent } from "./components/moreEvent";

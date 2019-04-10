@@ -76,6 +76,11 @@ body {
   text-decoration: none !important;
 }
 
+
+
+
+
+
 /*End - Header styles*/
 
 
@@ -144,7 +149,49 @@ body {
   width: 100%;
 }
 
+
+.form-control {
+  font-size: 2rem;
+  padding: 25px 15px;
+}
+
+
+
 /*End = Login, Register pages*/
+
+
+/*Search page styles*/
+
+.searchResults{
+  margin-top: 10%;
+}
+
+.searchResultsGrid{
+  display: flex;
+  margin-top: 2%;
+  
+}
+
+.search_result_name{
+    font-weight: bold;
+}
+
+.search_result_address{
+    font-weight: 600;
+}
+
+/* .search_result_price{
+    
+} */
+
+.details{
+  line-height: 30px;
+  margin-left: 2%;
+}
+
+/*End - Search page styles*/
+
+
 .block {
   width: 100px;
   /*float: left;*/
