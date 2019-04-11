@@ -10,6 +10,20 @@ body {
   
 }
 
+@import '~bootstrap/dist/css/bootstrap.css';
+
+.btn {
+	padding: 3px 15px 5px 15px;
+}
+
+.red {
+	color: red;
+}
+
+input {
+	border: 1px solid #CCC;
+}
+
 
 /*Header styles*/
 .headerContainer{
@@ -190,6 +204,148 @@ body {
 }
 
 /*End - Search page styles*/
+
+
+
+/*TopBar - menu styles*/
+
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.topbar {
+  position: fixed;
+  background-color: #56B7CF;
+  height: 60px;
+  width: 100%;
+  line-height: 60px;
+  vertical-align: middle;
+ 
+  -webkit-box-shadow: 0px 2px 2px 0px rgba(143,119,143,1);
+  -moz-box-shadow: 0px 2px 2px 0px rgba(143,119,143,1);
+  box-shadow: 0px 2px 2px 0px rgba(143,119,143,1);
+}
+
+.topbar > button {
+  padding: 6px 8px;
+  margin-right: 20px;
+}
+
+/* drawer */
+.drawer {
+  position: fixed;
+  /*need to recheck this value*/
+  top: 85px;
+  /* left: 0; */
+  bottom: 0;
+  width: 0%;
+  height: 100%;
+  z-index: 999;
+  transition: 0.2s;
+  overflow-x: hidden;
+  box-shadow: none;
+  /* box-shadow: 0px 8px 10px -5px rgba(0,0,0,0.2), 0px 16px 24px 2px rgba(0,0,0,0.14), 0px 6px 30px 5px rgba(0,0,0,0.12); */
+   background-color: #FFF;
+}
+
+.show-drawer {
+  width: 300px;
+}
+
+.drawer-head {
+  height: 100px;
+  background-color: #9934A3;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0,0,0,0.3);
+  z-index: 1; 
+}
+
+.drawer-menu {
+  display: block;
+  margin: 20px;
+}
+
+.drawer-menu li {
+  list-style: none;
+  min-height: 40px;
+}
+
+.search {
+  outline: none;
+  height: 40px;
+  padding: 0 10px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.topbar > button {
+  height: 35px;
+  border: none;
+  background-color: #FFF;
+  border-radius: 3px;
+  line-height: normal;
+}
+
+.main-content {
+  padding: 100px 50px;
+  text-align: center;
+}
+
+/* resturants */
+.box {
+  border: 1px solid #CCC;
+  border-radius: 5px;
+  height: auto;
+  text-align: left;
+  -webkit-box-shadow: 0px 2px 4px 0px rgba(181,172,181,1);
+  -moz-box-shadow: 0px 2px 4px 0px rgba(181,172,181,1);
+  box-shadow: 0px 2px 4px 0px rgba(181,172,181,1);
+  padding-bottom: 20px;
+}
+.box > img {
+  width: 100%;
+  height: 160px;
+  border: none;
+}
+.box-content {
+  padding: 5px 10px;
+}
+.box-title {
+  display: block;
+  font-weight: 600;
+}
+.box-desc {
+  display: block;
+  font-size: 13px;
+  color: #4e4e4e;
+}
+
+
+
+/*End - TopBar - menu styles*/
+
+
+
+
 
 
 .block {

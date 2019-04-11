@@ -17,10 +17,17 @@ class Application extends React.Component{
     }
 
     render() {
+
+        //Fix to be added - sweet spot ??
+        // const backdrop = (window.location.href.includes('register')) 
+		// 	? '' : (
+		// 		<Header/>
+		// 	); 
+            
         return(
             <div className="container">
             <BrowserRouter> 
-                 <Header  />
+                 <Header/>
                 <Switch>
                     <Route path="/" component={LoginComponent} exact/>
                     <Route path="/register" component={RegisterComponent} />
