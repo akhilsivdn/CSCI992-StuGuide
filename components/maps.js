@@ -39,7 +39,7 @@ export class MapComponent extends Component {
     return (
       <div style={{ height: '50vh', width: '100%', clear: 'both', position: 'relative' }}>
 
-        <Map
+        <Map disableDefaultUI={true}
           google={this.props.google}
           center={{
             lat: this.state.latitude,
@@ -51,6 +51,7 @@ export class MapComponent extends Component {
             <Marker key={marker.id} id={marker.id}
               position={{ lat: marker.latitude, lng: marker.longitude }}
             />
+
           ))}
 
         </Map>

@@ -18,10 +18,10 @@ class DrawerComponent extends React.Component {
 
 	render() {
 		const drawer = (this.props.open) ? 'show-drawer' : 'hide-drawer';
-		const backdrop = (this.props.open) 
+		const backdrop = (this.props.open)
 			? (
 				<div className="backdrop container" onClick={() => this.close()}></div>
-			) 
+			)
 			: '';
 
 		return (
@@ -30,16 +30,18 @@ class DrawerComponent extends React.Component {
 				<div className={'drawer ' + drawer}>
 					<div className="drawer-head"></div>
 					<ul className="drawer-menu">
-						{/* <li>
-							<input type="search" className="search" placeholder="Search" />
-						</li> */}
 						<li>
 							<Link to="/home">Home</Link>
 						</li>
 
 						<li>
-							<Link to="/resturants">Resturants</Link>
+							<Link to="/restaurants">Restaurants &amp; Cafes</Link>
 						</li>
+
+						<li>
+							<Link to="/transport">Transport</Link>
+						</li>
+
 						{/* <li>
 							<Link to="/event">Bus and Train Stations</Link>
 						</li>

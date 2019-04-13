@@ -8,7 +8,7 @@ import { LoginComponent } from "./login";
 
 
 
-export class Header extends React.Component {
+export class HeaderComponent extends React.Component {
 
     constructor() {
         super();

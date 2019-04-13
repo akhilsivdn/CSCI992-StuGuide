@@ -1,14 +1,15 @@
 import React from "react";
 import { render } from "react-dom";
 
-import { Header } from "./components/Header";
+import { HeaderComponent } from "./components/Header";
 import {LandingComponent }  from "./components/landing";
 import  SearchComponent  from "./components/search";
+import  TransportComponent  from "./components/transport";
 import { LoginComponent } from "./components/login";
 import {RegisterComponent} from "./components/register";
 import { MoreEventComponent } from "./components/moreEvent";
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-
+import {RestaurantsComponent} from "./components/restaurants";
 
 
 class Application extends React.Component{
@@ -27,12 +28,14 @@ class Application extends React.Component{
         return(
             <div className="container">
             <BrowserRouter> 
-                 <Header/>
+                 <HeaderComponent/>
                 <Switch>
                     <Route path="/" component={LoginComponent} exact/>
                     <Route path="/register" component={RegisterComponent} />
                     <Route path="/home" component={LandingComponent} />
                     <Route path="/search" component={SearchComponent} />
+                    <Route path="/transport" component={TransportComponent} />
+                    <Route path="/restaurants" component={RestaurantsComponent} />
                     <Route path="/more" component={MoreEventComponent} />
                 </Switch>
                

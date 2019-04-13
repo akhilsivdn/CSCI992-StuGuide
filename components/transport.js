@@ -3,7 +3,8 @@ import React from "react";
 import { GoogleApiWrapper } from 'google-maps-react';
 import MapComponent from "./maps";
 
-export class SearchComponent extends React.Component {
+//Not completed.
+export class TransportComponent extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -21,7 +22,7 @@ export class SearchComponent extends React.Component {
         if (e &&
             e.target.value) {
             //allow-cross-origin header problem. so this fix. will change if we get some time later.
-            const url = 'https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-34.4075307%20150.8667624%20&radius=25000&keyword=' + e.target.value + '&key=AIzaSyBi99vISytb1d0NAogNjpwgGy_wElH2ly0';
+            const url = 'https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-34.4075307%20150.8667624%20&radius=2500&type=bus_station&key=AIzaSyBi99vISytb1d0NAogNjpwgGy_wElH2ly0';
             fetch(url)
                 .then(res => res.json())
                 .then(data => this.setState({
@@ -36,10 +37,6 @@ export class SearchComponent extends React.Component {
                 pos: []
             });
         }
-    }
-
-    DisplayPrice() {
-        return '$';
     }
 
     render() {
@@ -69,30 +66,8 @@ export class SearchComponent extends React.Component {
                 <div className="searchResults">
                     {
                         this.state.data.map(function (place, i) {
-                            var price = '';
-                            if (place.price_level) {
-                                switch (place.price_level) {
-                                    case 1:
-                                        price = '$';
-                                        break;
-                                    case 2:
-                                        price = '$$';
-                                        break;
-                                    case 3:
-                                        price = '$$$';
-                                        break;
-                                    case 4:
-                                        price = '$$$$';
-                                        break;
-                                    case 5:
-                                        price = '$$$$$';
-                                        break;
-                                }
-                            }
-                            var fn = (place.opening_hours && place.opening_hours.open_now) ? "Open" : (place.opening_hours ? "Closed" : "");
+                  
                             var placeUrl = 'https://www.google.com/maps/place/?q=place_id:' + place.place_id;
-                           
-                           
                             return (
                                 <div className="searchResultsGrid">
                                     <img src={place.icon} height='50px'></img>
@@ -114,4 +89,4 @@ export class SearchComponent extends React.Component {
 }
 export default GoogleApiWrapper({
     apiKey: 'AIzaSyBi99vISytb1d0NAogNjpwgGy_wElH2ly0'
-})(SearchComponent);
+})(TransportComponent);
