@@ -3,7 +3,7 @@ import React from "react";
 import { GoogleApiWrapper } from 'google-maps-react';
 import MapComponent from "./maps";
 
-export class RestaurantsComponent extends React.Component {
+export class StoresComponent extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -20,7 +20,7 @@ export class RestaurantsComponent extends React.Component {
     FilteredList() {
         //allow-cross-origin header problem. so this fix. will change if we get some time later.
 
-        var types = "cafe|restaurant";
+        var types = "convenience_store";
 
         const url = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-34.4075307%20150.8667624&radius=5000&rankBy=distance&types=" + types + "&sensor=true&key=AIzaSyBi99vISytb1d0NAogNjpwgGy_wElH2ly0";
 
@@ -127,4 +127,4 @@ export class RestaurantsComponent extends React.Component {
 }
 export default GoogleApiWrapper({
     apiKey: 'AIzaSyBi99vISytb1d0NAogNjpwgGy_wElH2ly0'
-})(RestaurantsComponent);
+})(StoresComponent);

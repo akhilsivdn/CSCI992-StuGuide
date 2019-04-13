@@ -42,10 +42,14 @@ class DrawerComponent extends React.Component {
 							<Link to="/transport">Transport</Link>
 						</li>
 
-						{/* <li>
-							<Link to="/event">Bus and Train Stations</Link>
-						</li>
 						<li>
+							<Link to="/groceries">Groceries</Link>
+						</li>
+
+						<li>
+							<Link to="/stores">Covenient Stores</Link>
+						</li> 
+						{/*<li>
 							<Link to="/parkings">Parkings</Link>
 						</li> */}
 					</ul>
