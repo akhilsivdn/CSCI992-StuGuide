@@ -9,8 +9,9 @@ export class TransportComponent extends React.Component {
         super();
         this.state = {
             data: [],
-            curr: '',
-            pos: []
+            origin: '',
+            destination: '',
+            template: ''
         }
     }
 
@@ -18,71 +19,149 @@ export class TransportComponent extends React.Component {
 
     }
 
-    FilteredList(e) {
-        if (e &&
-            e.target.value) {
-            //allow-cross-origin header problem. so this fix. will change if we get some time later.
-            const url = 'https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-34.4075307%20150.8667624%20&radius=2500&type=bus_station&key=AIzaSyBi99vISytb1d0NAogNjpwgGy_wElH2ly0';
-            fetch(url)
-                .then(res => res.json())
-                .then(data => this.setState({
-                    data: data.results
-                }
-                ));
-        }
+    SetOrigin(e) {
+        this.setState({
+            origin: e.target.value
+        });
+    }
+    SetDestination(e) {
+        this.setState({
+            destination: e.target.value
+        });
+    }
 
-        else {
-            this.setState({
-                data: [],
-                pos: []
-            });
+
+    GetTransitData(e) {
+
+
+        // var ori = 'University of Wollongong';
+        // var depa = 'Penny Whistlers, Kiama'
+
+        var ori = this.state.origin;
+        var depa = this.state.destination;
+
+
+        //allow-cross-origin header problem. so this fix. will change if we get some time later.
+        const url = 'https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=' + ori + '&destination=' + depa + '&mode=transit&key=AIzaSyBi99vISytb1d0NAogNjpwgGy_wElH2ly0';
+        console.log(url);
+        fetch(url)
+            .then(res => res.json())
+            .then(data => this.setState({
+                data: data.routes
+            }
+            )).then(() => {
+                this.displayResults();
+                console.log(this.state.data);
+            })
+    }
+
+    shouldComponentUpdate() {
+        return true;
+    }
+
+
+    displayResults() {
+        const stylee = (
+            <div className="searchResults">
+                {
+                    this.state.data && this.state.data.map(function (route, i) {
+                        var deptime = route.legs[0].departure_time ?
+                            (<div>Departure time: {route.legs[0].departure_time.text}</div>) : '';
+                        var arrtime = route.legs[0].arrival_time ?
+                            (<div>Departure time: {route.legs[0].arrival_time.text}</div>) : '';
+                        return (
+                            <div className="searchResultsGrid showRoute">
+                                {deptime}
+                                {arrtime}
+                                <div>Total distance: {route.legs[0].distance.text}</div>
+                                <div>Total duration: {route.legs[0].duration.text}</div>
+                                {
+                                    route.legs[0].steps.map(function (step, i) {
+
+                                        const deparrture_time_stop = step.transit_details
+                                            ? (
+                                                <div className="transitBlock">
+                                                    <span>Transit details</span>
+                                                    <img src={step.transit_details.line.vehicle.icon} height='50px' width='50px' />
+                                                    <span>
+                                                        Take {step.transit_details.line.short_name}
+                                                        from {step.transit_details.departure_stop.name}
+                                                        at {step.transit_details.departure_time.text}
+                                                    </span>
+                                                    <span>Arrive at {step.transit_details.arrival_stop.name}
+                                                        at {step.transit_details.arrival_time.text}
+                                                    </span>
+
+                                                    {/*                                                    
+                                                    <span>Transit departure stop: </span>
+                                                    <span>Transit departure stop: </span> */}
+                                                </div>
+                                            )
+                                            : '';
+
+                                        const arrival_time_stop = step.transit_details
+                                            ? (
+                                                ''
+                                                // <div>
+                                                //     <span>Transit arrival stop: {step.transit_details.arrival_stop.name}</span>
+                                                //     <span>Transit arrival stop: {step.transit_details.arrival_time.text}</span>
+                                                // </div>
+                                            )
+                                            : '';
+
+
+                                        return (
+
+                                            <div className="searchResultsGrid showRoute">
+                                                <div className="stepId">Step {i + 1}</div>
+
+                                                <div>
+                                                    <span className="durationText"> {step.duration.text} : </span>
+                                                    <span>{step.html_instructions}</span>
+                                                </div>
+
+                                                {/* <div>Step distance: {step.distance.text}</div>
+                                                <div>Step duration: {step.duration.text}</div>
+                                                <div>Travel mode: {step.travel_mode}</div> */}
+
+                                                {deparrture_time_stop}
+                                                {arrival_time_stop}
+
+                                                {/* <div>Instruction: {step.html_instructions}</div> */}
+                                            </div>
+                                        );
+                                    })
+                                }
+                            </div>
+                        );
+                    })
+                }
+            </div>
+        );
+
+        this.setState({
+            template: stylee
         }
+        );
+
+        return stylee;
     }
 
     render() {
 
-        var pos1 = [];
-
-        if (this && this.state.data.length > 0) {
-            this.state.data.map(function (place, i) {
-                pos1.push({ latitude: place.geometry.location.lat, longitude: place.geometry.location.lng })
-            })
-        }
-        else {
-            //will change this later
-            pos1.push({ latitude: -34.4075307, longitude: 150.8667624 })
-        }
-
-        this.state.pos = pos1;
-
         return (
             <div>
 
-                <MapComponent markers={this.state.pos} zoom={10} />
+                <input type="text" className="form-control form-control-lg" placeholder="Type in your starting point"
+                    onChange={(e) => this.SetOrigin(e)} />
 
-                <input type="text" className="form-control form-control-lg" placeholder="Search"
-                    onChange={(e) => this.FilteredList(e)} />
+                <input type="text" className="form-control form-control-lg" placeholder="Type in your destination point"
+                    onChange={(e) => this.SetDestination(e)} />
 
-                <div className="searchResults">
-                    {
-                        this.state.data.map(function (place, i) {
-                  
-                            var placeUrl = 'https://www.google.com/maps/place/?q=place_id:' + place.place_id;
-                            return (
-                                <div className="searchResultsGrid">
-                                    <img src={place.icon} height='50px'></img>
-                                    <div className="details">
-                                        <div className="search_result_name">{place.name} </div>
-                                        <div className="search_result_address">{place.vicinity} </div>
-                                        <button>
-                                            <a target="_blank" href={placeUrl}>Get Directions</a>
-                                        </button>
-                                    </div>
-                                </div>
-                            );
-                        })
-                    }
-                </div>
+                <button className="getTransitButton" onClick={(e) => this.GetTransitData(e)}>Calculate transit data</button>
+
+                {this.state.template}
+
             </div>
         )
     }

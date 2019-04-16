@@ -11,8 +11,9 @@ import { MoreEventComponent } from "./components/moreEvent";
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { RestaurantsComponent } from "./components/restaurants";
 import { GroceriesComponent } from "./components/groceries";
-import {StoresComponent} from "./components/stores";
-
+import { StoresComponent } from "./components/stores";
+import { CommonComponent } from "./components/common";
+import { SettingsComponent } from "./components/settings";
 
 class Application extends React.Component {
     constructor() {
@@ -20,12 +21,6 @@ class Application extends React.Component {
     }
 
     render() {
-
-        //Fix to be added - sweet spot ??
-        // const backdrop = (window.location.href.includes('register')) 
-        // 	? '' : (
-        // 		<Header/>
-        // 	); 
 
         return (
             <div className="container">
@@ -36,11 +31,14 @@ class Application extends React.Component {
                         <Route path="/register" component={RegisterComponent} />
                         <Route path="/home" component={LandingComponent} />
                         <Route path="/search" component={SearchComponent} />
-                        <Route path="/transport" component={TransportComponent} />
-                        <Route path="/restaurants" component={RestaurantsComponent} />
-                        <Route path="/groceries" component={GroceriesComponent} />
-                        <Route path="/stores" component={StoresComponent} />
+                        <Route path="/medical" component={CommonComponent} /> 
+                        <Route path="/restaurants" component={CommonComponent} />
+                        <Route path="/groceries" component={CommonComponent} />
+                        <Route path="/stores" component={CommonComponent} />
+                        <Route path="/lawyers" component={CommonComponent} />
                         <Route path="/more" component={MoreEventComponent} />
+                        <Route path="/transit" component={TransportComponent} />
+                        <Route path="/settings" component={SettingsComponent} />
                     </Switch>
 
                 </BrowserRouter>

@@ -203,6 +203,10 @@ input {
   margin-left: 2%;
 }
 
+.form_search{
+  margin-top: 3%;
+}
+
 /*End - Search page styles*/
 
 
@@ -340,6 +344,13 @@ body {
 }
 
 
+.title_common_menu{
+  margin-top: 3%;
+  margin-bottom: 3%;
+  font-size: x-large;
+  font-weight: 600;
+} 
+
 
 /*End - TopBar - menu styles*/
 
@@ -368,9 +379,40 @@ display: inline-block;
 
 
 
+
+
 /*End - Restaurants, cafes page styles*/
 
 
+/*Transport component - styles*/
+
+.stepId{
+background: red;
+display: inline-block;
+border-radius: 10px;
+}
+
+.durationText{
+font-weight: 700;
+}
+
+.getTransitButton{
+  margin: 3%;
+  font-size: larger;
+  border-radius: 15px;
+  padding: 5px;
+}
+
+.transitBlock{
+  display: flex;
+  flex-direction: column;
+}
+
+.showRoute{
+  display: block;
+}
+
+/*End - Transport component - styles*/
 
 .block {
   width: 100px;

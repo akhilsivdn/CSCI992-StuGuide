@@ -60,10 +60,11 @@ export class SearchComponent extends React.Component {
 
         return (
             <div>
+                <div className="title_common_menu">Search for a place to know more..</div>
 
                 <MapComponent markers={this.state.pos} zoom={10} />
 
-                <input type="text" className="form-control form-control-lg" placeholder="Search"
+                <input type="text" className="form-control form-control-lg form_search" placeholder="Search for a place"
                     onChange={(e) => this.FilteredList(e)} />
 
                 <div className="searchResults">
