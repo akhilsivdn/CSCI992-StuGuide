@@ -1,12 +1,15 @@
 import React from "react";
 import axios from 'axios';
-import {Link} from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 export class RegisterComponent extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {value: ''};
+        this.state = {
+            value: '',
+            redirect: false
+        };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -19,10 +22,11 @@ export class RegisterComponent extends React.Component {
 
 
     handleChange(event) {
-        this.setState({value: event.target.value});
+        this.setState({ value: event.target.value });
     }
 
     handleSubmit(event) {
+        var _this = this;
         event.preventDefault();
 
         const transformRequest = (jsonData = {}) =>
@@ -38,14 +42,20 @@ export class RegisterComponent extends React.Component {
             password_confirm: data.get('password_confirm')
         };
 
-        axios.post('/api/v1/auth/register', transformRequest(postBody), {
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                }
+        //change this later after service is pushed live
+        var isDebug = true;
+        var url = isDebug ? 'http://124.168.38.203:82/api/v1/auth/register' : '/api/v1/auth/register'
+
+        axios.post(url, transformRequest(postBody), {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
             }
+        }
         ).then(function (response) {
-            if(response.data.status === 'success') {
-                alert('successfully registered')
+            if (response.data.status === 'success') {
+                _this.setState({
+                    redirect: true
+                });
             } else {
                 alert(response.data.payload.error)
             }
@@ -56,14 +66,19 @@ export class RegisterComponent extends React.Component {
     }
 
     render() {
+
+        //redirect to home on succesful registration.
+        if (this.state.redirect) {
+            return <Redirect push to="/home" />;
+        }
         return (
             <form onSubmit={this.handleSubmit}>
                 <div className="loginSection">
-                    <input placeholder="User name" className="inputfield" type="text" name="username"/>
-                    <input placeholder="Email" className="inputfield" type="text" name="email"/>
-                    <input placeholder="Password" className="inputfield" type="password" name="password"/>
+                    <input placeholder="User name" className="inputfield" type="text" name="username" />
+                    <input placeholder="Email" className="inputfield" type="text" name="email" />
+                    <input placeholder="Password" className="inputfield" type="password" name="password" />
                     <input placeholder="Confirm password" className="inputfield" type="password"
-                           name="password_confirm"/>
+                        name="password_confirm" />
                     <button className="pos">Submit</button>
                 </div>
             </form>
