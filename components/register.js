@@ -67,9 +67,9 @@ export class RegisterComponent extends React.Component {
 
     render() {
 
-        //redirect to home on succesful registration.
+        //redirect to login on succesful registration.
         if (this.state.redirect) {
-            return <Redirect push to="/home" />;
+            return <Redirect push to="/login" />;
         }
         return (
             <form onSubmit={this.handleSubmit}>
