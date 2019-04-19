@@ -14,6 +14,7 @@ import { GroceriesComponent } from "./components/groceries";
 import { StoresComponent } from "./components/stores";
 import { CommonComponent } from "./components/common";
 import { SettingsComponent } from "./components/settings";
+import { TripPlannerComponent } from "./components/tripplanner";
 
 class Application extends React.Component {
     constructor() {
@@ -39,6 +40,7 @@ class Application extends React.Component {
                         <Route path="/more" component={MoreEventComponent} />
                         <Route path="/transit" component={TransportComponent} />
                         <Route path="/settings" component={SettingsComponent} />
+                        <Route path="/tripplanner" component={TripPlannerComponent} />
                     </Switch>
 
                 </BrowserRouter>

@@ -10,34 +10,30 @@ export class CommonComponent extends React.Component {
 
         this.state = {
             data: [],
-            curr: '',
             pos: [],
             str: '',
-            title: ''
+            title: '',
+            placeArray: []
         }
     }
 
     componentDidUpdate() {
-
         if (this.props.location.pathname != this.state.str) {
             this.FilteredList(this);
         }
     }
 
-    componentDidMount(prevProps, prevState) {
+    componentDidMount() {
         this.FilteredList(this);
     }
 
     FilteredList(e) {
-
-        //allow-cross-origin header problem. so this fix. will change if we get some time later.
-
         this.state = {
             data: [],
             pos: [],
-            title: ''
+            title: '',
+            placeArray: []
         }
-
 
         var types = "";
         var titleText = '';
@@ -64,11 +60,17 @@ export class CommonComponent extends React.Component {
             types = "lawyer"
             titleText = "Lawyers near me";
         }
-
-
-
         //Not adding else - we may need to add more here..
-        const url = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-34.4075307%20150.8667624&radius=5000&rankBy=distance&types=" + types + "&sensor=true&key=AIzaSyBi99vISytb1d0NAogNjpwgGy_wElH2ly0";
+
+
+
+        //const url = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-34.4075307%20150.8667624&radius=5000&rankBy=distance&types=" + types + "&sensor=true&key=AIzaSyBi99vISytb1d0NAogNjpwgGy_wElH2ly0";
+
+        //updated - to rank them in distance - TODO://update latitude and longitude values - now location set to UoW
+        const url = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-34.4054,150.8784&rankby=distance&types=" + types + "&sensor=true&key=AIzaSyBi99vISytb1d0NAogNjpwgGy_wElH2ly0";
+
+        var arr = [];
+        var resultCount = 0;
 
         fetch(url)
             .then(res => res.json())
@@ -76,15 +78,37 @@ export class CommonComponent extends React.Component {
                 data: data.results,
                 str: this.props.location.pathname,
                 title: titleText
+            })).then(() => {
+                this.state.data.map(function (place) {
+                    resultCount++;
+                    place.phone = '';
+                    place.website = '';
+
+                    const url = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/details/json?placeid=" + place.place_id + "&key=AIzaSyBi99vISytb1d0NAogNjpwgGy_wElH2ly0";
+                    fetch(url)
+                        .then(res => res.json())
+                        .then(op => {
+                            place.phone = op.result.formatted_phone_number
+                            place.website = op.result.website
+                            arr.push(place)
+                        }).then(() => {
+                            if (resultCount > 0 && arr.length > 0 && resultCount == arr.length) {
+                                this.Execute(arr);
+                            }
+                        })
+                }, this)
             }
             )
-            );
-
-
     }
 
     DisplayPrice() {
         return '$';
+    }
+
+    Execute(arr) {
+        this.setState({
+            placeArray: arr
+        })
     }
 
     render() {
@@ -93,9 +117,7 @@ export class CommonComponent extends React.Component {
 
         //will change this later
         pos1.push({ latitude: -34.4075307, longitude: 150.8667624 });
-
         this.state.pos = pos1;
-
         return (
             <div>
                 <div className="title_common_menu">{this.state.title}</div>
@@ -104,7 +126,8 @@ export class CommonComponent extends React.Component {
 
                 <div className="searchResults">
                     {
-                        this.state.data.map(function (place, i) {
+                        this.state.placeArray && this.state.placeArray.map(function (place) {
+
                             var price = 'Price not available';
                             if (place.price_level) {
                                 switch (place.price_level) {
@@ -125,6 +148,7 @@ export class CommonComponent extends React.Component {
                                         break;
                                 }
                             }
+
                             var openHrs = 'Opening hours not available';
 
                             openHrs = place.opening_hours && (place.opening_hours.open_now ? "Open" : "Closed");
@@ -146,19 +170,27 @@ export class CommonComponent extends React.Component {
                                         <div className="search_result_address">{place.vicinity} </div>
                                         <div className="ratingBlock">{place.rating}</div>
                                         <div className="price">{price}</div>
-                                        <button>
-                                            <a target="_blank" href={placeUrl}>Get Directions</a>
-                                        </button>
+
+                                        {/* need to implement to trigger phone from here */}
+                                        <div className="price">
+                                            <a target="_blank" href={place.phone}>Call</a>
+                                        </div>
+                                        
+                                        <div className="price">
+                                            <a target="_blank" href={place.website}>Website</a>
+                                        </div>
+                                        <button><a target="_blank" href={placeUrl}>Get Directions</a></button>
                                     </div>
                                 </div>
                             );
-                        })
+                        }, this)
                     }
                 </div>
-            </div>
+            </div >
         )
     }
 }
+
 export default GoogleApiWrapper({
     apiKey: 'AIzaSyBi99vISytb1d0NAogNjpwgGy_wElH2ly0'
 })(CommonComponent);

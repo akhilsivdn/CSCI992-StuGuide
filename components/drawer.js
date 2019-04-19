@@ -43,6 +43,10 @@ class DrawerComponent extends React.Component {
 						</li>
 
 						<li>
+							<Link to="/tripplanner">Trip Planner</Link>
+						</li>
+
+						<li>
 							<Link to="/groceries">Groceries</Link>
 						</li>
 
