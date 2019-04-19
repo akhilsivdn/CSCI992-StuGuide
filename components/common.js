@@ -1,7 +1,7 @@
 import React from "react";
-
 import { GoogleApiWrapper } from 'google-maps-react';
 import MapComponent from "./maps";
+import config from 'react-global-configuration';
 
 
 export class CommonComponent extends React.Component {
@@ -62,12 +62,13 @@ export class CommonComponent extends React.Component {
         }
         //Not adding else - we may need to add more here..
 
-
+        var latitude = config.get('latitude');
+        var longitude = config.get('longitude');
 
         //const url = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-34.4075307%20150.8667624&radius=5000&rankBy=distance&types=" + types + "&sensor=true&key=AIzaSyBi99vISytb1d0NAogNjpwgGy_wElH2ly0";
 
         //updated - to rank them in distance - TODO://update latitude and longitude values - now location set to UoW
-        const url = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-34.4054,150.8784&rankby=distance&types=" + types + "&sensor=true&key=AIzaSyBi99vISytb1d0NAogNjpwgGy_wElH2ly0";
+        const url = 'https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + latitude + ',' + longitude + '&rankby=distance&types=' + types + '&sensor=true&key=AIzaSyBi99vISytb1d0NAogNjpwgGy_wElH2ly0';
 
         var arr = [];
         var resultCount = 0;
@@ -116,7 +117,7 @@ export class CommonComponent extends React.Component {
         var pos1 = [];
 
         //will change this later
-        pos1.push({ latitude: -34.4075307, longitude: 150.8667624 });
+        pos1.push({ latitude: config.get('latitude'), longitude: config.get('longitude') });
         this.state.pos = pos1;
         return (
             <div>
@@ -175,7 +176,7 @@ export class CommonComponent extends React.Component {
                                         <div className="price">
                                             <a target="_blank" href={place.phone}>Call</a>
                                         </div>
-                                        
+
                                         <div className="price">
                                             <a target="_blank" href={place.website}>Website</a>
                                         </div>

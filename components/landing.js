@@ -2,6 +2,7 @@ import React from "react";
 import { WeatherComponent } from "./weather";
 import MapComponent from "./maps";
 import { EventBoxComponent } from "./eventbox"
+import config from 'react-global-configuration';
 
 
 export class LandingComponent extends React.Component {
@@ -9,13 +10,12 @@ export class LandingComponent extends React.Component {
         super();
         this.state = {}
     }
-
-
+    
     render() {
         var pos1 = [];
         
         //need to change later
-        pos1.push({ latitude: -34.4075307, longitude: 150.8667624 });
+        pos1.push({ latitude: config.get('latitude'), longitude: config.get('longitude') });
 
         return (
             <div>

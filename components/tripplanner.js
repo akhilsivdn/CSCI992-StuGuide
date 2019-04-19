@@ -14,7 +14,7 @@ export class TripPlannerComponent extends React.Component {
     render() {
         return (
             <div>
-
+                TODO: Trip planner page!
             </div>
         )
     }

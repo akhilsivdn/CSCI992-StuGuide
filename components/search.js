@@ -2,6 +2,7 @@ import React from "react";
 
 import { GoogleApiWrapper } from 'google-maps-react';
 import MapComponent from "./maps";
+import config from 'react-global-configuration';
 
 export class SearchComponent extends React.Component {
     constructor() {
@@ -13,15 +14,11 @@ export class SearchComponent extends React.Component {
         }
     }
 
-    componentDidMount() {
-
-    }
-
     FilteredList(e) {
         if (e &&
             e.target.value) {
             //allow-cross-origin header problem. so this fix. will change if we get some time later.
-            const url = 'https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-34.4075307%20150.8667624%20&radius=25000&keyword=' + e.target.value + '&key=AIzaSyBi99vISytb1d0NAogNjpwgGy_wElH2ly0';
+            const url = 'https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + config.get('latitude') + ',' + config.get('longitude') + '&radius=25000&keyword=' + e.target.value + '&key=AIzaSyBi99vISytb1d0NAogNjpwgGy_wElH2ly0';
             fetch(url)
                 .then(res => res.json())
                 .then(data => this.setState({
@@ -53,7 +50,7 @@ export class SearchComponent extends React.Component {
         }
         else {
             //will change this later
-            pos1.push({ latitude: -34.4075307, longitude: 150.8667624 })
+            pos1.push({ latitude: config.get('latitude'), longitude: config.get('longitude') });
         }
 
         this.state.pos = pos1;
@@ -92,8 +89,8 @@ export class SearchComponent extends React.Component {
                             }
                             var fn = (place.opening_hours && place.opening_hours.open_now) ? "Open" : (place.opening_hours ? "Closed" : "");
                             var placeUrl = 'https://www.google.com/maps/place/?q=place_id:' + place.place_id;
-                           
-                           
+
+
                             return (
                                 <div className="searchResultsGrid">
                                     <img src={place.icon} height='50px'></img>

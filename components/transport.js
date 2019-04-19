@@ -1,7 +1,6 @@
 import React from "react";
 
 import { GoogleApiWrapper } from 'google-maps-react';
-import MapComponent from "./maps";
 
 //Not completed.
 export class TransportComponent extends React.Component {
