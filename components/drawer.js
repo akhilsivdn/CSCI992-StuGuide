@@ -130,7 +130,7 @@ class DrawerComponent extends React.Component {
 									<LogoutIcon />
 								</ListItemIcon>
 								<ListItemText>
-									<Link to="/logout">Logout</Link>
+									<Link to="/">Logout</Link>
 								</ListItemText>
 							</ListItem>
 						</List>

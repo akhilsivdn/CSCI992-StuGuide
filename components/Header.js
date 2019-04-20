@@ -1,10 +1,7 @@
 import React from "react";
+import { browserHistory } from 'react-router';
 import { Link, Route, BrowserRouter as Router } from "react-router-dom";
-import TopbarComponent from "./Topbar";
 import DrawerComponent from "./drawer";
-import { SearchComponent } from "./search";
-import { RegisterComponent } from "./register";
-import { LoginComponent } from "./login";
 import { AppBar, Toolbar, IconButton, Typography, Button } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from '@material-ui/icons/Search';
@@ -38,28 +35,37 @@ export class HeaderComponent extends React.Component {
         });
     }
 
-
     render() {
         return (
-
             <div>
                 <AppBar position="relative">
                     <Toolbar>
                         <IconButton
                             color="inherit"
                             onClick={() => this.openDrawer()}
+                            style={{ flex: 0, alignItems: 'center', justifyContent: 'center' }}
+
                         >
                             <MenuIcon />
                         </IconButton>
-                        <Typography variant="h6" color="inherit" noWrap>
+                        <Typography variant="h5" color="inherit" noWrap style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                             StuGuide
                         </Typography>
-                        <IconButton color="inherit" onClick='/search'>
-                            <SearchIcon />
-                        </IconButton>
-                        {/* <Button color="inherit">
-                            LOGOUT
-                        </Button> */}
+
+                        <Link to="/search">
+                        <Button variant="flat" style={{color:"white"}} >
+
+                                <SearchIcon style={{
+                                    height: '100%',
+                                    position: 'relative',
+                                    pointerEvents: 'none',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                }}
+                                />
+                            </Button>
+                        </Link>
                     </Toolbar>
                 </AppBar>
 
@@ -67,8 +73,10 @@ export class HeaderComponent extends React.Component {
                     open={this.state.open}
                     close={() => this.setState({ open: false })}
                 />
-            </div>
 
+
+
+            </div>
 
             // <div className="headerContainer">
             //     <div className="left">

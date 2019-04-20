@@ -10,13 +10,9 @@ import { LoginComponent } from "./components/login";
 import { RegisterComponent } from "./components/register";
 import { MoreEventComponent } from "./components/moreEvent";
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { RestaurantsComponent } from "./components/restaurants";
-import { GroceriesComponent } from "./components/groceries";
-import { StoresComponent } from "./components/stores";
 import { CommonComponent } from "./components/common";
 import { SettingsComponent } from "./components/settings";
 import { TripPlannerComponent } from "./components/tripplanner";
-
 
 class Application extends Component {
 

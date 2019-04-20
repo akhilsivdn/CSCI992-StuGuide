@@ -1,7 +1,7 @@
 import React from "react";
 import axios from 'axios';
 import { Link, Redirect } from "react-router-dom";
-import { TextField, Button } from '@material-ui/core';
+import { TextField, Button, Paper, Dialog, DialogActions, DialogContent, DialogTitle, List, ListItem } from '@material-ui/core';
 
 export class RegisterComponent extends React.Component {
 
@@ -19,7 +19,6 @@ export class RegisterComponent extends React.Component {
     myFunction() {
 
     }
-
 
     handleChange(event) {
         this.setState({ value: event.target.value });
@@ -73,15 +72,124 @@ export class RegisterComponent extends React.Component {
         }
         return (
             <form onSubmit={this.handleSubmit}>
+
                 <div className="loginSection">
+                    <Paper>
+                        <Dialog
+                            open="TRUE"
+                            style={{
+                                width: "100%",
+                                display: "flex",
+                                position: "relative",
+                                justifyContent: "center"
+                            }}>
+                            <DialogTitle
+                                id="form-dialog-title"
+                                style={{
+                                    display: "flex",
+                                    position: "relative",
+                                    justifyContent: "center"
+                                }}>
+                                Register
+                            </DialogTitle>
 
-                    <TextField margin="normal" label="Username" margin="dense" placeholder="Enter Username" className="inputfield" type="text" name="username"/>
+                            <DialogContent
+                                style={{
+                                    width: "100%",
+                                    display: "flex",
+                                    position: "relative",
+                                    justifyContent: "center"
+                                }}>
+                                <List>
+                                    <ListItem>
+                                        <TextField
+                                            label="E-mail"
+                                            margin="dense"
+                                            placeholder="Enter e-mail"
+                                            type="text"
+                                            name="email" />
+                                    </ListItem>
 
-                    <TextField margin="normal" label="E-mail" margin="dense" placeholder="Enter e-mail" className="inputfield" type="text" name="email"/>
+                                    {/* <ListItem>
+                                        <TextField
+                                            label="Firstr Name"
+                                            margin="normal"
+                                            placeholder="Enter First Name"
+                                            type="text"
+                                            name="fname" />
+                                        &nbsp;&nbsp;&nbsp;
+                                        <TextField
+                                            label="Last Name"
+                                            margin="normal"
+                                            placeholder="Enter Last Name"
+                                            type="text"
+                                            name="lname" />
+                                    </ListItem> */}
 
-                    <TextField label="Password" margin="dense" placeholder="Enter Password" className="inputfield pos" type="password"  name="password"/>
+                                    <ListItem>
+                                        <TextField
+                                            label="Username"
+                                            margin="dense"
+                                            placeholder="Enter Username"
+                                            type="text"
+                                            name="username" />
+                                    </ListItem>
 
-                    <TextField label="Confirm Password" margin="dense" placeholder="Confirm Password" className="inputfield pos" type="password" name="password_confirm"/>
+                                    <ListItem>
+                                        <TextField
+                                            label="Password"
+                                            margin="dense"
+                                            placeholder="Enter Password"
+                                            type="password"
+                                            name="password" />
+                                    </ListItem>
+
+                                    <ListItem>
+                                        <TextField
+                                            label="Confirm Password"
+                                            margin="dense"
+                                            placeholder="Confirm Password"
+                                            type="password"
+                                            name="password_confirm" />
+                                    </ListItem>
+
+                                    <ListItem
+                                        style={{
+                                            display: "flex",
+                                            position: "relative",
+                                            justifyContent: "center"
+                                        }}>
+                                        <Link to={'/'}>
+                                            <Button
+                                                size="large"
+                                                color="primary"
+                                                variant="contained">Register</Button>
+                                        </Link>
+                                    </ListItem>
+                                </List>
+                            </DialogContent>
+                            <DialogActions
+                                style={{
+                                    display: "flex",
+                                    position: "relative",
+                                    justifyContent: "center"
+                                }}>
+                                <span>
+                                    Already a member?&nbsp;
+                            <Link to={'/'}>
+                                        Sign In
+                            </Link>
+                                </span>
+                            </DialogActions>
+                        </Dialog>
+                    </Paper>
+                    {/* <TextField margin=" normal" label="Username" margin="dense" placeholder="Enter Username" className="inputfield" type="text" name="username" />
+
+                    <TextField m argin="normal" label="E-mail" margin="dense" placeholder="Enter e-mail" className="inputfield" type="text" name="email" />
+
+                    <TextFi eld label="Password" margin="dense" placeholder="Enter Password" className="inputfield pos" type="password" name="password" />
+            
+                    <TextField label="Confirm Password" margin="dense" placeholder="Confirm Password" className="inputfield pos" type="password" name="password_confirm" />
 
                     <div>
                         <Link to={'/'}>
@@ -90,16 +198,16 @@ export class RegisterComponent extends React.Component {
                         <Link to={'/register'}>
                             <Button size="small" color="secondary" variant="contained" className="pos">Cancel</Button>
                         </Link>
-                    </div>
+                    </div> */}
 
                 </div>
 
                 {/* <div className="loginSection">
                     <input placeholder="User name" className="inputfield" type="text" name="username" />
                     <input placeholder="Email" className="inputfield" type="text" name="email" />
-                    <input placeholder="Password" className="inputfield" type="password" name="password" />
+                    < input placeholder="Password" className="inputfield" type="password" name="password" />
                     <input placeholder="Confirm password" className="inputfield" type="password"
-                        name="password_confirm" />
+                    name="password_confirm" />
                     <button className="pos">Submit</button>
                 </div> */}
             </form>
