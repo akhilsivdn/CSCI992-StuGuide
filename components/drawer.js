@@ -1,6 +1,18 @@
 import React from 'react';
 import { Link, withRouter } from "react-router-dom";
 
+import { Divider, Paper, List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
+import DirectionIcon from "@material-ui/icons/Directions";
+import TransitIcon from "@material-ui/icons/DirectionsTransit";
+import HomeIcon from "@material-ui/icons/Map";
+import ShopIcon from "@material-ui/icons/LocalDining";
+import GroceryIcon from "@material-ui/icons/LocalGroceryStore";
+import LocalStoreIcon from "@material-ui/icons/LocalConvenienceStore";
+import MedicalIcon from "@material-ui/icons/LocalHospital";
+import LegalIcon from "@material-ui/icons/Book";
+import SettingsIcon from "@material-ui/icons/Settings";
+import LogoutIcon from "@material-ui/icons/ExitToApp";
+
 class DrawerComponent extends React.Component {
 	constructor(props) {
 		super();
@@ -25,54 +37,156 @@ class DrawerComponent extends React.Component {
 			: '';
 
 		return (
+
 			<div>
 				{backdrop}
-				<div className={'drawer ' + drawer}>
-					<div className="drawer-head"></div>
-					<ul className="drawer-menu">
-						<li>
-							<Link to="/home">Home</Link>
-						</li>
+				<Paper>
+					<div className={'drawer ' + drawer}>
 
-						<li>
-							<Link to="/restaurants">Restaurants &amp; Cafes</Link>
-						</li>
+						<List>
+							<ListItem button>
+								<ListItemIcon>
+									<HomeIcon />
+								</ListItemIcon>
+								<ListItemText>
+									<Link to="/home">Home</Link>
+								</ListItemText>
+							</ListItem>
 
-						<li>
-							<Link to="/transit">Transit</Link>
-						</li>
+							<ListItem button>
+								<ListItemIcon>
+									<ShopIcon />
+								</ListItemIcon>
+								<ListItemText>
+									<Link to="/restaurants">Restaurants</Link>
+								</ListItemText>
+							</ListItem>
 
-						<li>
-							<Link to="/tripplanner">Trip Planner</Link>
-						</li>
+							<ListItem button>
+								<ListItemIcon>
+									<TransitIcon />
+								</ListItemIcon>
+								<ListItemText>
+									<Link to="/transit">Transport</Link>
+								</ListItemText>
+							</ListItem>
 
-						<li>
-							<Link to="/groceries">Groceries</Link>
-						</li>
+							<ListItem button>
+								<ListItemIcon>
+									<DirectionIcon />
+								</ListItemIcon>
+								<ListItemText>
+									<Link to="/tripplanner">Trip Planner</Link>
+								</ListItemText>
+							</ListItem>
 
-						<li>
-							<Link to="/stores">Covenient Stores</Link>
-						</li>
+							<ListItem button>
+								<ListItemIcon>
+									<GroceryIcon />
+								</ListItemIcon>
+								<ListItemText>
+									<Link to="/groceries">Groceries</Link>
+								</ListItemText>
+							</ListItem>
 
-						<li>
-							<Link to="/medical">Medical Aid</Link>
-						</li>
+							<ListItem button>
+								<ListItemIcon>
+									<LocalStoreIcon />
+								</ListItemIcon>
+								<ListItemText>
+									<Link to="/stores">Covenient Stores</Link>
+								</ListItemText>
+							</ListItem>
 
-						<li>
-							<Link to="/lawyers">Lawyers</Link>
-						</li>
+							<ListItem button>
+								<ListItemIcon>
+									<MedicalIcon />
+								</ListItemIcon>
+								<ListItemText>
+									<Link to="/medical">Medical Aid</Link>
+								</ListItemText>
+							</ListItem>
 
-						<li>
-							<Link to="/settings">Account Settings</Link>
-						</li>
+							<ListItem button>
+								<ListItemIcon>
+									<LegalIcon />
+								</ListItemIcon>
+								<ListItemText>
+									<Link to="/lawyers">Legal</Link>
+								</ListItemText>
+							</ListItem>
 
-						<li>
-							<Link to="/logout">Logout</Link>
-						</li>
+							<ListItem button>
+								<ListItemIcon>
+									<SettingsIcon />
+								</ListItemIcon>
+								<ListItemText>
+									<Link to="/settings">Account Settings</Link>
+								</ListItemText>
+							</ListItem>
 
-					</ul>
-				</div>
+							<ListItem button>
+								<ListItemIcon>
+									<LogoutIcon />
+								</ListItemIcon>
+								<ListItemText>
+									<Link to="/logout">Logout</Link>
+								</ListItemText>
+							</ListItem>
+						</List>
+					</div>
+				</Paper>
 			</div>
+
+
+			// <div>
+			// 	{backdrop}
+			// 	<div className={'drawer ' + drawer}>
+			// 		<div className="drawer-head"></div>
+			// 		<ul className="drawer-menu">
+			// 			<li>
+			// 				<Link to="/home">Home</Link>
+			// 			</li>
+
+			// 			<li>
+			// 				<Link to="/restaurants">Restaurants &amp; Cafes</Link>
+			// 			</li>
+
+			// 			<li>
+			// 				<Link to="/transit">Transit</Link>
+			// 			</li>
+
+			// 			<li>
+			// 				<Link to="/tripplanner">Trip Planner</Link>
+			// 			</li>
+
+			// 			<li>
+			// 				<Link to="/groceries">Groceries</Link>
+			// 			</li>
+
+			// 			<li>
+			// 				<Link to="/stores">Covenient Stores</Link>
+			// 			</li>
+
+			// 			<li>
+			// 				<Link to="/medical">Medical Aid</Link>
+			// 			</li>
+
+			// 			<li>
+			// 				<Link to="/lawyers">Lawyers</Link>
+			// 			</li>
+
+			// 			<li>
+			// 				<Link to="/settings">Account Settings</Link>
+			// 			</li>
+
+			// 			<li>
+			// 				<Link to="/logout">Logout</Link>
+			// 			</li>
+
+			// 		</ul>
+			// 	</div>
+			// </div>
 		);
 	}
 }

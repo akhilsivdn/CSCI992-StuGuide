@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { render } from "react-dom";
 import config from 'react-global-configuration';
 
-
 import { HeaderComponent } from "./components/Header";
 import { LandingComponent } from "./components/landing";
 import SearchComponent from "./components/search";
