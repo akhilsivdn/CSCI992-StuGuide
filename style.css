@@ -412,6 +412,13 @@ font-weight: 700;
   display: block;
 }
 
+
+.btns{
+  margin: 15px;
+  width: 15%;
+  border-radius: 25px;
+}
+
 /*End - Transport component - styles*/
 
 .block {

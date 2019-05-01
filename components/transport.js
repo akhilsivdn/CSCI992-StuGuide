@@ -50,7 +50,6 @@ export class TransportComponent extends React.Component {
             }
             )).then(() => {
                 this.displayResults();
-                console.log(this.state.data);
             })
     }
 
@@ -67,7 +66,7 @@ export class TransportComponent extends React.Component {
                         var deptime = route.legs[0].departure_time ?
                             (<div>Departure time: {route.legs[0].departure_time.text}</div>) : '';
                         var arrtime = route.legs[0].arrival_time ?
-                            (<div>Departure time: {route.legs[0].arrival_time.text}</div>) : '';
+                            (<div>Arrival time: {route.legs[0].arrival_time.text}</div>) : '';
                         return (
                             <div className="searchResultsGrid showRoute">
                                 {deptime}

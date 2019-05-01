@@ -164,7 +164,7 @@ export class CommonComponent extends React.Component {
 
                             return (
                                 <div className="searchResultsGrid">
-                                    <img src={imgUrl} height='300px' width='300px'></img>
+                                    <img src={imgUrl} height='250px' width='250px'></img>
                                     <div className="details">
                                         <div className="openHrs">{openHrs}</div>
                                         <div className="search_result_name restaurantTitle">{place.name} </div>
