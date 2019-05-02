@@ -18,6 +18,7 @@ import { SettingsComponent } from "./components/settings";
 import { TripPlannerComponent } from "./components/tripplanner";
 import { PlanoftheDayComponent } from "./components/planoftheday";
 import { ForecastComponent } from "./components/forecast";
+import { NewsFeedComponent } from "./components/newsfeeds";
 
 
 class Application extends Component {
@@ -90,6 +91,7 @@ class Application extends Component {
                         <Route path="/things-to-do" component={TripPlannerComponent} />
                         <Route path="/plan-for-the-day" component={PlanoftheDayComponent} />
                         <Route path="/weather-forecast" component={ForecastComponent} />
+                        <Route path="/local-news" component={NewsFeedComponent} />
                     </Switch>
 
                 </BrowserRouter>

@@ -421,6 +421,39 @@ font-weight: 700;
 
 /*End - Transport component - styles*/
 
+
+/*News feed page styles start*/
+
+.title-news-page{
+  font-size: 25px;
+  font-weight: 500;
+  padding: 15px
+}
+
+.content{
+  display: flex;
+  padding: 15px;
+}
+
+.news-title{
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.news-details{
+  margin-left: 2%;
+
+}
+.news-pusblished{
+
+}
+
+.news-description{
+  font-size: 17px;
+}
+
+/*End -- news feed styles*/
+
 .block {
   width: 100px;
   /*float: left;*/

@@ -12,6 +12,8 @@ export class WeatherComponent extends React.Component {
             name: '',
             region: '',
             data: null,
+            wind: '',
+            condtnText: ''
         }
 
     }
@@ -29,7 +31,9 @@ export class WeatherComponent extends React.Component {
                 image: data.current.condition.icon,
                 temp: data.current.temp_c,
                 name: data.location.name,
-                region: data.location.region
+                region: data.location.region,
+                wind: data.current.wind_kph,
+                condtnText: data.current.condition.text
             }
             ));
     }
@@ -40,11 +44,10 @@ export class WeatherComponent extends React.Component {
 
                 <div>
                     <div>Current temperature: {this.state.temp}&#8451;</div>
+                    <div>Wind speed: {this.state.wind}</div>
                     <div>{this.state.name}</div>
-                    <div>{this.state.region}</div>
-
+                    <div>{this.state.condtnText}</div>
                 </div>
-
                 <div>
                     <img src={this.state.image} width={'120px'} height={'120px'}></img>
                 </div>
