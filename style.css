@@ -437,14 +437,11 @@ font-weight: 700;
 
 .news-title{
   font-weight: bold;
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .news-details{
   margin-left: 2%;
-
-}
-.news-pusblished{
 
 }
 
@@ -453,6 +450,50 @@ font-weight: 700;
 }
 
 /*End -- news feed styles*/
+
+
+
+.title_page{
+  font-size: 30px;
+  font-weight: 600;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+
+/*Start - itinerary page styles*/
+
+.itinerary_title{
+  font-weight: 500 !important;
+  font-variant-caps: all-petite-caps;
+  font-size: xx-large;
+}
+
+.itinerary_image{
+  display: block;
+  margin: 0 auto;
+}
+
+.itinerary_place_name{
+  margin: 15px;
+  font-size: 22px;
+}
+
+.itinerary_description{
+  margin: 15px;
+  font-size: 17px;
+  font-style: italic;
+}
+
+.itinerary_button{
+  border-radius: 16px;
+  padding: 5px;
+  margin: 15px;
+}
+
+
+/*End - itinerary page styles*/
+
 
 .block {
   width: 100px;

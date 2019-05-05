@@ -91,7 +91,7 @@ class Application extends Component {
                         <Route path="/things-to-do" component={TripPlannerComponent} />
                         <Route path="/plan-for-the-day" component={PlanoftheDayComponent} />
                         <Route path="/weather-forecast" component={ForecastComponent} />
-                        <Route path="/local-news" component={NewsFeedComponent} />
+                        <Route path="/news-headlines" component={NewsFeedComponent} />
                     </Switch>
 
                 </BrowserRouter>

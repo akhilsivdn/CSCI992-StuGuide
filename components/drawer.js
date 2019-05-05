@@ -67,7 +67,7 @@ class DrawerComponent extends React.Component {
 									<DirectionIcon />
 								</ListItemIcon>
 								<ListItemText>
-									<Link to="/local-news">Local News</Link>
+									<Link to="/news-headlines">News Headlines</Link>
 								</ListItemText>
 							</ListItem>
 

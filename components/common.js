@@ -121,7 +121,7 @@ export class CommonComponent extends React.Component {
         this.state.pos = pos1;
         return (
             <div>
-                <div className="title_common_menu">{this.state.title}</div>
+                <div className="title_page">{this.state.title}</div>
 
                 <MapComponent markers={this.state.pos} zoom={10} />
 
