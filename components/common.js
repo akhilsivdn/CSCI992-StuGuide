@@ -2,6 +2,8 @@ import React from "react";
 import { GoogleApiWrapper } from 'google-maps-react';
 import MapComponent from "./maps";
 import config from 'react-global-configuration';
+import CircularProgress from "@material-ui/core/CircularProgress";
+import { Modal, Dialog } from "@material-ui/core";
 
 
 export class CommonComponent extends React.Component {
@@ -13,6 +15,7 @@ export class CommonComponent extends React.Component {
             pos: [],
             str: '',
             title: '',
+            isLoading: true,
             placeArray: []
         }
     }
@@ -32,8 +35,8 @@ export class CommonComponent extends React.Component {
             data: [],
             pos: [],
             title: '',
-            placeArray: []
-        }
+            placeArray: [],
+        };
 
         var types = "";
         var titleText = '';
@@ -77,6 +80,7 @@ export class CommonComponent extends React.Component {
             .then(res => res.json())
             .then(data => this.setState({
                 data: data.results,
+                isLoading: true,
                 str: this.props.location.pathname,
                 title: titleText
             })).then(() => {
@@ -108,13 +112,65 @@ export class CommonComponent extends React.Component {
 
     Execute(arr) {
         this.setState({
-            placeArray: arr
+            placeArray: arr,
+            isLoading: false
         })
     }
 
     render() {
 
         var pos1 = [];
+
+        if (this.state.isLoading) {
+            return (
+                <div className="loadingBar">
+                    <Modal
+
+                        open={this.state.isLoading}
+                        style={{
+                            top: '53 %',
+                            left: '48 %',
+                            transform: 'translate(-53 %, -48 %)',
+                        }}>
+                        <CircularProgress style={{ color: '#1f41fa' }} />
+                    </Modal>
+                </div>
+            )
+        }
+        else {
+            //will change this later
+            pos1.push({ latitude: config.get('latitude'), longitude: config.get('longitude') });
+            this.state.pos = pos1;
+            return (
+                <div>
+                    <div className="title_common_menu">{this.state.title}</div>
+
+                    <MapComponent markers={this.state.pos} zoom={10} />
+
+                    <div className="searchResults">
+                        {
+                            this.state.placeArray && this.state.placeArray.map(function (place) {
+
+                                var price = 'Price not available';
+                                if (place.price_level) {
+                                    switch (place.price_level) {
+                                        case 1:
+                                            price = '$';
+                                            break;
+                                        case 2:
+                                            price = '$$';
+                                            break;
+                                        case 3:
+                                            price = '$$$';
+                                            break;
+                                        case 4:
+                                            price = '$$$$';
+                                            break;
+                                        case 5:
+                                            price = '$$$$$';
+                                            break;
+                                    }
+
 
         //will change this later
         pos1.push({ latitude: config.get('latitude'), longitude: config.get('longitude') });
@@ -147,20 +203,31 @@ export class CommonComponent extends React.Component {
                                     case 5:
                                         price = '$$$$$';
                                         break;
+
                                 }
-                            }
 
-                            var openHrs = 'Opening hours not available';
+                                var openHrs = 'Opening hours not available';
 
-                            openHrs = place.opening_hours && (place.opening_hours.open_now ? "Open" : "Closed");
+                                openHrs = place.opening_hours && (place.opening_hours.open_now ? "Open" : "Closed");
 
-                            pos1.push({ latitude: place.geometry.location.lat, longitude: place.geometry.location.lng });
+                                pos1.push({ latitude: place.geometry.location.lat, longitude: place.geometry.location.lng });
 
-                            var placeUrl = 'https://www.google.com/maps/place/?q=place_id:' + place.place_id;
+                                var placeUrl = 'https://www.google.com/maps/place/?q=place_id:' + place.place_id;
 
-                            var imgUrl = '';
-                            if (place.photos && place.photos[0])
-                                imgUrl = 'https://maps.googleapis.com/maps/api/place/photo?photoreference=' + place.photos[0].photo_reference + '&sensor=false&maxheight=480&maxwidth=480&key=AIzaSyBi99vISytb1d0NAogNjpwgGy_wElH2ly0';
+                                var imgUrl = '';
+                                if (place.photos && place.photos[0])
+                                    imgUrl = 'https://maps.googleapis.com/maps/api/place/photo?photoreference=' + place.photos[0].photo_reference + '&sensor=false&maxheight=480&maxwidth=480&key=AIzaSyBi99vISytb1d0NAogNjpwgGy_wElH2ly0';
+
+
+                                return (
+                                    <div className="searchResultsGrid">
+                                        <img src={imgUrl} height='250px' width='250px'></img>
+                                        <div className="details">
+                                            <div className="openHrs">{openHrs}</div>
+                                            <div className="search_result_name restaurantTitle">{place.name} </div>
+                                            <div className="search_result_address">{place.vicinity} </div>
+                                            <div className="ratingBlock">{place.rating}</div>
+                                            <div className="price">{price}</div>
 
                             return (
                                 <div className="searchResultsGrid">
@@ -172,24 +239,28 @@ export class CommonComponent extends React.Component {
                                         <div className="ratingBlock">{place.rating}</div>
                                         <div className="price">{price}</div>
 
-                                        {/* need to implement to trigger phone from here */}
-                                        <div className="price">
-                                            <a target="_blank" href={place.phone}>Call</a>
-                                        </div>
 
-                                        <div className="price">
-                                            <a target="_blank" href={place.website}>Website</a>
+                                            {/* need to implement to trigger phone from here */}
+                                            <div className="price">
+                                                <a target="_blank" href={place.phone}>Call</a>
+                                            </div>
+
+                                            <div className="price">
+                                                <a target="_blank" href={place.website}>Website</a>
+                                            </div>
+                                            <button><a target="_blank" href={placeUrl}>Get Directions</a></button>
                                         </div>
-                                        <button><a target="_blank" href={placeUrl}>Get Directions</a></button>
                                     </div>
-                                </div>
-                            );
-                        }, this)
-                    }
-                </div>
-            </div >
-        )
+                                );
+                            }, this)
+                        }
+                    </div>
+                </div >
+            )
+        }
     }
+
+
 }
 
 export default GoogleApiWrapper({

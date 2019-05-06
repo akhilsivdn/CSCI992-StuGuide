@@ -10,15 +10,16 @@ import { LoginComponent } from "./components/login";
 import { RegisterComponent } from "./components/register";
 import { MoreEventComponent } from "./components/moreEvent";
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { RestaurantsComponent } from "./components/restaurants";
-import { GroceriesComponent } from "./components/groceries";
-import { StoresComponent } from "./components/stores";
 import { CommonComponent } from "./components/common";
 import { SettingsComponent } from "./components/settings";
 import { TripPlannerComponent } from "./components/tripplanner";
+
+import { MoreEventsPageComponent } from "./components/moreEventsPage";
+
 import { PlanoftheDayComponent } from "./components/planoftheday";
 import { ForecastComponent } from "./components/forecast";
 import { NewsFeedComponent } from "./components/newsfeeds";
+
 
 
 class Application extends Component {
@@ -88,10 +89,15 @@ class Application extends Component {
                         <Route path="/more" component={MoreEventComponent} />
                         <Route path="/transit" component={TransportComponent} />
                         <Route path="/settings" component={SettingsComponent} />
+
+                        <Route path="/tripplanner" component={TripPlannerComponent} />
+                        <Route path="/moreEvents" component= { MoreEventsPageComponent }/>
+
                         <Route path="/things-to-do" component={TripPlannerComponent} />
                         <Route path="/plan-for-the-day" component={PlanoftheDayComponent} />
                         <Route path="/weather-forecast" component={ForecastComponent} />
                         <Route path="/news-headlines" component={NewsFeedComponent} />
+
                     </Switch>
 
                 </BrowserRouter>

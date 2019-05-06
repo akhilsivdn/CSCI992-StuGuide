@@ -26,8 +26,9 @@ class DrawerComponent extends React.Component {
 
 	close() {
 		this.props.close();
+		document.body.style.overflow = 'visible';
 	}
-
+	
 	render() {
 		const drawer = (this.props.open) ? 'show-drawer' : 'hide-drawer';
 		const backdrop = (this.props.open)
@@ -157,7 +158,7 @@ class DrawerComponent extends React.Component {
 									<LogoutIcon />
 								</ListItemIcon>
 								<ListItemText>
-									<Link to="/logout">Logout</Link>
+									<Link to="/">Logout</Link>
 								</ListItemText>
 							</ListItem>
 						</List>
