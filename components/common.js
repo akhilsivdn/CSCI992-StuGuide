@@ -120,7 +120,6 @@ export class CommonComponent extends React.Component {
     render() {
 
         var pos1 = [];
-
         if (this.state.isLoading) {
             return (
                 <div className="loadingBar">
@@ -143,7 +142,7 @@ export class CommonComponent extends React.Component {
             this.state.pos = pos1;
             return (
                 <div>
-                    <div className="title_common_menu">{this.state.title}</div>
+                    <div className="title_page">{this.state.title}</div>
 
                     <MapComponent markers={this.state.pos} zoom={10} />
 
@@ -170,40 +169,6 @@ export class CommonComponent extends React.Component {
                                             price = '$$$$$';
                                             break;
                                     }
-
-
-        //will change this later
-        pos1.push({ latitude: config.get('latitude'), longitude: config.get('longitude') });
-        this.state.pos = pos1;
-        return (
-            <div>
-                <div className="title_page">{this.state.title}</div>
-
-                <MapComponent markers={this.state.pos} zoom={10} />
-
-                <div className="searchResults">
-                    {
-                        this.state.placeArray && this.state.placeArray.map(function (place) {
-
-                            var price = 'Price not available';
-                            if (place.price_level) {
-                                switch (place.price_level) {
-                                    case 1:
-                                        price = '$';
-                                        break;
-                                    case 2:
-                                        price = '$$';
-                                        break;
-                                    case 3:
-                                        price = '$$$';
-                                        break;
-                                    case 4:
-                                        price = '$$$$';
-                                        break;
-                                    case 5:
-                                        price = '$$$$$';
-                                        break;
-
                                 }
 
                                 var openHrs = 'Opening hours not available';
@@ -218,7 +183,6 @@ export class CommonComponent extends React.Component {
                                 if (place.photos && place.photos[0])
                                     imgUrl = 'https://maps.googleapis.com/maps/api/place/photo?photoreference=' + place.photos[0].photo_reference + '&sensor=false&maxheight=480&maxwidth=480&key=AIzaSyBi99vISytb1d0NAogNjpwgGy_wElH2ly0';
 
-
                                 return (
                                     <div className="searchResultsGrid">
                                         <img src={imgUrl} height='250px' width='250px'></img>
@@ -228,17 +192,6 @@ export class CommonComponent extends React.Component {
                                             <div className="search_result_address">{place.vicinity} </div>
                                             <div className="ratingBlock">{place.rating}</div>
                                             <div className="price">{price}</div>
-
-                            return (
-                                <div className="searchResultsGrid">
-                                    <img src={imgUrl} height='250px' width='250px'></img>
-                                    <div className="details">
-                                        <div className="openHrs">{openHrs}</div>
-                                        <div className="search_result_name restaurantTitle">{place.name} </div>
-                                        <div className="search_result_address">{place.vicinity} </div>
-                                        <div className="ratingBlock">{place.rating}</div>
-                                        <div className="price">{price}</div>
-
 
                                             {/* need to implement to trigger phone from here */}
                                             <div className="price">
