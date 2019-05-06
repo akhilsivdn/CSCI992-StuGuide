@@ -56,10 +56,28 @@ class DrawerComponent extends React.Component {
 
 							<ListItem button>
 								<ListItemIcon>
-									<ShopIcon />
+									<DirectionIcon />
 								</ListItemIcon>
 								<ListItemText>
-									<Link to="/restaurants">Restaurants</Link>
+									<Link to="/things-to-do">Things to do</Link>
+								</ListItemText>
+							</ListItem>
+
+							<ListItem button>
+								<ListItemIcon>
+									<DirectionIcon />
+								</ListItemIcon>
+								<ListItemText>
+									<Link to="/news-headlines">News Headlines</Link>
+								</ListItemText>
+							</ListItem>
+
+							<ListItem button>
+								<ListItemIcon>
+									<DirectionIcon />
+								</ListItemIcon>
+								<ListItemText>
+									<Link to="/plan-for-the-day">Plan for the day</Link>
 								</ListItemText>
 							</ListItem>
 
@@ -74,10 +92,10 @@ class DrawerComponent extends React.Component {
 
 							<ListItem button>
 								<ListItemIcon>
-									<DirectionIcon />
+									<ShopIcon />
 								</ListItemIcon>
 								<ListItemText>
-									<Link to="/tripplanner">Trip Planner</Link>
+									<Link to="/restaurants">Restaurants</Link>
 								</ListItemText>
 							</ListItem>
 
@@ -114,6 +132,15 @@ class DrawerComponent extends React.Component {
 								</ListItemIcon>
 								<ListItemText>
 									<Link to="/lawyers">Legal</Link>
+								</ListItemText>
+							</ListItem>
+						
+							<ListItem button>
+								<ListItemIcon>
+									<LegalIcon />
+								</ListItemIcon>
+								<ListItemText>
+									<Link to="/weather-forecast">Weather Forecast</Link>
 								</ListItemText>
 							</ListItem>
 

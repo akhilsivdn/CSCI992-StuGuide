@@ -34,7 +34,7 @@ export class MapComponent extends Component {
           }}
           zoom={this.props.zoom}>
 
-          {this.props.markers.map(marker => (
+          {this.props.markers && this.props.markers.map(marker => (
             <Marker key={marker.id} id={marker.id}
               position={{ lat: marker.latitude, lng: marker.longitude }}
             />

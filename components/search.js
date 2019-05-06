@@ -57,7 +57,7 @@ export class SearchComponent extends React.Component {
 
         return (
             <div>
-                <div className="title_common_menu">Search for a place to know more..</div>
+                <div className="title_page">Search for a place to know more..</div>
 
                 <MapComponent markers={this.state.pos} zoom={10} />
 

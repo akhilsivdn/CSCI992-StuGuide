@@ -23,9 +23,10 @@ export class EventBoxComponent extends React.Component {
     GetIt() {
         var latitude = config.get('latitude');
         var longitude = config.get('longitude');
+        var location = config.get('locationName');
 
         //need to change {place} later
-        fetch('https://www.eventbriteapi.com/v3/events/search/?q={wollongong}&location.within=50km&location.latitude=' + latitude + '&location.longitude=' + longitude + '&token=MJN62TFZ2KMEP2RRRQYX')
+        fetch('https://www.eventbriteapi.com/v3/events/search/?q=' + location + '&location.within=50km&location.latitude=' + latitude + '&location.longitude=' + longitude + '&token=MJN62TFZ2KMEP2RRRQYX')
             .then(res => res.json())
             .then(data => this.setState({
                 data: data.events
