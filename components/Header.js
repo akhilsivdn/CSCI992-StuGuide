@@ -22,10 +22,12 @@ export class HeaderComponent extends React.Component {
             this.setState({
                 open: false,
             });
+            document.body.style.overflow = 'visible';
         } else {
             this.setState({
                 open: true,
             });
+            document.body.style.overflow = 'hidden';
         }
     }
 
@@ -33,6 +35,7 @@ export class HeaderComponent extends React.Component {
         this.setState({
             open: false,
         });
+
     }
 
     render() {
@@ -53,7 +56,7 @@ export class HeaderComponent extends React.Component {
                         </Typography>
 
                         <Link to="/search">
-                        <Button variant="flat" style={{color:"white"}} >
+                            <Button variant="flat" style={{ color: "white" }} >
 
                                 <SearchIcon style={{
                                     height: '100%',

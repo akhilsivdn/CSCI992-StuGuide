@@ -118,7 +118,7 @@ input {
 
 .abc{
   display: flex;
-  overflow: scroll;
+  overflow-y: hidden;
 }
 
 .eventdetail{
@@ -127,12 +127,18 @@ input {
 }
 
  .event{
-  width: 220px;
-  border: black;
-  border-style: solid;
+  
 } 
 
-
+.grid{
+  display: flex;
+  height: 100vh;
+  align-items: flex-start;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0px;
+}
 
 /*End - HomeContent section*/
 
@@ -255,7 +261,7 @@ body {
   /* left: 0; */
   bottom: 0;
   width: 0%;
-  height: 100%;
+  height: auto;
   z-index: 999;
   transition: 0.2s;
   overflow-x: hidden;
@@ -491,4 +497,14 @@ font-weight: 700;
 /* Styling of overlay */
 .bm-overlay {
   background: rgba(0, 0, 0, 0.3);
+}
+
+/* Loading Bar */
+.loadingBar{
+  position: fixed;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
 }

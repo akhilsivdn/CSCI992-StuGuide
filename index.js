@@ -13,6 +13,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { CommonComponent } from "./components/common";
 import { SettingsComponent } from "./components/settings";
 import { TripPlannerComponent } from "./components/tripplanner";
+import { MoreEventsPageComponent } from "./components/moreEventsPage";
 
 class Application extends Component {
 
@@ -63,6 +64,7 @@ class Application extends Component {
                         <Route path="/transit" component={TransportComponent} />
                         <Route path="/settings" component={SettingsComponent} />
                         <Route path="/tripplanner" component={TripPlannerComponent} />
+                        <Route path="/moreEvents" component= { MoreEventsPageComponent }/>
                     </Switch>
 
                 </BrowserRouter>
