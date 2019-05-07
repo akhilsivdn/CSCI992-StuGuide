@@ -215,7 +215,36 @@ input {
 
 /*End - Search page styles*/
 
+/*Start - weather forecast page*/
 
+.forecastDays{
+  display: flex;
+}
+
+
+.forecastpage{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: bisque;
+  border-radius: 3%;
+  max-width: 85%;
+  overflow: auto;
+}
+
+.forecast_current{
+  width: 100%;
+  display: flex;
+}
+
+.forecast{
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+/*End - weather forecast page*/
 
 /*TopBar - menu styles*/
 

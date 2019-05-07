@@ -2,6 +2,7 @@ import React from "react";
 import { GoogleApiWrapper } from 'google-maps-react';
 import MapComponent from "./maps";
 import config from 'react-global-configuration';
+import StarRatings from 'react-star-ratings';
 
 export class TripPlannerComponent extends React.Component {
     constructor() {
@@ -91,10 +92,15 @@ export class TripPlannerComponent extends React.Component {
                                         <div className="openHrs">{openHrs}</div>
                                         <div className="search_result_name restaurantTitle">{place.name} </div>
                                         <div className="search_result_address">{place.formatted_address} </div>
-                                        <div className="ratingBlock">{place.rating}</div>
-
-                                        <button><a target="_blank" href={placeUrl}>Get Directions</a></button>
-
+                                        {/* <div className="ratingBlock">{place.rating}</div> */}
+                                        <StarRatings starDimension="40px"
+                                            starSpacing="8px"
+                                            rating={place.rating}
+                                            starRatedColor="blue"
+                                            numberOfStars={5} />
+                                        <div>
+                                            <button><a target="_blank" href={placeUrl}>Get Directions</a></button>
+                                        </div>
                                     </div>
                                 </div>
                             );

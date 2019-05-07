@@ -55,7 +55,7 @@ export class ForecastComponent extends React.Component {
 
         this.DisplayDayoftheWeek(1);
 
-        fetch('http://api.apixu.com/v1/forecast.json?key=e7ab3fccbda843c8b4485021192303&days=5&q=' + location)
+        fetch('http://api.apixu.com/v1/forecast.json?key=e7ab3fccbda843c8b4485021192303&days=6&q=' + location)
             .then(res => res.json())
             .then(data => this.setState({
                 current: data.current,
@@ -69,31 +69,55 @@ export class ForecastComponent extends React.Component {
         var location = config.get('locationName');
 
         return (
-            <div className="forecast">
-                <div>{location}</div>
-                <div className="forecast_current">
-                    <div className="current_weather_text">
-                        <span className="conditionText">{this.state.current && this.state.current.condition.text}</span>
-                        <span>{this.state.current && this.state.current.temp_c}&#8451;</span>
+            <div className="forecastpage">
+                <div>
+                    <div>{location}</div>
+                    <hr />
+                    <div className="forecast_current">
+                        <div className="current_weather_text">
+                            <span style={{
+                                display: 'block'
+                            }}>{this.state.current && this.state.current.condition.text}</span>
+                            <span>{this.state.current && this.state.current.temp_c}&#8451;</span>
+                        </div>
+                        <div className="current_weather_image">
+                            <img src={this.state.current && this.state.current.condition.icon} width={'120px'} height={'120px'}></img>
+                        </div>
                     </div>
-                    <div className="current_weather_image">
-                        <img src={this.state.current && this.state.current.condition.icon} width={'120px'} height={'120px'}></img>
-                    </div>
+                    <hr />
+                    <div className="forecastDays">
+                        {
+                            this.state.forecastDays.map(function (forecastDay, i) {
+                                if (i == 0) {
+                                    return ('');
+                                }
 
+                                if (this.state.day == 7) {
+                                    this.state.day = 0;
+                                }
+                                let dayString = this.DisplayDayoftheWeek(this.state.day);
+                                this.state.day++;
+
+                                return (
+                                    <div className="forecast">
+                                        <div>{dayString}</div>
+                                        <div className="current_weather_image">
+                                            <img src={forecastDay.day.condition.icon} width={'120px'} height={'120px'}></img>
+                                        </div>
+                                        <div>
+                                            <div className="current_weather_text">
+                                                <div className="conditionText">{forecastDay.day.maxtemp_c}&#8451;</div>
+                                                <div className="conditionText">{forecastDay.day.mintemp_c}&#8451;</div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                )
+                            }, this)
+                        }
+                    </div>
                 </div>
-                <hr />
-                {
-                    this.state.forecastDays.map(function (forecastDay, i) {
-                        let dayString = this.DisplayDayoftheWeek(this.state.day);
-                        this.state.day++;
-
-                        return (
-                            <div>
-
-                            </div>
-                        )
-                    }, this)
-                }
             </div>
         );
     }

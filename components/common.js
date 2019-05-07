@@ -4,7 +4,7 @@ import MapComponent from "./maps";
 import config from 'react-global-configuration';
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { Modal, Dialog } from "@material-ui/core";
-
+import StarRatings from 'react-star-ratings';
 
 export class CommonComponent extends React.Component {
     constructor(props) {
@@ -190,7 +190,13 @@ export class CommonComponent extends React.Component {
                                             <div className="openHrs">{openHrs}</div>
                                             <div className="search_result_name restaurantTitle">{place.name} </div>
                                             <div className="search_result_address">{place.vicinity} </div>
-                                            <div className="ratingBlock">{place.rating}</div>
+                                            {/* <div className="ratingBlock">{place.rating}</div> */}
+                                            <StarRatings starDimension="40px"
+                                                starSpacing="8px"
+                                                rating={place.rating}
+                                                starRatedColor="blue"
+                                                numberOfStars={5} />
+
                                             <div className="price">{price}</div>
 
                                             {/* need to implement to trigger phone from here */}
