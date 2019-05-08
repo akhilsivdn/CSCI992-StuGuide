@@ -63,6 +63,10 @@ export class CommonComponent extends React.Component {
             types = "lawyer"
             titleText = "Lawyers near me";
         }
+        else if (path.includes('parking')) {
+            types = "parking"
+            titleText = "Parking areas near me";
+        }
         //Not adding else - we may need to add more here..
 
         var latitude = config.get('latitude');
@@ -70,7 +74,6 @@ export class CommonComponent extends React.Component {
 
         //const url = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-34.4075307%20150.8667624&radius=5000&rankBy=distance&types=" + types + "&sensor=true&key=AIzaSyBi99vISytb1d0NAogNjpwgGy_wElH2ly0";
 
-        //updated - to rank them in distance - TODO://update latitude and longitude values - now location set to UoW
         const url = 'https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + latitude + ',' + longitude + '&rankby=distance&types=' + types + '&sensor=true&key=AIzaSyBi99vISytb1d0NAogNjpwgGy_wElH2ly0';
 
         var arr = [];

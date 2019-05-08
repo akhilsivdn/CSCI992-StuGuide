@@ -86,6 +86,7 @@ class Application extends Component {
                         <Route path="/groceries" component={CommonComponent} />
                         <Route path="/stores" component={CommonComponent} />
                         <Route path="/lawyers" component={CommonComponent} />
+                        <Route path="/parking-slots" component={CommonComponent} />
                         <Route path="/more" component={MoreEventComponent} />
                         <Route path="/transit" component={TransportComponent} />
                         <Route path="/settings" component={SettingsComponent} />

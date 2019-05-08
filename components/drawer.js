@@ -140,6 +140,15 @@ class DrawerComponent extends React.Component {
 									<LegalIcon />
 								</ListItemIcon>
 								<ListItemText>
+									<Link to="/parking-slots">Parking Slots</Link>
+								</ListItemText>
+							</ListItem>
+
+							<ListItem button>
+								<ListItemIcon>
+									<LegalIcon />
+								</ListItemIcon>
+								<ListItemText>
 									<Link to="/weather-forecast">Weather Forecast</Link>
 								</ListItemText>
 							</ListItem>
