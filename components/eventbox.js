@@ -25,7 +25,6 @@ export class EventBoxComponent extends React.Component {
         var longitude = config.get('longitude');
         var location = config.get('locationName');
 
-        //need to change {place} later
         fetch('https://www.eventbriteapi.com/v3/events/search/?q=' + location + '&location.within=50km&location.latitude=' + latitude + '&location.longitude=' + longitude + '&token=MJN62TFZ2KMEP2RRRQYX')
             .then(res => res.json())
             .then(data => this.setState({
@@ -37,168 +36,96 @@ export class EventBoxComponent extends React.Component {
 
 
     render() {
+        return (
+            <div>
+                <Link style={{
+                    'text-decoration': 'none'
+                }} to={{
+                    pathname: "/moreEvents",
+                    data: this.state.data
+                }}>
+                    <Button style={{
+                        'padding': '20px 8px'
+                    }} size="medium" color="default">
+                        <span style={{
+                            'font-size': '20px',
+                            'font-style': 'italic',
+                            'font-family': 'cursive',
+                            'font-weight': '600'
+                        }}>Events Nearby</span>
 
-        let number = this.state.data.length;
+                        {/* Replace the icon with material icon */}
 
-        if (number > 4) {
-            return (
-                <div>
-                    <Link to={{
-                        pathname: "/moreEvents",
-                        data: this.state.data
-                    }}>
-                        <Button size="medium" color="default">
-                            Events Nearby
-                        </Button>
-                    </Link>
-                    <div className="abc">
-                        {
-                            this.state.data.map(function (event, i) {
-                                if (i < 4) {
-                                    return (
-                                        <div className="event">
-                                            <Card
+                        {this.state.data && this.state.data.length > 4 && <span style={{
+                            'font-size': '28px',
+                            'font-style': 'italic',
+                            'font-family': 'cursive',
+                            'font-weight': '600',
+                            'padding': '5px'
+                        }}>&#62;</span>}
+                    </Button>
+                </Link>
+                <div className="abc">
+                    {
+                        this.state.data.map(function (event, i) {
+                            if (i < 4) {
+                                return (
+                                    <div className="event">
+                                        <Card
+                                            style={{
+                                                height: '400px',
+                                                padding: 'inherit',
+                                                marginInlineEnd: '20px',
+                                                marginTop: '5px',
+                                                marginBottom: '10px',
+                                                marginLeft: '7px',
+                                                borderRadius: '10px',
+                                            }} >
+                                            <CardActionArea
                                                 style={{
-                                                    height: '400px',
-                                                    padding: 'inherit',
-                                                    marginInlineEnd: '20px',
-                                                    marginTop: '5px',
-                                                    marginBottom: '10px',
-                                                    marginLeft: '7px',
-                                                    borderRadius: '10px',
-                                                }} >
-                                                <CardActionArea
+                                                    width: "250px"
+                                                }}>
+                                                <CardMedia
+                                                    component="img"
+                                                    alt="Contemplative Reptile"
+                                                    // className={classes.media}
+                                                    height="210px"
+                                                    src={event.logo.url}
+                                                // image="/static/images/cards/contemplative-reptile.jpg"
+                                                // title="Contemplative Reptile" ask akhil
+                                                />
+                                                <CardContent
                                                     style={{
-                                                        width: "250px"
+                                                        height: "125px"
                                                     }}>
-                                                    <CardMedia
-                                                        component="img"
-                                                        alt="Contemplative Reptile"
-                                                        // className={classes.media}
-                                                        height="210px"
-                                                        src={event.logo.url}
-                                                    // image="/static/images/cards/contemplative-reptile.jpg"
-                                                    // title="Contemplative Reptile" ask akhil
-                                                    />
-                                                    <CardContent
-                                                        style={{
-                                                            height: "125px"
-                                                        }}>
-                                                        {/* <Typography gutterBottom variant="h5" component="h2">
+                                                    {/* <Typography gutterBottom variant="h5" component="h2">
                                                         Ask Akhil
                                             </Typography> */}
-                                                        <Typography variant="subheading"
-                                                        >
-                                                            {event.name.text}
-                                                        </Typography>
-                                                    </CardContent>
-                                                </CardActionArea>
-                                                <CardActions>
-                                                    <Link to={{
-                                                        pathname: "/more",
-                                                        data: event
-                                                    }}>
-                                                        <Button size="small" color="primary">
-                                                            Know More
+                                                    <Typography variant="subheading"
+                                                    >
+                                                        {event.name.text}
+                                                    </Typography>
+                                                </CardContent>
+                                            </CardActionArea>
+                                            <CardActions>
+                                                <Link to={{
+                                                    pathname: "/more",
+                                                    data: event
+                                                }}>
+                                                    <Button size="small" color="primary">
+                                                        Know More
                                                         </Button>
-                                                    </Link>
-                                                </CardActions>
-                                            </Card>
-
-                                            {/* <img src={event.logo.url} width='200px' height='210px'></img>
-                                        <div>{event.name.text}</div>
-                                        <Link to={{
-                                            pathname: "/more",
-                                            data: event
-                                        }}>
-                                            <button className="buttonClass">more</button>
-                                        </Link> */}
-                                        </div>
-                                    );
-                                }
-                            })
-                        }
-                    </div>
+                                                </Link>
+                                            </CardActions>
+                                        </Card>
+                                        
+                                    </div>
+                                );
+                            }
+                        })
+                    }
                 </div>
-            )
-        }
-        else {
-            return (
-                <div>
-                    <span>
-                        Events Nearby..
-                    </span>
-                    <div className="abc">
-                        {
-                            this.state.data.map(function (event, i) {
-                                if (i < 4) {
-                                    return (
-                                        <div className="event">
-                                            <Card
-                                                style={{
-                                                    height: '400px',
-                                                    padding: 'inherit',
-                                                    marginInlineEnd: '20px',
-                                                    marginTop: '5px',
-                                                    marginBottom: '10px',
-                                                    marginLeft: '10px',
-                                                    borderRadius: '10px',
-                                                }} >
-                                                <CardActionArea
-                                                    style={{
-                                                        width: "250px"
-                                                    }}>
-                                                    <CardMedia
-                                                        component="img"
-                                                        alt="Contemplative Reptile"
-                                                        // className={classes.media}
-                                                        height="210px"
-                                                        src={event.logo.url}
-                                                    // image="/static/images/cards/contemplative-reptile.jpg"
-                                                    // title="Contemplative Reptile" ask akhil
-                                                    />
-                                                    <CardContent
-                                                        style={{
-                                                            height: "125px"
-                                                        }}>
-                                                        {/* <Typography gutterBottom variant="h5" component="h2">
-                                                        Ask Akhil
-                                            </Typography> */}
-                                                        <Typography variant="subheading"
-                                                        >
-                                                            {event.name.text}
-                                                        </Typography>
-                                                    </CardContent>
-                                                </CardActionArea>
-                                                <CardActions>
-                                                    <Link to={{
-                                                        pathname: "/more",
-                                                        data: event
-                                                    }}>
-                                                        <Button size="small" color="primary">
-                                                            Know More
-                                                </Button>
-                                                    </Link>
-                                                </CardActions>
-                                            </Card>
-
-                                            {/* <img src={event.logo.url} width='200px' height='210px'></img>
-                                        <div>{event.name.text}</div>
-                                        <Link to={{
-                                            pathname: "/more",
-                                            data: event
-                                        }}>
-                                            <button className="buttonClass">more</button>
-                                        </Link> */}
-                                        </div>
-                                    );
-                                }
-
-                            })
-                        }
-                    </div>
-                </div>
-            )
-        }
+            </div>
+        )
     }
 }

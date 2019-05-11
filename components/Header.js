@@ -52,7 +52,12 @@ export class HeaderComponent extends React.Component {
                             <MenuIcon />
                         </IconButton>
                         <Typography variant="h5" color="inherit" noWrap style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                            StuGuide
+                            <Link to="/home" style={{
+                                'color': 'white',
+                                'text-decoration': 'none'
+                            }} >
+                                StuGuide
+                            </Link>
                         </Typography>
 
                         <Link to="/search">

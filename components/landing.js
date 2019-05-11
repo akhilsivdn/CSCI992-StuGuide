@@ -10,11 +10,18 @@ export class LandingComponent extends React.Component {
         super();
         this.state = {}
     }
-    
+
     render() {
         var pos1 = [];
-        
-        //need to change later
+     
+        if (config.get('latitude') == '' || config.get('longitude') == '') {
+            config.set({
+                latitude: '-34.4054',
+                longitude: '150.8784',
+                locationName: 'Wollongong'
+            });
+        }
+
         pos1.push({ latitude: config.get('latitude'), longitude: config.get('longitude') });
 
         return (
