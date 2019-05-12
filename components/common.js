@@ -70,6 +70,17 @@ export class CommonComponent extends React.Component {
     }
 
     FilteredList(e) {
+        try {
+            var latitude = config.get('latitude');
+        }
+        catch (error) {
+            config.set({
+                latitude: '-34.4054',
+                longitude: '150.8784',
+                locationName: 'Wollongong'
+            });
+        }
+
         this.state = {
             data: [],
             pos: [],
@@ -106,7 +117,7 @@ export class CommonComponent extends React.Component {
             types = "parking"
             titleText = "Parking areas near me";
         }
-    
+
         var latitude = config.get('latitude');
         var longitude = config.get('longitude');
 

@@ -5,8 +5,12 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, ''),
         filename: 'transpiled.js',
+        publicPath: '/'
     },
-    module:{
+    devServer: {
+        historyApiFallback: true,
+    },
+    module: {
         rules: [
             {
                 test: /\.jsx?$/,

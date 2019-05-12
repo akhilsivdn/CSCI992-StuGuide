@@ -55,9 +55,18 @@ export class TripPlannerComponent extends React.Component {
     render() {
 
         var pos1 = [];
-
-        //will change this later
-        pos1.push({ latitude: config.get('latitude'), longitude: config.get('longitude') });
+        try {
+            pos1.push({ latitude: config.get('latitude'), longitude: config.get('longitude') });
+        }
+        
+        catch (error) {
+            config.set({
+                latitude: '-34.4054',
+                longitude: '150.8784',
+                locationName: 'Wollongong'
+            });
+            pos1.push({ latitude: config.get('latitude'), longitude: config.get('longitude') });
+        }
         this.state.pos = pos1;
         return (
             <div>
@@ -93,7 +102,7 @@ export class TripPlannerComponent extends React.Component {
                                         <div className="search_result_name restaurantTitle">{place.name} </div>
                                         <div className="search_result_address">{place.formatted_address} </div>
                                         {/* <div className="ratingBlock">{place.rating}</div> */}
-                                        <StarRatings starDimension="40px"
+                                        <StarRatings starDimension="25px"
                                             starSpacing="8px"
                                             rating={place.rating}
                                             starRatedColor="blue"

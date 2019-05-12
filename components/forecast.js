@@ -47,7 +47,18 @@ export class ForecastComponent extends React.Component {
     }
 
     GetIt() {
-        var location = config.get('locationName');
+        try {
+            var location = config.get('locationName');
+        }
+        catch (error) {
+            config.set({
+                latitude: '-34.4054',
+                longitude: '150.8784',
+                locationName: 'Wollongong'
+            });
+            var location = 'Wollongong';
+        }
+
         let newDate = new Date()
         this.setState({
             day: newDate.getDay() + 1
@@ -66,8 +77,20 @@ export class ForecastComponent extends React.Component {
 
 
     render() {
-        var location = config.get('locationName');
+        try {
+            var location = config.get('locationName');
+        }
 
+        catch (error) {
+            config.set({
+                latitude: '-34.4054',
+                longitude: '150.8784',
+                locationName: 'Wollongong'
+            });
+            var location = 'Wollongong';
+        }
+        
+    
         return (
             <div className="forecastpage">
                 <div>

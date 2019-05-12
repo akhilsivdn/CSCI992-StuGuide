@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import config from 'react-global-configuration';
 import { Card, CardActionArea, CardActions, CardContent, CardMedia, Button, Typography, Grid } from '@material-ui/core';
 
@@ -15,6 +15,9 @@ export class MoreEventsPageComponent extends React.Component {
     }
 
     render() {
+        if (!this.state.data) {
+            return <Redirect push to="/home" />;
+        }
         return (
             <div className="grid">
                 {

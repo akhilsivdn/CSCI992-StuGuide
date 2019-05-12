@@ -57,7 +57,7 @@ export class HeaderComponent extends React.Component {
                                 'text-decoration': 'none'
                             }} >
                                 StuGuide
-                            </Link>
+                </Link>
                         </Typography>
 
                         <Link to="/search">
@@ -81,45 +81,7 @@ export class HeaderComponent extends React.Component {
                     open={this.state.open}
                     close={() => this.setState({ open: false })}
                 />
-
-
-
             </div>
-
-            // <div className="headerContainer">
-            //     <div className="left">
-            //         {/* <div className={"barContainer  "+ (this.state.isClicked ? "change" : "")} onClick={this.myFunction.bind(this)}>
-            //             <div className="bar1"></div>
-            //             <div className="bar2"></div>
-            //             <div className="bar3"></div>
-            //         </div> */}
-
-
-            //             <div className="wrapper">
-            //                 <TopbarComponent onMenuClick={() => this.openDrawer()} />
-            //                 <DrawerComponent
-            //                     open={this.state.open}
-            //                     close={() => this.setState({ open: false })} />
-
-
-            //             </div>
-
-            //     </div>
-
-            //     <div className="right">
-            //         <Link to={'/search'}>
-            //             <img src={'./search (1).png'} width={'50px'} height={'50px'} />
-            //         </Link>
-            //     </div>
-
-            //     <div className="center">
-            //         <Link to={'/'} className="titleLink">
-            //             <div className="barContainer title">
-            //                 StuGuide
-            //             </div>
-            //         </Link>
-            //     </div>
-            // </div>
         );
-    }
+}
 }

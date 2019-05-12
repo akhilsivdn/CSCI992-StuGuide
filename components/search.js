@@ -49,8 +49,18 @@ export class SearchComponent extends React.Component {
             })
         }
         else {
-            //will change this later
-            pos1.push({ latitude: config.get('latitude'), longitude: config.get('longitude') });
+            try {
+                pos1.push({ latitude: config.get('latitude'), longitude: config.get('longitude') });
+            }
+
+            catch (error) {
+                config.set({
+                    latitude: '-34.4054',
+                    longitude: '150.8784',
+                    locationName: 'Wollongong'
+                });
+                pos1.push({ latitude: config.get('latitude'), longitude: config.get('longitude') });
+            }
         }
 
         this.state.pos = pos1;

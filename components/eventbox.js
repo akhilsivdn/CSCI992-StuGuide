@@ -13,11 +13,10 @@ export class EventBoxComponent extends React.Component {
             data: [],
             curr: ''
         }
-        this.GetIt();
     }
 
     componentDidMount() {
-
+        this.GetIt();
     }
 
     GetIt() {

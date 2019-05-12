@@ -1,42 +1,9 @@
-// import React from "react";
-
-// export class MoreEventComponent extends React.Component {
-
-//     constructor(props) {
-//         super(props);
-//         this.state = {
-//             data: this.props.location.data
-//         }
-
-//         console.log(this.props.location.data);
-//     }
-
-
-//     render() {
-//         return (
-//         <div className="eventdetail">
-//             <img src={this.state.data.logo.url}  height='250px'></img>
-//             <hr />
-//             <hr />
-//             <div>{this.state.data.name.text}</div>
-//             <hr />
-//             <hr />
-//             <div>{this.state.data.description.text}</div>
-//             <hr />
-//             <hr />
-//             <a target="_blank"  href={this.state.data.url}>Book Now</a>
-//         </div>
-//         );
-//     }
-// }
-
-
 import React from "react";
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
-
+import {  Redirect } from "react-router-dom";
 
 const theme = createMuiTheme({
     overrides: {
@@ -77,6 +44,9 @@ export class MoreEventComponent extends React.Component {
 
 
     render() {
+        if (!this.state.data) {
+            return <Redirect push to="/home" />;
+        }
         return (
             <div className="eventdetail">
                 <img src={this.state.data.logo.url}  height='250px'></img>
