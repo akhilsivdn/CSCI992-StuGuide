@@ -1,6 +1,5 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
-import config from 'react-global-configuration';
 import { Card, CardActionArea, CardActions, CardContent, CardMedia, Button, Typography, Grid } from '@material-ui/core';
 
 export class MoreEventsPageComponent extends React.Component {
@@ -10,11 +9,10 @@ export class MoreEventsPageComponent extends React.Component {
         this.state = {
             data: this.props.location.data
         }
-
-        console.log(this.props.location.data);
     }
 
     render() {
+        window.scrollTo(0, 0);
         if (!this.state.data) {
             return <Redirect push to="/home" />;
         }

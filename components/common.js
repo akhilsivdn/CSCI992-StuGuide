@@ -1,7 +1,6 @@
 import React from "react";
 import { GoogleApiWrapper } from 'google-maps-react';
 import MapComponent from "./maps";
-import config from 'react-global-configuration';
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { Modal, Dialog } from "@material-ui/core";
 import StarRatings from 'react-star-ratings';
@@ -70,17 +69,6 @@ export class CommonComponent extends React.Component {
     }
 
     FilteredList(e) {
-        try {
-            var latitude = config.get('latitude');
-        }
-        catch (error) {
-            config.set({
-                latitude: '-34.4054',
-                longitude: '150.8784',
-                locationName: 'Wollongong'
-            });
-        }
-
         this.state = {
             data: [],
             pos: [],
@@ -118,8 +106,8 @@ export class CommonComponent extends React.Component {
             titleText = "Parking areas near me";
         }
 
-        var latitude = config.get('latitude');
-        var longitude = config.get('longitude');
+        var latitude = localStorage.getItem('latitude');
+        var longitude = localStorage.getItem('longitude');
 
         const url = 'https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + latitude + ',' + longitude + '&rankby=distance&types=' + types + '&sensor=true&key=AIzaSyBi99vISytb1d0NAogNjpwgGy_wElH2ly0';
 
@@ -194,7 +182,7 @@ export class CommonComponent extends React.Component {
             )
         }
         else {
-            pos1.push({ latitude: config.get('latitude'), longitude: config.get('longitude') });
+            pos1.push({ latitude: localStorage.getItem('latitude'), longitude: localStorage.getItem('longitude') });
             this.state.pos = pos1;
             return (
                 <div>

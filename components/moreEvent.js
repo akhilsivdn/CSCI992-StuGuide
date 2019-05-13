@@ -3,7 +3,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
-import {  Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 const theme = createMuiTheme({
     overrides: {
@@ -38,19 +38,17 @@ export class MoreEventComponent extends React.Component {
         this.state = {
             data: this.props.location.data
         }
-
-        console.log(this.props.location.data);
     }
 
 
     render() {
+        window.scrollTo(0, 0); //fix for resetting scroll position.
         if (!this.state.data) {
             return <Redirect push to="/home" />;
         }
         return (
             <div className="eventdetail">
-                <img src={this.state.data.logo.url}  height='250px'></img>
-                <hr />
+                <img src={this.state.data.logo.url} height='250px'></img>
                 <div>
                     <MuiThemeProvider theme={theme}>
 
@@ -60,16 +58,10 @@ export class MoreEventComponent extends React.Component {
                             </Typography>
                         </Paper>
                     </MuiThemeProvider>
-
-
-
-
                 </div>
-                <hr />
                 <div>{this.state.data.description.text}</div>
-                <hr />
-                
-                <a target="_blank"  href={this.state.data.url}></a>
+
+                <a target="_blank" href={this.state.data.url}></a>
                 <MuiThemeProvider theme={theme}>
                     <Button>Book Now</Button>
                 </MuiThemeProvider>

@@ -174,56 +174,6 @@ class DrawerComponent extends React.Component {
 					</div>
 				</Paper>
 			</div>
-
-
-			// <div>
-			// 	{backdrop}
-			// 	<div className={'drawer ' + drawer}>
-			// 		<div className="drawer-head"></div>
-			// 		<ul className="drawer-menu">
-			// 			<li>
-			// 				<Link to="/home">Home</Link>
-			// 			</li>
-
-			// 			<li>
-			// 				<Link to="/restaurants">Restaurants &amp; Cafes</Link>
-			// 			</li>
-
-			// 			<li>
-			// 				<Link to="/transit">Transit</Link>
-			// 			</li>
-
-			// 			<li>
-			// 				<Link to="/tripplanner">Trip Planner</Link>
-			// 			</li>
-
-			// 			<li>
-			// 				<Link to="/groceries">Groceries</Link>
-			// 			</li>
-
-			// 			<li>
-			// 				<Link to="/stores">Covenient Stores</Link>
-			// 			</li>
-
-			// 			<li>
-			// 				<Link to="/medical">Medical Aid</Link>
-			// 			</li>
-
-			// 			<li>
-			// 				<Link to="/lawyers">Lawyers</Link>
-			// 			</li>
-
-			// 			<li>
-			// 				<Link to="/settings">Account Settings</Link>
-			// 			</li>
-
-			// 			<li>
-			// 				<Link to="/logout">Logout</Link>
-			// 			</li>
-
-			// 		</ul>
-			// 	</div>
-			// </div>
 		);
 	}
 }

@@ -1,7 +1,6 @@
 import React from "react";
 import { GoogleApiWrapper } from 'google-maps-react';
 import MapComponent from "./maps";
-import config from 'react-global-configuration';
 import StarRatings from 'react-star-ratings';
 
 export class TripPlannerComponent extends React.Component {
@@ -22,7 +21,7 @@ export class TripPlannerComponent extends React.Component {
     }
 
     UseMyLocation(e) {
-        var loc = config.get('locationName');
+        var loc = localStorage.getItem('locationName');
         this.setState({
             queryLocaltion: loc
         });
@@ -40,9 +39,6 @@ export class TripPlannerComponent extends React.Component {
             pos: []
         });
 
-        var latitude = config.get('latitude');
-        var longitude = config.get('longitude');
-
         const url = 'https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=things+to+do+in+' + e + '&language=en&key=AIzaSyBi99vISytb1d0NAogNjpwgGy_wElH2ly0';
 
         fetch(url)
@@ -56,17 +52,13 @@ export class TripPlannerComponent extends React.Component {
 
         var pos1 = [];
         try {
-            pos1.push({ latitude: config.get('latitude'), longitude: config.get('longitude') });
+            pos1.push({ latitude: localStorage.getItem('latitude'), longitude: localStorage.getItem('longitude') });
         }
-        
+
         catch (error) {
-            config.set({
-                latitude: '-34.4054',
-                longitude: '150.8784',
-                locationName: 'Wollongong'
-            });
-            pos1.push({ latitude: config.get('latitude'), longitude: config.get('longitude') });
+            console.log(error);
         }
+
         this.state.pos = pos1;
         return (
             <div>
@@ -101,7 +93,6 @@ export class TripPlannerComponent extends React.Component {
                                         <div className="openHrs">{openHrs}</div>
                                         <div className="search_result_name restaurantTitle">{place.name} </div>
                                         <div className="search_result_address">{place.formatted_address} </div>
-                                        {/* <div className="ratingBlock">{place.rating}</div> */}
                                         <StarRatings starDimension="25px"
                                             starSpacing="8px"
                                             rating={place.rating}

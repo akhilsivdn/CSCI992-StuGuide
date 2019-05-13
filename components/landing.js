@@ -1,75 +1,78 @@
 import React from "react";
 import { WeatherComponent } from "./weather";
 import MapComponent from "./maps";
-import { EventBoxComponent } from "./eventbox"
-import config from 'react-global-configuration';
+import { EventBoxComponent } from "./eventbox";
+
 
 export class LandingComponent extends React.Component {
     constructor() {
         super();
         this.state = {
-            pos: []
+            pos: [],
+            isLoaded: false
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.getMyLocation();
     }
 
     getMyLocation() {
-        const location = window.navigator && window.navigator.geolocation
-
         var latitude = '';
         var longitude = '';
         var placeName = '';
 
+        const location = window.navigator && window.navigator.geolocation;
+ 
         if (location) {
             location.getCurrentPosition((position) => {
                 latitude = position.coords.latitude
                 longitude = position.coords.longitude
+                localStorage.setItem("latitude", latitude);
+                localStorage.setItem("longitude", longitude);
 
                 const url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + latitude + ',' + longitude + '&sensor=true&key=AIzaSyBi99vISytb1d0NAogNjpwgGy_wElH2ly0';
 
                 fetch(url)
                     .then(res => res.json())
                     .then(data => {
-                        placeName = data.results[0].address_components[2].long_name
-
-                        config.set({
-                            latitude: latitude,
-                            longitude: longitude,
-                            locationName: placeName
-                        });
+                        placeName = data.results[0].address_components[2].long_name;
+                        localStorage.setItem("locationName", placeName);
+                        this.setState({
+                            isLoaded: true
+                        })
                     });
             }, (error) => {
                 console.log(error.message);
                 //set default location to university of wollongong
-                config.set({
-                    latitude: '-34.4054',
-                    longitude: '150.8784',
-                    locationName: 'Wollongong'
-                });
-            },
+                localStorage.setItem("latitude", "-34.4054");
+                localStorage.setItem("longitude", '150.8784');
+                localStorage.setItem("locationName", 'Wollongong');
+            }
             )
         }
     }
 
     render() {
-        var pos1 = [];
 
+        if (!this.state.isLoaded) {
+            return (
+                /*Add loading here */
+                <div>
+                </div>
+            )
+        }
+        var pos1 = [];
         try {
-            pos1.push({ latitude: config.get('latitude'), longitude: config.get('longitude') });
+            pos1.push({
+                latitude: localStorage.getItem("latitude"),
+                longitude: localStorage.getItem("longitude")
+            });
         }
 
         catch (error) {
-            config.set({
-                latitude: '-34.4054',
-                longitude: '150.8784',
-                locationName: 'Wollongong'
-            });
-            pos1.push({ latitude: config.get('latitude'), longitude: config.get('longitude') });
+            console.log(error);
         }
-
         return (
             <div>
                 <WeatherComponent />

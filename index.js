@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
-import config from 'react-global-configuration';
-
 import { HeaderComponent } from "./components/Header";
 import { LandingComponent } from "./components/landing";
 import SearchComponent from "./components/search";
@@ -13,9 +11,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { CommonComponent } from "./components/common";
 import { SettingsComponent } from "./components/settings";
 import { TripPlannerComponent } from "./components/tripplanner";
-
 import { MoreEventsPageComponent } from "./components/moreEventsPage";
-
 import { PlanoftheDayComponent } from "./components/planoftheday";
 import { ForecastComponent } from "./components/forecast";
 import { NewsFeedComponent } from "./components/newsfeeds";

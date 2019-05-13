@@ -1,6 +1,4 @@
 import React from "react";
-import config from 'react-global-configuration';
-
 
 export class ForecastComponent extends React.Component {
 
@@ -12,7 +10,6 @@ export class ForecastComponent extends React.Component {
             current: null
         }
     }
-
 
     componentDidMount() {
         this.GetIt();
@@ -48,15 +45,10 @@ export class ForecastComponent extends React.Component {
 
     GetIt() {
         try {
-            var location = config.get('locationName');
+            var location = localStorage.getItem('locationName');
         }
         catch (error) {
-            config.set({
-                latitude: '-34.4054',
-                longitude: '150.8784',
-                locationName: 'Wollongong'
-            });
-            var location = 'Wollongong';
+           console.log(error);
         }
 
         let newDate = new Date()
@@ -75,22 +67,14 @@ export class ForecastComponent extends React.Component {
             ));
     }
 
-
     render() {
         try {
-            var location = config.get('locationName');
+            var location = localStorage.getItem('locationName');
         }
-
         catch (error) {
-            config.set({
-                latitude: '-34.4054',
-                longitude: '150.8784',
-                locationName: 'Wollongong'
-            });
-            var location = 'Wollongong';
+           console.log(error);
         }
         
-    
         return (
             <div className="forecastpage">
                 <div>

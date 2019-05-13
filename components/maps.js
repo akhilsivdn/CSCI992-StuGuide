@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
-import config from 'react-global-configuration';
 
 
 export class MapComponent extends Component {
@@ -16,8 +15,8 @@ export class MapComponent extends Component {
 
   componentDidMount(){
     this.setState({
-        latitude: config.get('latitude'),
-        longitude: config.get('longitude')
+        latitude: localStorage.getItem('latitude'),
+        longitude: localStorage.getItem('longitude')
       });
   }
 

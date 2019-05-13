@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import config from 'react-global-configuration';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { Card, CardActionArea, CardActions, CardContent, CardMedia, Button, Typography } from '@material-ui/core';
@@ -20,9 +19,9 @@ export class EventBoxComponent extends React.Component {
     }
 
     GetIt() {
-        var latitude = config.get('latitude');
-        var longitude = config.get('longitude');
-        var location = config.get('locationName');
+        var latitude = localStorage.getItem('latitude');
+        var longitude = localStorage.getItem('longitude');
+        var location = localStorage.getItem('locationName');
 
         fetch('https://www.eventbriteapi.com/v3/events/search/?q=' + location + '&location.within=50km&location.latitude=' + latitude + '&location.longitude=' + longitude + '&token=MJN62TFZ2KMEP2RRRQYX')
             .then(res => res.json())
@@ -31,9 +30,7 @@ export class EventBoxComponent extends React.Component {
             }
             ));
     }
-
-
-
+    
     render() {
         return (
             <div>
