@@ -70,9 +70,12 @@ export class WeatherComponent extends React.Component {
         let dayText = this.DisplayDayoftheWeek(newDate.getDay());
 
         return (
-            <div>
+            <div className="bg" style={{
+                'margin-top': '20px',
+                'margin-bottom': '20px'
+            }}>
                 {/* LOGO */}
-                <img src="./white_bg_logo.png"
+                <img className="logo" src="./white_bg_logo.png"
                     height='180px' width='180px' />
                 <div className="weatherDiv">
 

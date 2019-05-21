@@ -32,9 +32,10 @@ export class CommonComponent extends React.Component {
     }
 
     LoadMoreResults(e) {
-        this.setState({
-            isLoading: true
-        })
+        
+        // this.setState({
+        //     isLoading: true
+        // })
 
         const url = 'https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyBi99vISytb1d0NAogNjpwgGy_wElH2ly0&pagetoken=' + this.state.nextPageToken;
         var arr = [];
@@ -60,7 +61,7 @@ export class CommonComponent extends React.Component {
                             arr.push(place)
                         }).then(() => {
                             if (resultCount > 0 && arr.length > 0 && resultCount == arr.length) {
-                                this.Execute(arr, 1);
+                                this.Execute(arr);
                             }
                         })
                 }, this)
@@ -194,7 +195,12 @@ export class CommonComponent extends React.Component {
                         dataLength={20}
                         next={(e) => this.LoadMoreResults(e)}
                         hasMore={true}
-                        loader={<h4>Loading...</h4>}>
+                        loader={<h4 style={{    
+                            'margin': '10px',
+                            'font-size': '18px',
+                            'font-style': 'italic',
+                            'font-weight': '600'
+                            }}>Loading...</h4>}>
                         {
                             this.state.placeArray && this.state.placeArray.map(function (place) {
 
@@ -233,7 +239,11 @@ export class CommonComponent extends React.Component {
 
                                 return (
                                     <div className="searchResultsGrid">
-                                        <img src={imgUrl} height='250px' width='250px'></img>
+
+                                        <img src={imgUrl} height='250px' width='250px'
+                                            onError={(e) => {
+                                                e.target.onerror = null; e.target.src = "./white_bg_logo_ph.png"; e.target.className = "dd"
+                                            }}></img>
                                         <div className="details">
                                             <div className="openHrs">{openHrs}</div>
                                             <div className="search_result_name restaurantTitle">{place.name} </div>

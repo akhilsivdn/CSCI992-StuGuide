@@ -1,5 +1,5 @@
 import React from "react";
-import {Paper, Grid, ButtonBase, GridList, Typography, Button} from "@material-ui/core";
+import { Paper, Grid, ButtonBase, GridList, Typography, Button } from "@material-ui/core";
 
 const styles = theme => ({
     paper: {
@@ -31,8 +31,8 @@ export class NewsFeedComponent extends React.Component {
         fetch('https://newsapi.org/v2/top-headlines?sources=google-news-au&apiKey=178ef681a1984f65b66501a4791a6e5f')
             .then(res => res.json())
             .then(data => this.setState({
-                    newsArticles: data.articles
-                }
+                newsArticles: data.articles
+            }
             ));
     }
 
@@ -42,6 +42,14 @@ export class NewsFeedComponent extends React.Component {
                 <div className="title_page">News Headlines</div>
                 <GridList cellHeight='auto' className={styles.gridList} cols={1}>
                     {this.state.newsArticles.map(function (article, i) {
+                        var published = article.publishedAt;
+                        published = published.replace('T', ' ').concat(' UTC');
+                        var date = new Date(published);
+                        var day = date.toString().substring(4, 15);
+                        var time = date.toString().substring(16, 24);
+                        var dayTimeText = "Published: " + day + " " + time;
+                        var description = article.content.split('[+')[0];
+
                         return (
                             <div>
                                 <Paper className={styles.paper}>
@@ -54,10 +62,11 @@ export class NewsFeedComponent extends React.Component {
                                         <Grid item xs={12} sm container>
                                             <Grid item xs container direction="column" spacing={16}>
                                                 <Grid item xs>
-                                                    <Typography class='news-title'  gutterBottom variant="subtitle1">
+                                                    <Typography class='news-title' gutterBottom variant="subtitle1">
                                                         {article.title}
                                                     </Typography>
-                                                    <Typography gutterBottom class='news-description'>{article.description}</Typography>
+                                                    <div className="published">{dayTimeText}</div>
+                                                    <Typography gutterBottom class='news-description'>{description}</Typography>
                                                 </Grid>
                                                 <Grid item>
                                                     <Button size="small" color="primary">

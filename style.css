@@ -246,6 +246,25 @@ input {
 
 /*End - weather forecast page*/
 
+@media only screen and (max-width: 767px) and (min-width: 400px) {
+  .bg{
+    display: grid;
+  }
+
+  .logo{
+    margin: 0 auto;
+  }
+
+  .weatherDiv{
+    margin: 0 auto;
+  }
+}
+
+
+.dd{
+  opacity: 0.6;
+}
+
 /*TopBar - menu styles*/
 
 
@@ -473,6 +492,7 @@ font-weight: 700;
 .news-title{
   font-weight: bold;
   font-size: 20px;
+  margin-bottom: .2em;
 }
 
 .news-details{
@@ -482,6 +502,13 @@ font-weight: 700;
 
 .news-description{
   font-size: 17px;
+}
+
+.published{
+    font-size: 16px;
+    font-style: italic;
+    font-weight: 400;
+    color: gray;
 }
 
 /*End -- news feed styles*/
