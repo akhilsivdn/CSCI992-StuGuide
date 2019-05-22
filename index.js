@@ -28,29 +28,31 @@ class Application extends Component {
         return (
             <div className="container">
                 <BrowserRouter>
-                    <HeaderComponent />
                     <Switch>
                         <Route path="/" component={LoginComponent} exact />
                         <Route path="/register" component={RegisterComponent} />
-                        <Route path="/home" component={LandingComponent} />
-                        <Route path="/search" component={SearchComponent} />
-                        <Route path="/medical" component={CommonComponent} />
-                        <Route path="/restaurants" component={CommonComponent} />
-                        <Route path="/groceries" component={CommonComponent} />
-                        <Route path="/stores" component={CommonComponent} />
-                        <Route path="/lawyers" component={CommonComponent} />
-                        <Route path="/parking-slots" component={CommonComponent} />
-                        <Route path="/more" component={MoreEventComponent} />
-                        <Route path="/transit" component={TransportComponent} />
-                        <Route path="/settings" component={SettingsComponent} />
+                        <switch>
+                            <HeaderComponent />
+                            <Route path="/home" component={LandingComponent} />
+                            <Route path="/search" component={SearchComponent} />
+                            <Route path="/medical" component={CommonComponent} />
+                            <Route path="/restaurants" component={CommonComponent} />
+                            <Route path="/groceries" component={CommonComponent} />
+                            <Route path="/stores" component={CommonComponent} />
+                            <Route path="/lawyers" component={CommonComponent} />
+                            <Route path="/parking-slots" component={CommonComponent} />
+                            <Route path="/more" component={MoreEventComponent} />
+                            <Route path="/transit" component={TransportComponent} />
+                            <Route path="/settings" component={SettingsComponent} />
 
-                        <Route path="/tripplanner" component={TripPlannerComponent} />
-                        <Route path="/moreEvents" component= { MoreEventsPageComponent }/>
+                            <Route path="/tripplanner" component={TripPlannerComponent} />
+                            <Route path="/moreEvents" component={MoreEventsPageComponent} />
 
-                        <Route path="/things-to-do" component={TripPlannerComponent} />
-                        <Route path="/plan-for-the-day" component={PlanoftheDayComponent} />
-                        <Route path="/weather-forecast" component={ForecastComponent} />
-                        <Route path="/news-headlines" component={NewsFeedComponent} />
+                            <Route path="/things-to-do" component={TripPlannerComponent} />
+                            <Route path="/plan-for-the-day" component={PlanoftheDayComponent} />
+                            <Route path="/weather-forecast" component={ForecastComponent} />
+                            <Route path="/news-headlines" component={NewsFeedComponent} />
+                        </switch>
 
                     </Switch>
 
