@@ -240,17 +240,17 @@ export class CommonComponent extends React.Component {
                                 return (
                                     <div className="searchResultsGrid">
 
-                                        <img src={imgUrl} height='250px' width='250px'
+                                        <img src={imgUrl} height='250px' width='300px'
                                             onError={(e) => {
-                                                e.target.onerror = null; e.target.src = "./white_bg_logo_ph.png"; e.target.className = "dd"
+                                                e.target.onerror = null; e.target.src = "./nodata.png";  e.target.className = "dd"
                                             }}></img>
                                         <div className="details">
                                             <div className="openHrs">{openHrs}</div>
                                             <div className="search_result_name restaurantTitle">{place.name} </div>
                                             <div className="search_result_address">{place.vicinity} </div>
                                             {place.rating && place.rating > 0 &&
-                                                <StarRatings starDimension="25px"
-                                                    starSpacing="8px"
+                                                <StarRatings starDimension="20px"
+                                                    starSpacing="2px"
                                                     rating={place.rating}
                                                     starRatedColor="blue"
                                                     numberOfStars={5} />
