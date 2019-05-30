@@ -2,6 +2,8 @@ import React from "react";
 import { GoogleApiWrapper } from 'google-maps-react';
 import MapComponent from "./maps";
 import StarRatings from 'react-star-ratings';
+import Paper from '@material-ui/core/Paper';
+import Button from "@material-ui/core/Button";
 
 export class SearchComponent extends React.Component {
     constructor() {
@@ -65,21 +67,38 @@ export class SearchComponent extends React.Component {
                             var placeUrl = 'https://www.google.com/maps/place/?q=place_id:' + place.place_id;
                             return (
                                 <div className="searchResultsGrid">
-                                    <img src={place.icon} height='50px'></img>
-                                    <div className="details">
-                                        <div className="search_result_name">{place.name} </div>
-                                        {place.rating && place.rating > 0 &&
-                                            <StarRatings starDimension="25px"
-                                                starSpacing="8px"
-                                                rating={place.rating}
-                                                starRatedColor="blue"
-                                                numberOfStars={5} />
-                                        }
-                                        <div className="search_result_address">{place.vicinity} </div>
-                                        <button>
-                                            <a target="_blank" href={placeUrl}>Get Directions</a>
-                                        </button>
-                                    </div>
+                                    <Paper style={{
+                                        width: "85%",
+                                        margin:"0 auto"
+                                    }}>
+                                        <div>
+                                            <img style={{marginLeft:"10px"}} src={place.icon} height='50px'></img>
+                                            <div className="details" style={{
+                                                marginLeft: "100px",
+                                                display: "inline-block"
+                                            }}>
+                                                <div className="search_result_name" >{place.name} </div>
+                                                {place.rating && place.rating > 0 &&
+                                                    <StarRatings starDimension="25px"
+                                                        starSpacing="8px"
+                                                        rating={place.rating}
+                                                        starRatedColor="blue"
+                                                        numberOfStars={5} />
+                                                }
+                                                <div className="search_result_address" >{place.vicinity} </div>
+
+                                            </div>
+                                        </div>
+                                        <div style={{
+                                            float: "right",
+                                            display: "inline-block",
+                                            margin: "15px"
+                                        }}>
+                                            <Button variant="raised" >
+                                                <a target="_blank" href={placeUrl}>Get Directions</a>
+                                            </Button>
+                                        </div>
+                                    </Paper>
                                 </div>
                             );
                         })
