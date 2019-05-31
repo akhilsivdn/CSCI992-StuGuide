@@ -103,7 +103,7 @@ export class LoginComponent extends React.Component {
                                         justifyContent: "center"
                                     }}>
                                     <span >
-                                    <Link to={'/'}> {/** Need to implement */}
+                                    <Link to={'/forgot-password'}>
                                             Forgot Password?
                                 </Link>
                                     </span>
