@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { TextField, Button, Paper, Dialog, DialogActions, DialogContent, DialogTitle, List, ListItem } from '@material-ui/core';
+import jwt from 'jsonwebtoken';
 
 export class LoginComponent extends React.Component {
 
@@ -10,6 +11,27 @@ export class LoginComponent extends React.Component {
 
     myFunction() {
 
+    }
+     /**
+     * Authenticate for user login
+     * 
+     * @return void
+     */
+    authenticate() {
+      axios.get('http://124.168.104.121:8080/api/v1/auth/login', data)
+        .then((res) => {
+          if(res.status == 200) {
+            // verify token here
+            jwt.verify('token', {})
+
+            // store the authentication key send from server response
+            localStorage.setItem('_key', res.headers.authentication);
+
+            // redirect to dashboard
+          } else {
+            console.log('authentication error!');
+          }
+        })
     }
 
     render() {
@@ -81,7 +103,7 @@ export class LoginComponent extends React.Component {
                                         justifyContent: "center"
                                     }}>
                                     <span >
-                                        <Link to={'/'}> {/** Need to implement */}
+                                    <Link to={'/'}> {/** Need to implement */}
                                             Forgot Password?
                                 </Link>
                                     </span>
