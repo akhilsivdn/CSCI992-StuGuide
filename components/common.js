@@ -32,7 +32,7 @@ export class CommonComponent extends React.Component {
     }
 
     LoadMoreResults(e) {
-        
+
         // this.setState({
         //     isLoading: true
         // })
@@ -170,14 +170,21 @@ export class CommonComponent extends React.Component {
             return (
                 <div className="loadingBar">
                     <Modal
-
                         open={this.state.isLoading}
                         style={{
-                            top: '53 %',
-                            left: '48 %',
-                            transform: 'translate(-53 %, -48 %)',
+                            transitionDuration: '800ms',
+                            transitionDelay: '800ms'
                         }}>
-                        <CircularProgress style={{ color: '#1f41fa' }} />
+                        <CircularProgress
+                            style={{
+                                position: 'absolute',
+                                top: '45%',
+                                left: '47%',
+                                color: '#1f41fa',
+                            }}
+                            thickness={4}
+                            size={70} 
+                        />
                     </Modal>
                 </div>
             )
@@ -195,12 +202,12 @@ export class CommonComponent extends React.Component {
                         dataLength={20}
                         next={(e) => this.LoadMoreResults(e)}
                         hasMore={true}
-                        loader={<h4 style={{    
+                        loader={<h4 style={{
                             'margin': '10px',
                             'font-size': '18px',
                             'font-style': 'italic',
                             'font-weight': '600'
-                            }}>Loading...</h4>}>
+                        }}>Loading...</h4>}>
                         {
                             this.state.placeArray && this.state.placeArray.map(function (place) {
 
@@ -242,7 +249,7 @@ export class CommonComponent extends React.Component {
 
                                         <img src={imgUrl} height='250px' width='300px'
                                             onError={(e) => {
-                                                e.target.onerror = null; e.target.src = "./nodata.png";  e.target.className = "dd"
+                                                e.target.onerror = null; e.target.src = "./nodata.png"; e.target.className = "dd"
                                             }}></img>
                                         <div className="details">
                                             <div className="openHrs">{openHrs}</div>

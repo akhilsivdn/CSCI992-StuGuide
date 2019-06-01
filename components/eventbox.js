@@ -30,7 +30,7 @@ export class EventBoxComponent extends React.Component {
             }
             ));
     }
-    
+
     render() {
         return (
             <div>
@@ -64,41 +64,35 @@ export class EventBoxComponent extends React.Component {
                 <div className="abc">
                     {
                         this.state.data.map(function (event, i) {
-                            if (i < 4) {
+                            if (i < 5) {
                                 return (
                                     <div className="event">
                                         <Card
                                             style={{
-                                                height: '400px',
+                                                height: '300px',
+                                                width: '200px',
                                                 padding: 'inherit',
-                                                marginInlineEnd: '20px',
+                                                marginInlineEnd: '10px',
                                                 marginTop: '5px',
                                                 marginBottom: '10px',
-                                                marginLeft: '7px',
+                                                marginLeft: '12px',
                                                 borderRadius: '10px',
                                             }} >
                                             <CardActionArea
                                                 style={{
-                                                    width: "250px"
+                                                    width: 'auto'
                                                 }}>
                                                 <CardMedia
                                                     component="img"
-                                                    alt="Contemplative Reptile"
-                                                    // className={classes.media}
-                                                    height="210px"
+                                                    alt={event.name.text}
+                                                    height="125px"
                                                     src={event.logo.url}
-                                                // image="/static/images/cards/contemplative-reptile.jpg"
-                                                // title="Contemplative Reptile" ask akhil
                                                 />
                                                 <CardContent
                                                     style={{
                                                         height: "125px"
                                                     }}>
-                                                    {/* <Typography gutterBottom variant="h5" component="h2">
-                                                        Ask Akhil
-                                            </Typography> */}
-                                                    <Typography variant="subheading"
-                                                    >
+                                                    <Typography variant="subheading">
                                                         {event.name.text}
                                                     </Typography>
                                                 </CardContent>
@@ -114,7 +108,6 @@ export class EventBoxComponent extends React.Component {
                                                 </Link>
                                             </CardActions>
                                         </Card>
-                                        
                                     </div>
                                 );
                             }

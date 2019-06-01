@@ -25,21 +25,23 @@ export class MoreEventsPageComponent extends React.Component {
                                 <div>
                                     <Card
                                         style={{
-                                            height: '400px',
+                                            height: '300px',
+                                            width: '200px',
                                             padding: 'inherit',
-                                            marginInlineEnd: '20px',
+                                            marginInlineEnd: '10px',
                                             marginTop: '5px',
                                             marginBottom: '10px',
-                                            marginLeft: '10px',
+                                            marginLeft: '12px',
                                             borderRadius: '10px',
                                         }} >
                                         <CardActionArea
                                             style={{
-                                                width: "250px"
+                                                width: 'auto'
                                             }}>
                                             <CardMedia
                                                 component="img"
-                                                height="210px"
+                                                alt={event.name.text}
+                                                height="125px"
                                                 src={event.logo.url}
                                             />
                                             <CardContent
@@ -58,7 +60,7 @@ export class MoreEventsPageComponent extends React.Component {
                                             }}>
                                                 <Button size="small" color="primary">
                                                     Know More
-                                                </Button>
+                                                        </Button>
                                             </Link>
                                         </CardActions>
                                     </Card>
