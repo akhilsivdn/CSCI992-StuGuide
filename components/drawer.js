@@ -1,15 +1,19 @@
 import React from 'react';
 import { Link, withRouter } from "react-router-dom";
 
-import { Divider, Paper, List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
-import DirectionIcon from "@material-ui/icons/Directions";
+import { Paper, List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
+import HomeIcon from "@material-ui/icons/MapTwoTone";
+import ThingsToDoIcon from "@material-ui/icons/Assignment";
+import NewsIcon from "@material-ui/icons/Event";
+import PlanIcon from "@material-ui/icons/Schedule"; //Commute
 import TransitIcon from "@material-ui/icons/DirectionsTransit";
-import HomeIcon from "@material-ui/icons/Map";
 import ShopIcon from "@material-ui/icons/LocalDining";
 import GroceryIcon from "@material-ui/icons/LocalGroceryStore";
 import LocalStoreIcon from "@material-ui/icons/LocalConvenienceStore";
 import MedicalIcon from "@material-ui/icons/LocalHospital";
-import LegalIcon from "@material-ui/icons/Book";
+import LegalIcon from "@material-ui/icons/Report"; // People // Person // QuestionAnswer
+import ParkingIcon from "@material-ui/icons/LocalParkingRounded";
+import WeatherIcon from "@material-ui/icons/Cloud";
 import SettingsIcon from "@material-ui/icons/Settings";
 import LogoutIcon from "@material-ui/icons/ExitToApp";
 
@@ -56,7 +60,7 @@ class DrawerComponent extends React.Component {
 
 							<ListItem button>
 								<ListItemIcon>
-									<DirectionIcon />
+									<ThingsToDoIcon />
 								</ListItemIcon>
 								<ListItemText>
 									<Link to="/things-to-do">Things to do</Link>
@@ -65,7 +69,7 @@ class DrawerComponent extends React.Component {
 
 							<ListItem button>
 								<ListItemIcon>
-									<DirectionIcon />
+									<NewsIcon />
 								</ListItemIcon>
 								<ListItemText>
 									<Link to="/news-headlines">News Headlines</Link>
@@ -74,7 +78,7 @@ class DrawerComponent extends React.Component {
 
 							<ListItem button>
 								<ListItemIcon>
-									<DirectionIcon />
+									<PlanIcon />
 								</ListItemIcon>
 								<ListItemText>
 									<Link to="/plan-for-the-day">Plan for the day</Link>
@@ -137,7 +141,7 @@ class DrawerComponent extends React.Component {
 						
 							<ListItem button>
 								<ListItemIcon>
-									<LegalIcon />
+									<ParkingIcon />
 								</ListItemIcon>
 								<ListItemText>
 									<Link to="/parking-slots">Parking Slots</Link>
@@ -146,7 +150,7 @@ class DrawerComponent extends React.Component {
 
 							<ListItem button>
 								<ListItemIcon>
-									<LegalIcon />
+									<WeatherIcon />
 								</ListItemIcon>
 								<ListItemText>
 									<Link to="/weather-forecast">Weather Forecast</Link>
