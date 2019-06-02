@@ -1,4 +1,6 @@
 import React from "react";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import { Modal } from "@material-ui/core";
 
 export class WeatherComponent extends React.Component {
     constructor() {
@@ -11,9 +13,9 @@ export class WeatherComponent extends React.Component {
             region: '',
             data: null,
             wind: '',
-            condtnText: ''
+            condtnText: '',
+            isLoading: true
         }
-
     }
 
     componentDidMount() {
@@ -32,7 +34,8 @@ export class WeatherComponent extends React.Component {
                 region: data.location.region,
                 wind: data.current.wind_kph,
                 condtnText: data.current.condition.text,
-                humidity: data.current.humidity
+                humidity: data.current.humidity,
+                isLoading: false
             }
             ));
     }
@@ -66,6 +69,30 @@ export class WeatherComponent extends React.Component {
     }
 
     render() {
+        if (this.state.isLoading) {
+            return (
+                <div className="loadingBar">
+                    <Modal
+                        open={this.state.isLoading}
+                        style={{
+                            transitionDuration: '800ms',
+                            transitionDelay: '800ms'
+                        }}>
+                        <CircularProgress
+                            style={{
+                                position: 'absolute',
+                                top: '45%',
+                                left: '47%',
+                                color: '#1f41fa',
+                            }}
+                            thickness={4}
+                            size={70}
+                        />
+                    </Modal>
+                </div>
+            )
+        }
+        
         let newDate = new Date();
         let dayText = this.DisplayDayoftheWeek(newDate.getDay());
 

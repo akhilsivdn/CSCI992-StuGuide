@@ -2,11 +2,12 @@ import React from "react";
 import { GoogleApiWrapper } from 'google-maps-react';
 import MapComponent from "./maps";
 import StarRatings from 'react-star-ratings';
+import CircularProgress from "@material-ui/core/CircularProgress";
+import { Modal } from "@material-ui/core";
 
 export class TripPlannerComponent extends React.Component {
     constructor() {
         super();
-
         this.state = {
             data: [],
             queryLocaltion: ''
@@ -36,7 +37,8 @@ export class TripPlannerComponent extends React.Component {
     FilteredList(e) {
         this.setState({
             data: [],
-            pos: []
+            pos: [],
+            isLoading: true
         });
 
         const url = 'https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=things+to+do+in+' + e + '&language=en&key=AIzaSyBi99vISytb1d0NAogNjpwgGy_wElH2ly0';
@@ -44,11 +46,37 @@ export class TripPlannerComponent extends React.Component {
         fetch(url)
             .then(res => res.json())
             .then(data => this.setState({
-                data: data.results
+                data: data.results,
+                isLoading: false
             }))
     }
 
     render() {
+
+
+        if (this.state.isLoading) {
+            return (
+                <div className="loadingBar">
+                    <Modal
+                        open={this.state.isLoading}
+                        style={{
+                            transitionDuration: '800ms',
+                            transitionDelay: '800ms'
+                        }}>
+                        <CircularProgress
+                            style={{
+                                position: 'absolute',
+                                top: '45%',
+                                left: '47%',
+                                color: '#1f41fa',
+                            }}
+                            thickness={4}
+                            size={70}
+                        />
+                    </Modal>
+                </div>
+            )
+        }
 
         var pos1 = [];
         try {
@@ -59,7 +87,7 @@ export class TripPlannerComponent extends React.Component {
             console.log(error);
         }
 
-        this.state.pos = pos1;
+        this.state.pos = pos1;     
         return (
             <div>
                 <input type="text" className="form-control form-control-lg" placeholder="Enter location to explore"

@@ -1,8 +1,8 @@
 import React from "react";
-
 import { GoogleApiWrapper } from 'google-maps-react';
+import CircularProgress from "@material-ui/core/CircularProgress";
+import { Modal } from "@material-ui/core";
 
-//Not completed.
 export class TransportComponent extends React.Component {
     constructor() {
         super();
@@ -10,12 +10,9 @@ export class TransportComponent extends React.Component {
             data: [],
             origin: '',
             destination: '',
-            template: ''
+            template: '',
+            noRoutesAvailable: false
         }
-    }
-
-    componentDidMount() {
-
     }
 
     SetOrigin(e) {
@@ -31,7 +28,9 @@ export class TransportComponent extends React.Component {
 
 
     GetTransitData(e) {
-
+        this.setState({
+            isLoading: true
+        })
 
         // var ori = 'University of Wollongong';
         // var depa = 'Penny Whistlers, Kiama'
@@ -46,7 +45,8 @@ export class TransportComponent extends React.Component {
         fetch(url)
             .then(res => res.json())
             .then(data => this.setState({
-                data: data.routes
+                data: data.routes,
+                noRoutesAvailable: data.status == "ZERO_RESULTS"
             }
             )).then(() => {
                 this.displayResults();
@@ -59,94 +59,132 @@ export class TransportComponent extends React.Component {
 
 
     displayResults() {
-        const stylee = (
-            <div className="searchResults">
-                {
-                    this.state.data && this.state.data.map(function (route, i) {
-                        var deptime = route.legs[0].departure_time ?
-                            (<div>Departure time: {route.legs[0].departure_time.text}</div>) : '';
-                        var arrtime = route.legs[0].arrival_time ?
-                            (<div>Arrival time: {route.legs[0].arrival_time.text}</div>) : '';
-                        return (
-                            <div className="searchResultsGrid showRoute">
-                                {deptime}
-                                {arrtime}
-                                <div>Total distance: {route.legs[0].distance.text}</div>
-                                <div>Total duration: {route.legs[0].duration.text}</div>
-                                {
-                                    route.legs[0].steps.map(function (step, i) {
+        if (this.state.noRoutesAvailable) {
+            const stylee = (
+                <div className="searchResults" style={{ textAlign: "center" }}>
+                    <span style={{
+                        display: "block",
+                        fontSize: "24px",
+                        fontWeight: "500",
+                        marginBottom: "20px"
+                    }}>Oops ! No public transport routes found. Please check your query</span>
+                    <img src="./noresults.png" width="250px" height="250px" />
+                </div>
+            );
+            this.setState({
+                template: stylee,
+                isLoading: false
+            }
+            );
+        }
+        else {
+            const stylee = (
+                <div className="searchResults">
+                    {
+                        this.state.data && this.state.data.map(function (route, i) {
+                            var deptime = route.legs[0].departure_time ?
+                                (<div>Departure time: {route.legs[0].departure_time.text}</div>) : '';
+                            var arrtime = route.legs[0].arrival_time ?
+                                (<div>Arrival time: {route.legs[0].arrival_time.text}</div>) : '';
+                            return (
+                                <div className="searchResultsGrid showRoute">
+                                    {deptime}
+                                    {arrtime}
+                                    <div>Total distance: {route.legs[0].distance.text}</div>
+                                    <div>Total duration: {route.legs[0].duration.text}</div>
+                                    {
+                                        route.legs[0].steps.map(function (step, i) {
 
-                                        const deparrture_time_stop = step.transit_details
-                                            ? (
-                                                <div className="transitBlock">
-                                                    <span>Transit details</span>
-                                                    <img src={step.transit_details.line.vehicle.icon} height='50px' width='50px' />
-                                                    <span>
-                                                        Take {step.transit_details.line.short_name}
-                                                        from {step.transit_details.departure_stop.name}
-                                                        at {step.transit_details.departure_time.text}
-                                                    </span>
-                                                    <span>Arrive at {step.transit_details.arrival_stop.name}
-                                                        at {step.transit_details.arrival_time.text}
-                                                    </span>
+                                            const deparrture_time_stop = step.transit_details
+                                                ? (
+                                                    <div className="transitBlock">
+                                                        <span>Transit details</span>
+                                                        <img src={step.transit_details.line.vehicle.icon} height='50px' width='50px' />
+                                                        <span>
+                                                            Take {step.transit_details.line.short_name}
+                                                            from {step.transit_details.departure_stop.name}
+                                                            at {step.transit_details.departure_time.text}
+                                                        </span>
+                                                        <span>Arrive at {step.transit_details.arrival_stop.name}
+                                                            at {step.transit_details.arrival_time.text}
+                                                        </span>
+                                                    </div>
+                                                )
+                                                : '';
 
-                                                    {/*                                                    
-                                                    <span>Transit departure stop: </span>
-                                                    <span>Transit departure stop: </span> */}
-                                                </div>
-                                            )
-                                            : '';
-
-                                        const arrival_time_stop = step.transit_details
-                                            ? (
-                                                ''
-                                                // <div>
-                                                //     <span>Transit arrival stop: {step.transit_details.arrival_stop.name}</span>
-                                                //     <span>Transit arrival stop: {step.transit_details.arrival_time.text}</span>
-                                                // </div>
-                                            )
-                                            : '';
+                                            const arrival_time_stop = step.transit_details
+                                                ? (
+                                                    ''
+                                                    // <div>
+                                                    //     <span>Transit arrival stop: {step.transit_details.arrival_stop.name}</span>
+                                                    //     <span>Transit arrival stop: {step.transit_details.arrival_time.text}</span>
+                                                    // </div>
+                                                )
+                                                : '';
 
 
-                                        return (
+                                            return (
 
-                                            <div className="searchResultsGrid showRoute">
-                                                <div className="stepId">Step {i + 1}</div>
+                                                <div className="searchResultsGrid showRoute">
+                                                    <div className="stepId">Step {i + 1}</div>
 
-                                                <div>
-                                                    <span className="durationText"> {step.duration.text} : </span>
-                                                    <span>{step.html_instructions}</span>
-                                                </div>
+                                                    <div>
+                                                        <span className="durationText"> {step.duration.text} : </span>
+                                                        <span>{step.html_instructions}</span>
+                                                    </div>
 
-                                                {/* <div>Step distance: {step.distance.text}</div>
+                                                    {/* <div>Step distance: {step.distance.text}</div>
                                                 <div>Step duration: {step.duration.text}</div>
                                                 <div>Travel mode: {step.travel_mode}</div> */}
 
-                                                {deparrture_time_stop}
-                                                {arrival_time_stop}
+                                                    {deparrture_time_stop}
+                                                    {arrival_time_stop}
 
-                                                {/* <div>Instruction: {step.html_instructions}</div> */}
-                                            </div>
-                                        );
-                                    })
-                                }
-                            </div>
-                        );
-                    })
-                }
-            </div>
-        );
+                                                    {/* <div>Instruction: {step.html_instructions}</div> */}
+                                                </div>
+                                            );
+                                        })
+                                    }
+                                </div>
+                            );
+                        })
+                    }
+                </div>
+            );
 
-        this.setState({
-            template: stylee
+            this.setState({
+                template: stylee,
+                isLoading: false
+            }
+            );
         }
-        );
-
-        return stylee;
     }
 
     render() {
 
+        if (this.state.isLoading) {
+            return (
+                <div className="loadingBar">
+                    <Modal
+                        open={this.state.isLoading}
+                        style={{
+                            transitionDuration: '800ms',
+                            transitionDelay: '800ms'
+                        }}>
+                        <CircularProgress
+                            style={{
+                                position: 'absolute',
+                                top: '45%',
+                                left: '47%',
+                                color: '#1f41fa',
+                            }}
+                            thickness={4}
+                            size={70}
+                        />
+                    </Modal>
+                </div>
+            )
+        }
         return (
             <div>
 

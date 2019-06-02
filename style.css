@@ -196,6 +196,9 @@ input {
 
 .search_result_name{
   font-weight: bold;
+}
+
+.serachpageresultName{
   max-width: 85%;
   overflow: hidden;
   text-overflow: ellipsis;

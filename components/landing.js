@@ -2,14 +2,15 @@ import React from "react";
 import { WeatherComponent } from "./weather";
 import MapComponent from "./maps";
 import { EventBoxComponent } from "./eventbox";
-
+import CircularProgress from "@material-ui/core/CircularProgress";
+import { Modal } from "@material-ui/core";
 
 export class LandingComponent extends React.Component {
     constructor() {
         super();
         this.state = {
             pos: [],
-            isLoaded: false
+            isLoading: true
         }
     }
 
@@ -39,7 +40,7 @@ export class LandingComponent extends React.Component {
                         placeName = data.results[0].address_components[2].long_name;
                         localStorage.setItem("locationName", placeName);
                         this.setState({
-                            isLoaded: true
+                            isLoading: false
                         })
                     });
             }, (error) => {
@@ -55,13 +56,30 @@ export class LandingComponent extends React.Component {
 
     render() {
 
-        if (!this.state.isLoaded) {
+        if (this.state.isLoading) {
             return (
-                /*Add loading here */
-                <div>
+                <div className="loadingBar">
+                    <Modal
+                        open={this.state.isLoading}
+                        style={{
+                            transitionDuration: '800ms',
+                            transitionDelay: '800ms'
+                        }}>
+                        <CircularProgress
+                            style={{
+                                position: 'absolute',
+                                top: '45%',
+                                left: '47%',
+                                color: '#1f41fa',
+                            }}
+                            thickness={4}
+                            size={70}
+                        />
+                    </Modal>
                 </div>
             )
         }
+        
         var pos1 = [];
         try {
             pos1.push({

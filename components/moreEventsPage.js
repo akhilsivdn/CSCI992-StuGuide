@@ -16,11 +16,13 @@ export class MoreEventsPageComponent extends React.Component {
         if (!this.state.data) {
             return <Redirect push to="/home" />;
         }
+        var location = localStorage.getItem("locationName")
         return (
-            <div className="grid">
-                {
-                    this.state.data.map(function (event, i) {
-                        if (i) {
+            <div>
+                <div className="title_page">More events near {location}..</div>
+                <div className="grid">
+                    {
+                        this.state.data.map(function (event, i) {
                             return (
                                 <div>
                                     <Card
@@ -31,7 +33,6 @@ export class MoreEventsPageComponent extends React.Component {
                                             marginInlineEnd: '10px',
                                             marginTop: '5px',
                                             marginBottom: '10px',
-                                            marginLeft: '12px',
                                             borderRadius: '10px',
                                         }} >
                                         <CardActionArea
@@ -67,9 +68,10 @@ export class MoreEventsPageComponent extends React.Component {
                                 </div>
                             );
                         }
-                    })
-                }
-            </div>
+                        )
+                    }
+                </div>
+            </div >
         );
     }
 }

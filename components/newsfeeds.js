@@ -1,5 +1,7 @@
 import React from "react";
 import { Paper, Grid, ButtonBase, GridList, Typography, Button } from "@material-ui/core";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import { Modal } from "@material-ui/core";
 
 const styles = theme => ({
     paper: {
@@ -20,6 +22,7 @@ export class NewsFeedComponent extends React.Component {
         super();
         this.state = {
             newsArticles: [],
+            isLoading: true
         }
     }
 
@@ -31,12 +34,37 @@ export class NewsFeedComponent extends React.Component {
         fetch('https://newsapi.org/v2/top-headlines?sources=google-news-au&apiKey=178ef681a1984f65b66501a4791a6e5f')
             .then(res => res.json())
             .then(data => this.setState({
-                newsArticles: data.articles
+                newsArticles: data.articles,
+                isLoading: false
             }
             ));
     }
 
     render() {
+
+        if (this.state.isLoading) {
+            return (
+                <div className="loadingBar">
+                    <Modal
+                        open={this.state.isLoading}
+                        style={{
+                            transitionDuration: '800ms',
+                            transitionDelay: '800ms'
+                        }}>
+                        <CircularProgress
+                            style={{
+                                position: 'absolute',
+                                top: '45%',
+                                left: '47%',
+                                color: '#1f41fa',
+                            }}
+                            thickness={4}
+                            size={70}
+                        />
+                    </Modal>
+                </div>
+            )
+        }
         return (
             <div>
                 <div className="title_page">News Headlines</div>

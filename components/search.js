@@ -126,9 +126,6 @@ export class SearchComponent extends React.Component {
                         <input type="text" className="form-control form-control-lg form_search" placeholder="Search for a place"
                             onChange={(e) => this.FilteredList(e)} value={this.state.queryString} />
 
-
-
-
                         <div className="searchResults">
                             {
                                 this.state.data.map(function (place, i) {
@@ -159,7 +156,7 @@ export class SearchComponent extends React.Component {
                                                     marginTop: "40px",
                                                     marginBottom: "30px"
                                                 }}>
-                                                    <div className="search_result_name" >{place.name} </div>
+                                                    <div className="search_result_name serachpageresultName" >{place.name} </div>
                                                     {place.rating && place.rating > 0 &&
                                                         <StarRatings starDimension="25px"
                                                             starSpacing="8px"

@@ -1,11 +1,13 @@
 import React from "react";
-
+import CircularProgress from "@material-ui/core/CircularProgress";
+import { Modal } from "@material-ui/core";
 
 export class PlanoftheDayComponent extends React.Component {
     constructor() {
         super();
         this.state = {
-            itineraryItems: []
+            itineraryItems: [],
+            isLoading: true
         }
 
     }
@@ -23,12 +25,36 @@ export class PlanoftheDayComponent extends React.Component {
         const url = 'https://www.triposo.com/api/20181213/day_planner.json?location_id=Wollongong&max_distance=50&account=WQR7PI47&token=5rsw9thr4cz8eqgww24i4s2gql9cewn7&start_date=' + dateText + '&end_date=' + dateText;
         fetch(url).then(res => res.json())
             .then(data => this.setState({
-                itineraryItems: data.results[0].days[0].itinerary_items
+                itineraryItems: data.results[0].days[0].itinerary_items,
+                isLoading: false
             }
             ));
     }
 
     render() {
+        if (this.state.isLoading) {
+            return (
+                <div className="loadingBar">
+                    <Modal
+                        open={this.state.isLoading}
+                        style={{
+                            transitionDuration: '800ms',
+                            transitionDelay: '800ms'
+                        }}>
+                        <CircularProgress
+                            style={{
+                                position: 'absolute',
+                                top: '45%',
+                                left: '47%',
+                                color: '#1f41fa',
+                            }}
+                            thickness={4}
+                            size={70}
+                        />
+                    </Modal>
+                </div>
+            )
+        }
         return (
             <div>
                 <div className="title_page">Plan for the day</div>

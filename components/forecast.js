@@ -1,6 +1,6 @@
 import React from "react";
-import config from 'react-global-configuration';
-
+import CircularProgress from "@material-ui/core/CircularProgress";
+import { Modal } from "@material-ui/core";
 
 export class ForecastComponent extends React.Component {
 
@@ -9,7 +9,8 @@ export class ForecastComponent extends React.Component {
         this.state = {
             forecastDays: [],
             day: 0,
-            current: null
+            current: null,
+            isLoading: true
         }
     }
 
@@ -65,7 +66,8 @@ export class ForecastComponent extends React.Component {
             .then(res => res.json())
             .then(data => this.setState({
                 current: data.current,
-                forecastDays: data.forecast.forecastday
+                forecastDays: data.forecast.forecastday,
+                isLoading: false
             }
             ));
     }
@@ -80,13 +82,35 @@ export class ForecastComponent extends React.Component {
             console.log(error);
         }
 
+        if(this.state.isLoading){
+            return(
+                <div className="loadingBar">
+                <Modal
+                    open={this.state.isLoading}
+                    style={{
+                        transitionDuration: '800ms',
+                        transitionDelay: '800ms'
+                    }}>
+                    <CircularProgress
+                        style={{
+                            position: 'absolute',
+                            top: '45%',
+                            left: '47%',
+                            color: '#1f41fa',
+                        }}
+                        thickness={4}
+                        size={70}
+                    />
+                </Modal>
+            </div>
+            )
+        }
 
         return (
             <div className="forecastpage">
                 <div>
                     <div>
                         <br />
-
                         <font size={'5'}><b>{location}</b></font>
                     </div>
                     <hr />

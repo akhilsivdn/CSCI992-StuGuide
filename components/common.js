@@ -2,7 +2,7 @@ import React from "react";
 import { GoogleApiWrapper } from 'google-maps-react';
 import MapComponent from "./maps";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import { Modal, Dialog } from "@material-ui/core";
+import { Modal } from "@material-ui/core";
 import StarRatings from 'react-star-ratings';
 import InfiniteScroll from "react-infinite-scroll-component";
 
@@ -187,104 +187,122 @@ export class CommonComponent extends React.Component {
         else {
             pos1.push({ latitude: localStorage.getItem('latitude'), longitude: localStorage.getItem('longitude') });
             this.state.pos = pos1;
-            return (
-                <div>
-                    <div className="title_page">{this.state.title}</div>
+            if (this.state.placeArray.length > 0) {
+                return (
+                    <div>
+                        <div className="title_page">{this.state.title}</div>
 
-                    <MapComponent markers={this.state.pos} zoom={10} />
+                        <MapComponent markers={this.state.pos} zoom={10} />
 
-                    <InfiniteScroll
-                        dataLength={20}
-                        next={(e) => this.LoadMoreResults(e)}
-                        hasMore={true}
-                        loader={<h4 style={{
-                            'margin': '10px',
-                            'font-size': '18px',
-                            'font-style': 'italic',
-                            'font-weight': '600'
-                        }}>Loading...</h4>}>
-                        {
-                            this.state.placeArray && this.state.placeArray.map(function (place) {
+                        <InfiniteScroll
+                            dataLength={20}
+                            next={(e) => this.LoadMoreResults(e)}
+                            hasMore={true}
+                            loader={<h4 style={{
+                                'margin': '10px',
+                                'font-size': '18px',
+                                'font-style': 'italic',
+                                'font-weight': '600'
+                            }}>Loading...</h4>}>
+                            {
+                                this.state.placeArray && this.state.placeArray.map(function (place) {
 
-                                var price = 'Price not available';
-                                if (place.price_level) {
-                                    switch (place.price_level) {
-                                        case 1:
-                                            price = '$';
-                                            break;
-                                        case 2:
-                                            price = '$$';
-                                            break;
-                                        case 3:
-                                            price = '$$$';
-                                            break;
-                                        case 4:
-                                            price = '$$$$';
-                                            break;
-                                        case 5:
-                                            price = '$$$$$';
-                                            break;
+                                    var price = 'Price not available';
+                                    if (place.price_level) {
+                                        switch (place.price_level) {
+                                            case 1:
+                                                price = '$';
+                                                break;
+                                            case 2:
+                                                price = '$$';
+                                                break;
+                                            case 3:
+                                                price = '$$$';
+                                                break;
+                                            case 4:
+                                                price = '$$$$';
+                                                break;
+                                            case 5:
+                                                price = '$$$$$';
+                                                break;
+                                        }
                                     }
-                                }
 
-                                var openHrs = 'Opening hours not available';
+                                    var openHrs = 'Opening hours not available';
 
-                                openHrs = place.opening_hours && (place.opening_hours.open_now ? "Open" : "Closed");
+                                    openHrs = place.opening_hours && (place.opening_hours.open_now ? "Open" : "Closed");
 
-                                pos1.push({ latitude: place.geometry.location.lat, longitude: place.geometry.location.lng });
+                                    pos1.push({ latitude: place.geometry.location.lat, longitude: place.geometry.location.lng });
 
-                                var placeUrl = 'https://www.google.com/maps/place/?q=place_id:' + place.place_id;
+                                    var placeUrl = 'https://www.google.com/maps/place/?q=place_id:' + place.place_id;
 
-                                var imgUrl = '';
-                                if (place.photos && place.photos[0])
-                                    imgUrl = 'https://maps.googleapis.com/maps/api/place/photo?photoreference=' + place.photos[0].photo_reference + '&sensor=false&maxheight=480&maxwidth=480&key=AIzaSyBi99vISytb1d0NAogNjpwgGy_wElH2ly0';
+                                    var imgUrl = '';
+                                    if (place.photos && place.photos[0])
+                                        imgUrl = 'https://maps.googleapis.com/maps/api/place/photo?photoreference=' + place.photos[0].photo_reference + '&sensor=false&maxheight=480&maxwidth=480&key=AIzaSyBi99vISytb1d0NAogNjpwgGy_wElH2ly0';
 
-                                return (
-                                    <div className="searchResultsGrid">
+                                    return (
+                                        <div className="searchResultsGrid">
 
-                                        <img src={imgUrl} height='250px' width='300px'
-                                            onError={(e) => {
-                                                e.target.onerror = null; e.target.src = "./nodata.png"; e.target.className = "dd"
-                                            }}></img>
-                                        <div className="details">
-                                            <div className="openHrs">{openHrs}</div>
-                                            <div className="search_result_name restaurantTitle">{place.name} </div>
-                                            <div className="search_result_address">{place.vicinity} </div>
-                                            {place.rating && place.rating > 0 &&
-                                                <StarRatings starDimension="20px"
-                                                    starSpacing="2px"
-                                                    rating={place.rating}
-                                                    starRatedColor="blue"
-                                                    numberOfStars={5} />
-                                            }
+                                            <img src={imgUrl} height='250px' width='300px'
+                                                onError={(e) => {
+                                                    e.target.onerror = null; e.target.src = "./nodata.png"; e.target.className = "dd"
+                                                }}></img>
+                                            <div className="details">
+                                                <div className="openHrs">{openHrs}</div>
+                                                <div className="search_result_name restaurantTitle">{place.name} </div>
+                                                <div className="search_result_address">{place.vicinity} </div>
+                                                {place.rating && place.rating > 0 &&
+                                                    <StarRatings starDimension="20px"
+                                                        starSpacing="2px"
+                                                        rating={place.rating}
+                                                        starRatedColor="blue"
+                                                        numberOfStars={5} />
+                                                }
 
-                                            {price && price != '' &&
-                                                <div className="price">{price}</div>
-                                            }
+                                                {price && price != '' &&
+                                                    <div className="price">{price}</div>
+                                                }
 
-                                            {place.phone &&
-                                                <div className="price" onClick={(e) => this.ClickPhone(place.phone, e)}>
-                                                    <a target="_blank" href={place.phone}>Call</a>
-                                                </div>
-                                            }
-                                            {place.website &&
-                                                <div className="price">
-                                                    <a target="_blank" href={place.website}>Website</a>
-                                                </div>
-                                            }
-                                            <button><a target="_blank" href={placeUrl}>Get Directions</a></button>
+                                                {place.phone &&
+                                                    <div className="price" onClick={(e) => this.ClickPhone(place.phone, e)}>
+                                                        <a target="_blank" href={place.phone}>Call</a>
+                                                    </div>
+                                                }
+                                                {place.website &&
+                                                    <div className="price">
+                                                        <a target="_blank" href={place.website}>Website</a>
+                                                    </div>
+                                                }
+                                                <button><a target="_blank" href={placeUrl}>Get Directions</a></button>
+                                            </div>
                                         </div>
-                                    </div>
-                                );
-                            }, this)
-                        }
-                    </InfiniteScroll>
-                </div >
-            )
+                                    );
+                                }, this)
+                            }
+                        </InfiniteScroll>
+                    </div >
+                )
+            }
+            else {
+                return (
+                    <div>
+                        <div className="title_page">{this.state.title}</div>
+                        <MapComponent markers={this.state.pos} zoom={10} />
+                        <div className="searchResults" style={{ textAlign: "center" }}>
+                            <span style={{
+                                display: "block",
+                                fontSize: "24px",
+                                fontWeight: "500",
+                                marginBottom: "20px"
+                            }}>Oops ! No results found</span>
+                            <img src="./noresults.png" width="250px" height="250px" />
+                        </div>
+                    </div>
+                );
+
+            }
         }
     }
-
-
 }
 
 export default GoogleApiWrapper({
