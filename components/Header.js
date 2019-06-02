@@ -1,6 +1,5 @@
 import React from "react";
-import { browserHistory } from 'react-router';
-import { Link, Route, BrowserRouter as Router } from "react-router-dom";
+import { Link, BrowserRouter as Router } from "react-router-dom";
 import DrawerComponent from "./drawer";
 import { AppBar, Toolbar, IconButton, Typography, Button } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -53,8 +52,8 @@ export class HeaderComponent extends React.Component {
                         </IconButton>
                         <Typography variant="h5" color="inherit" noWrap style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                             <Link to="/home" style={{
-                                'color': 'white',
-                                'text-decoration': 'none'
+                                color: 'white',
+                                textDecoration: 'none'
                             }} >
                                 StuGuide
                 </Link>

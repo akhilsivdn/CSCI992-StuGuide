@@ -32,11 +32,6 @@ export class CommonComponent extends React.Component {
     }
 
     LoadMoreResults(e) {
-
-        // this.setState({
-        //     isLoading: true
-        // })
-
         const url = 'https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyBi99vISytb1d0NAogNjpwgGy_wElH2ly0&pagetoken=' + this.state.nextPageToken;
         var arr = [];
         var resultCount = 0;
@@ -183,7 +178,7 @@ export class CommonComponent extends React.Component {
                                 color: '#1f41fa',
                             }}
                             thickness={4}
-                            size={70} 
+                            size={70}
                         />
                     </Modal>
                 </div>

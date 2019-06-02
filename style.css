@@ -144,7 +144,7 @@ input {
 /*End - HomeContent section*/
 
 
-/*Login, Register pages*/
+/*Start - Login, Register pages*/
 
 .loginSection{
     margin: 0 auto;
@@ -178,13 +178,14 @@ input {
 
 
 
-/*End = Login, Register pages*/
+/*End - Login, Register pages*/
 
 
 /*Search page styles*/
 
 .searchResults{
-  margin-top: 5%;
+  margin-top: 25px;
+  margin-bottom: 25px;
 }
 
 .searchResultsGrid{
@@ -194,16 +195,17 @@ input {
 }
 
 .search_result_name{
-    font-weight: bold;
+  font-weight: bold;
+  max-width: 85%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .search_result_address{
     font-weight: 600;
 }
 
-/* .search_result_price{
-    
-} */
 
 .details{
   line-height: 30px;
@@ -215,6 +217,7 @@ input {
 }
 
 /*End - Search page styles*/
+
 
 /*Start - weather forecast page*/
 
@@ -265,6 +268,7 @@ input {
 .dd{
   opacity: 0.6;
 }
+
 
 /*TopBar - menu styles*/
 
