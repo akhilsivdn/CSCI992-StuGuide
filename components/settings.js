@@ -5,7 +5,7 @@ import Avatar from 'react-avatar-edit';
 export class SettingsComponent extends React.Component {
     constructor(props) {
         super(props);
-        const src = './default.png'
+        const src = './red_bg_logo.jpg'
         this.state = {
             username: '',
             password: '',
@@ -72,9 +72,10 @@ export class SettingsComponent extends React.Component {
                                 src={this.state.src}
                             />
                         </div>
-                        <div id='second'>
+                        {this.state.preview && <div id='second'>
                             <img src={this.state.preview} alt="Preview" />
                         </div>
+                        }
                     </div>
                     <div id='bottom'>
                         <div>

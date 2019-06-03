@@ -32,7 +32,7 @@ class DrawerComponent extends React.Component {
 		this.props.close();
 		document.body.style.overflow = 'visible';
 	}
-	
+
 	render() {
 		const drawer = (this.props.open) ? 'show-drawer' : 'hide-drawer';
 		const backdrop = (this.props.open)
@@ -49,6 +49,31 @@ class DrawerComponent extends React.Component {
 					<div className={'drawer ' + drawer}>
 
 						<List>
+
+							{/* Add binding later */}
+							<ListItem button>
+								<div style={{
+									height: "20vh",
+									margin: "0 auto"
+								}}>
+									<img src="./red_bg_logo.jpg" style={{
+										borderRadius: "50%",
+										width: "100px",
+										height: "100px",
+										margin: "0 auto",
+										display: "block"
+									}} />
+									<span style={{
+										display: "block",
+										textAlign: "center"
+									}}>username</span>
+									<span style={{
+										display: "block",
+										textAlign: "center"
+									}}>email ID</span>
+								</div>
+							</ListItem>
+
 							<ListItem button>
 								<ListItemIcon>
 									<HomeIcon />
@@ -138,7 +163,7 @@ class DrawerComponent extends React.Component {
 									<Link to="/lawyers">Legal</Link>
 								</ListItemText>
 							</ListItem>
-						
+
 							<ListItem button>
 								<ListItemIcon>
 									<ParkingIcon />
