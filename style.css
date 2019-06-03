@@ -449,9 +449,8 @@ display: inline-block;
 /*Transport component - styles*/
 
 .stepId{
-background: red;
-display: inline-block;
-border-radius: 10px;
+  display: block;
+  border-radius: 10px;
 }
 
 .durationText{
@@ -472,6 +471,7 @@ font-weight: 700;
 
 .showRoute{
   display: block;
+  margin: 0;
 }
 
 
