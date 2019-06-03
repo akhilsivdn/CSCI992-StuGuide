@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, withRouter } from "react-router-dom";
+import { Link, withRouter, Redirect } from "react-router-dom";
 
 import { Paper, List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
 import HomeIcon from "@material-ui/icons/MapTwoTone";
@@ -17,9 +17,19 @@ import WeatherIcon from "@material-ui/icons/Cloud";
 import SettingsIcon from "@material-ui/icons/Settings";
 import LogoutIcon from "@material-ui/icons/ExitToApp";
 
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
 class DrawerComponent extends React.Component {
 	constructor(props) {
 		super();
+		this.state = {
+			isOpen: false
+		}
 	}
 
 	componentDidMount() {
@@ -33,6 +43,30 @@ class DrawerComponent extends React.Component {
 		document.body.style.overflow = 'visible';
 	}
 
+
+	onClicked(e) {
+		e.preventDefault();
+		this.setState({
+			isOpen: true
+		})
+	}
+
+	handleClose() {
+		this.setState({
+			isOpen: false
+		})
+	}
+
+	handleLogout() {
+		if (localStorage.getItem('user-session')) {
+			localStorage.removeItem('user-session');
+		}
+		this.setState({
+			isOpen: false
+		})
+	}
+
+
 	render() {
 		const drawer = (this.props.open) ? 'show-drawer' : 'hide-drawer';
 		const backdrop = (this.props.open)
@@ -42,8 +76,22 @@ class DrawerComponent extends React.Component {
 			: '';
 
 		return (
-
 			<div>
+				<Dialog
+					open={this.state.isOpen}
+					onClose={() => this.handleClose()}
+					aria-labelledby="alert-dialog-title"
+					aria-describedby="alert-dialog-description">
+					<DialogTitle id="alert-dialog-title">{"Are you sure to logout?"}</DialogTitle>
+					<DialogActions>
+						<Button color="primary" onClick={() => this.handleClose()}>
+							No
+         				 </Button>
+						<Button color="primary" onClick={() => this.handleLogout()}>
+							<Link to="/">Yes</Link>
+						</Button>
+					</DialogActions>
+				</Dialog>
 				{backdrop}
 				<Paper>
 					<div className={'drawer ' + drawer}>
@@ -191,12 +239,12 @@ class DrawerComponent extends React.Component {
 								</ListItemText>
 							</ListItem>
 
-							<ListItem button>
+							<ListItem button onClick={(e) => this.onClicked(e)}>
 								<ListItemIcon>
 									<LogoutIcon />
 								</ListItemIcon>
 								<ListItemText>
-									<Link to="/">Logout</Link>
+									<Link>Logout</Link>
 								</ListItemText>
 							</ListItem>
 						</List>
