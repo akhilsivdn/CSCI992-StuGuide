@@ -696,3 +696,22 @@ font-weight: 700;
 }
 
 /*End - forgot password section*/
+
+/*Start - validation styles*/
+
+.validationMessage{
+  color: red;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  height: 2em;
+  margin-bottom: .5em;
+}
+
+.loginValidationMessage {
+  max-width: 250px;
+  margin-bottom: 3em;
+  height: auto;
+}
+
+/*End - validation styles*/

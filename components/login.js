@@ -7,31 +7,75 @@ export class LoginComponent extends React.Component {
 
     constructor() {
         super();
+        this.state = {
+            errorMessage: '',
+            userName: '',
+            password: '',
+            disableButton: false //Set to true when API is up.
+        }
     }
 
-    myFunction() {
-
+    onChangeUserName(e) {
+        if (e.target.value.length > 12) {
+            this.setState({
+                userNameErrorMessage: "Oops! maximum limit for username is 12",
+                disableButton: true
+            })
+        }
+        else {
+            this.setState({
+                userName: e.target.value,
+                userNameErrorMessage: '',
+                loginValidationMessage: '',
+                disableButton: e.target.value.length == 0 ? true : false
+            })
+        }
     }
-     /**
-     * Authenticate for user login
-     * 
-     * @return void
-     */
-    authenticate() {
-      axios.get('http://124.168.104.121:8080/api/v1/auth/login', data)
-        .then((res) => {
-          if(res.status == 200) {
-            // verify token here
-            jwt.verify('token', {})
 
-            // store the authentication key send from server response
-            localStorage.setItem('_key', res.headers.authentication);
 
-            // redirect to dashboard
-          } else {
-            console.log('authentication error!');
-          }
+    onChangePassword(e) {
+
+        //TODO: Now max length set to 15, change later
+        this.setState({
+            password: e.target.value,
+            passwordErrorMessage: e.target.value.length == 0 || e.target.value.length > 15 ? "Oops! Enter a password to continue" : '',
+            disableButton: e.target.value.length == 0 || e.target.value.length > 15 ? true : false,
+            loginValidationMessage: ''
         })
+    }
+
+    /**
+    * Authenticate for user login
+    * 
+    * @return void
+    */
+    authenticate() {
+
+        //TODO: remove this check
+        const isDebug = true;
+        if (isDebug) {
+            this.props.history.push("/home");
+        }
+        else {
+            axios.get('http://124.168.104.121:8080/api/v1/auth/login', data)
+                .then((res) => {
+                    if (res.status == 200) {
+                        // verify token here
+                        jwt.verify('token', {})
+
+                        // store the authentication key send from server response
+                        localStorage.setItem('_key', res.headers.authentication);
+
+                        // redirect to dashboard
+                        this.props.history.push("/home");
+                    } else {
+                        console.log('authentication error!');
+                        this.setState({
+                            loginError: "Authentication Error: please check username/password combination"
+                        })
+                    }
+                })
+        }
     }
 
     render() {
@@ -45,8 +89,7 @@ export class LoginComponent extends React.Component {
                             display: "flex",
                             position: "relative",
                             justifyContent: "center"
-                        }}
-                    >
+                        }}>
                         <DialogTitle
                             id="form-dialog-title"
                             style={{
@@ -61,40 +104,68 @@ export class LoginComponent extends React.Component {
                                 display: "flex",
                                 position: "relative",
                                 justifyContent: "center"
-                            }}
-                        >
+                            }}>
                             <List>
+
                                 <ListItem>
-                                    <TextField
+                                    <img src="./red_bg_logo.jpg" style={{
+                                        height: "100px",
+                                        width: "100px",
+                                        borderRadius: "50%",
+                                        display: "block",
+                                        margin: "0 auto"
+                                    }} />
+                                </ListItem>
+
+                                <ListItem>
+                                    <TextField style={{
+                                        paddingTop: "0px"
+                                    }}
                                         label="Username"
                                         margin="dense"
                                         placeholder="Enter Username"
                                         type="text"
-                                        name="username" />
+                                        name="username"
+                                        onChange={(e) => this.onChangeUserName(e)} />
                                 </ListItem>
 
+                                <div className="validationMessage">
+                                    {this.state.userNameErrorMessage}
+                                </div>
+
                                 <ListItem>
-                                    <TextField
+                                    <TextField style={{
+                                        paddingTop: "0px"
+                                    }}
                                         label="Password"
                                         margin="dense"
                                         placeholder="Enter Password"
                                         type="password"
-                                        name="password" />
+                                        name="password"
+                                        onChange={(e) => this.onChangePassword(e)} />
+
                                 </ListItem>
+
+                                <div className="validationMessage">
+                                    {this.state.passwordErrorMessage}
+                                </div>
 
                                 <ListItem
                                     style={{
                                         display: "flex",
                                         position: "relative",
-                                        justifyContent: "center"
+                                        justifyContent: "center",
+                                        paddingTop: "0px"
                                     }}>
-                                    <Link to={'/home'}>
-                                        <Button
-                                            size="large"
-                                            color="primary"
-                                            variant="contained">Login</Button>
-                                    </Link>
+                                    <Button disabled={this.state.disableButton} onClick={() => this.authenticate()}
+                                        size="large"
+                                        color="primary"
+                                        variant="contained">Login</Button>
                                 </ListItem>
+
+                                <div className="validationMessage loginValidationMessage">
+                                    {this.state.loginError}
+                                </div>
 
                                 <ListItem
                                     style={{
@@ -103,7 +174,7 @@ export class LoginComponent extends React.Component {
                                         justifyContent: "center"
                                     }}>
                                     <span >
-                                    <Link to={'/forgot-password'}>
+                                        <Link to={'/forgot-password'}>
                                             Forgot Password?
                                 </Link>
                                     </span>
@@ -125,16 +196,6 @@ export class LoginComponent extends React.Component {
                         </DialogActions>
                     </Dialog>
                 </Paper>
-
-                {/* <TextField label="Username" margin="dense" placeholder="Enter Username" className="inputfield" type="text" />
-
-                <TextField label="Password" margin="dense" placeholder="Enter Password" className="inputfield pos" type="password" />
-                <Link to={'/home'}>
-                    <Button size="small" color="primary" variant="contained" className="pos" onClick={this.myFunction}>Login</Button>
-                </Link>
-                <Link to={'/register'}>
-                    <Button size="small" color="secondary" variant="contained" className="pos" onClick={this.myFunction}>Register</Button>
-                </Link> */}
             </div >
 
         );
