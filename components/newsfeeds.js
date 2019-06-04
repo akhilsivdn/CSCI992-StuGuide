@@ -98,7 +98,7 @@ export class NewsFeedComponent extends React.Component {
                                                 </Grid>
                                                 <Grid item>
                                                     <Button size="small" color="primary">
-                                                        <a target="_blank"
+                                                        <a target="_blank" href={article.url}
                                                             rel="noopener noreferrer">
                                                             Read more
                                                         </a>
