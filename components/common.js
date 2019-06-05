@@ -2,7 +2,7 @@ import React from "react";
 import { GoogleApiWrapper } from 'google-maps-react';
 import MapComponent from "./maps";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import { Modal } from "@material-ui/core";
+import { Modal, Button } from "@material-ui/core";
 import StarRatings from 'react-star-ratings';
 import InfiniteScroll from "react-infinite-scroll-component";
 
@@ -47,6 +47,11 @@ export class CommonComponent extends React.Component {
                     place.phone = '';
                     place.website = '';
 
+                    var lat = place.geometry.location.lat;
+                    var lon = place.geometry.location.lng;
+
+                    place.distance = this.calculateDistance(lat, lon);
+
                     const url = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/details/json?placeid=" + place.place_id + "&key=AIzaSyBi99vISytb1d0NAogNjpwgGy_wElH2ly0";
                     fetch(url)
                         .then(res => res.json())
@@ -62,6 +67,27 @@ export class CommonComponent extends React.Component {
                 }, this)
             }
             )
+    }
+
+    DegreetoRad(value) {
+        return value * Math.PI / 180;
+    }
+
+    calculateDistance(latitude, longitude) {
+        var lat1 = localStorage.getItem('latitude');
+        var lon1 = localStorage.getItem('longitude');
+
+        var lat2 = latitude;
+        var lon2 = longitude;
+        var R = 6371; 
+        var dLat = this.DegreetoRad((lat2 - lat1))  
+        var dLon = this.DegreetoRad((lon2 - lon1));
+        var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(this.DegreetoRad(lat1)) * Math.cos(this.DegreetoRad(lat2)) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        var d = R * c; 
+        return d.toFixed(1);
     }
 
     FilteredList(e) {
@@ -125,6 +151,11 @@ export class CommonComponent extends React.Component {
                     place.phone = '';
                     place.website = '';
 
+                    var lat = place.geometry.location.lat;
+                    var lon = place.geometry.location.lng;
+
+                    place.distance = this.calculateDistance(lat, lon);
+
                     const url = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/details/json?placeid=" + place.place_id + "&key=AIzaSyBi99vISytb1d0NAogNjpwgGy_wElH2ly0";
                     fetch(url)
                         .then(res => res.json())
@@ -156,6 +187,10 @@ export class CommonComponent extends React.Component {
         var ph = phoneNumber.replace('(02)', '+61 2');
         ph = "tel:" + ph;
         window.open(ph);
+    }
+
+    scrollTop() {
+        window.scrollTo(0, 0);
     }
 
     render() {
@@ -195,14 +230,17 @@ export class CommonComponent extends React.Component {
                         <MapComponent markers={this.state.pos} zoom={10} />
 
                         <InfiniteScroll
-                            dataLength={20}
+                            dataLength={this.state.placeArray.length}
                             next={(e) => this.LoadMoreResults(e)}
-                            hasMore={true}
+                            hasMore={this.state.nextPageToken}
+                            endMessage={<Button style={{
+                                margin: '10px'
+                            }} onClick={this.scrollTop}>Take me to top!</Button>}
                             loader={<h4 style={{
-                                'margin': '10px',
-                                'font-size': '18px',
-                                'font-style': 'italic',
-                                'font-weight': '600'
+                                margin: '10px',
+                                fontSize: '18px',
+                                fontStyle: 'italic',
+                                fontWeight: '600'
                             }}>Loading...</h4>}>
                             {
                                 this.state.placeArray && this.state.placeArray.map(function (place) {
@@ -259,10 +297,19 @@ export class CommonComponent extends React.Component {
                                                         numberOfStars={5} />
                                                 }
 
-                                                {price && price != '' &&
+                                                <div style={{ display: "flex", alignItems: "center" }}>
                                                     <div className="price">{price}</div>
-                                                }
-
+                                                    <div style={{
+                                                        height: "8px",
+                                                        width: "8px",
+                                                        background: "#212529",
+                                                        borderRadius: "50%",
+                                                        marginLeft: "10px",
+                                                        marginRight: "10px",
+                                                        opacity: "0.8"
+                                                    }}></div>
+                                                    <div className="price">{place.distance} km</div>
+                                                </div>
                                                 {place.phone &&
                                                     <div className="price" onClick={(e) => this.ClickPhone(place.phone, e)}>
                                                         <a target="_blank" href={place.phone}>Call</a>
