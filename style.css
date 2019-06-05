@@ -138,6 +138,8 @@ input {
   align-content: flex-start;
   flex-wrap: wrap;
   list-style: none;
+  margin-left: 30px;
+  margin-right: 30px;
   padding: 0px;
 }
 
@@ -449,37 +451,33 @@ display: inline-block;
 /*Transport component - styles*/
 
 .stepId{
-background: red;
-display: inline-block;
-border-radius: 10px;
-}
-
-.durationText{
-font-weight: 700;
-}
-
-.getTransitButton{
-  margin: 3%;
-  font-size: larger;
-  border-radius: 15px;
-  padding: 5px;
-}
-
-.transitBlock{
-  display: flex;
-  flex-direction: column;
-}
-
-.showRoute{
+  background: red;
   display: block;
-}
-
-
-.btns{
-  margin: 15px;
-  width: 15%;
-  border-radius: 25px;
-}
+  border-radius: 10px;
+  
+  }
+  
+  .durationText{
+  font-weight: 700;
+  }
+  
+  .getTransitButton{
+   margin: 3%;
+   font-size: larger;
+   border-radius: 15px;
+   padding: 5px;
+  }
+  
+  .transitBlock{
+   display: flex;
+   flex-direction: column;
+  }
+  
+  .showRoute{
+   display: block;
+   margin-top: 0;
+  
+  }
 
 /*End - Transport component - styles*/
 

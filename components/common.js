@@ -1,6 +1,7 @@
 import React from "react";
 import { GoogleApiWrapper } from 'google-maps-react';
 import MapComponent from "./maps";
+import { Card, Grid, CardActions, CardContent, CardMedia, Button, Typography } from '@material-ui/core';
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { Modal } from "@material-ui/core";
 import StarRatings from 'react-star-ratings';
@@ -242,39 +243,118 @@ export class CommonComponent extends React.Component {
 
                                     return (
                                         <div className="searchResultsGrid">
+                                            <Card
+                                                style={{
+                                                    display: 'flex',
+                                                    // borderStyle: 'solid',
+                                                    height: '250px',
+                                                    width: '98%',
+                                                    marginInlineStart: '10px',
+                                                    padding: 'inherit',
+                                                    borderRadius: '10px',
+                                                }} >
 
-                                            <img src={imgUrl} height='250px' width='300px'
-                                                onError={(e) => {
-                                                    e.target.onerror = null; e.target.src = "./nodata.png"; e.target.className = "dd"
-                                                }}></img>
-                                            <div className="details">
-                                                <div className="openHrs">{openHrs}</div>
-                                                <div className="search_result_name restaurantTitle">{place.name} </div>
-                                                <div className="search_result_address">{place.vicinity} </div>
-                                                {place.rating && place.rating > 0 &&
-                                                    <StarRatings starDimension="20px"
-                                                        starSpacing="2px"
-                                                        rating={place.rating}
-                                                        starRatedColor="blue"
-                                                        numberOfStars={5} />
-                                                }
-
-                                                {price && price != '' &&
-                                                    <div className="price">{price}</div>
-                                                }
-
-                                                {place.phone &&
-                                                    <div className="price" onClick={(e) => this.ClickPhone(place.phone, e)}>
-                                                        <a target="_blank" href={place.phone}>Call</a>
-                                                    </div>
-                                                }
-                                                {place.website &&
-                                                    <div className="price">
-                                                        <a target="_blank" href={place.website}>Website</a>
-                                                    </div>
-                                                }
-                                                <button><a target="_blank" href={placeUrl}>Get Directions</a></button>
-                                            </div>
+                                                {/* <img src={imgUrl} height='250px !important' width='300px !important'
+                                                    onError={(e) => {
+                                                        e.target.onerror = null; e.target.src = "./nodata.png"; e.target.className = "dd"
+                                                    }}></img> */}
+                                                <CardMedia
+                                                    component='img'
+                                                    src={imgUrl}
+                                                    style={{
+                                                        width: '300px',
+                                                        // borderRight: 'solid',
+                                                        // borderRadius: '9px',
+                                                    }}
+                                                    onError={(e) => {
+                                                        e.target.onerror = null;
+                                                        e.target.src = "./nodata.png";
+                                                        e.target.className = "dd"
+                                                    }}
+                                                />
+                                                <CardContent style={{
+                                                    marginLeft: '10px',
+                                                    width: '800px',
+                                                    height: 'inherit'
+                                                }}>
+                                                    <Grid container>
+                                                        <Grid item
+                                                        style={{width:'400px'}}>
+                                                            <Grid container>
+                                                                <Typography
+                                                                    style={{
+                                                                        marginBottom: '10px',
+                                                                        fontWeight: 'bold'
+                                                                    }}
+                                                                    variant="h5" component="strong">
+                                                                    {place.name}
+                                                                </Typography>
+                                                            </Grid>
+                                                            <Grid container>
+                                                                <Typography variant="subtitle1">
+                                                                    Currently : {openHrs}
+                                                                </Typography>
+                                                            </Grid>
+                                                            <Grid container>
+                                                                <Typography variant="subtitle1">
+                                                                    Ratings : {place.rating && place.rating > 0 &&
+                                                                        <StarRatings starDimension="18px"
+                                                                            starSpacing="2px"
+                                                                            rating={place.rating}
+                                                                            starRatedColor="red"
+                                                                            numberOfStars={5} />
+                                                                    }
+                                                                </Typography>
+                                                            </Grid>
+                                                            <Grid container>
+                                                                <Typography variant="subtitle1">
+                                                                    Cost : {price && price != '' && price
+                                                                        // <div className="price">{price}</div>
+                                                                    }
+                                                                </Typography>
+                                                            </Grid>
+                                                            <Grid container>
+                                                                {/* <Button size="small"
+                                                                style={{marginTop:'10px'}}> */}
+                                                                {place.phone &&
+                                                                    <div className="" onClick={(e) => this.ClickPhone(place.phone, e)}>
+                                                                        <a target="_blank" href={place.phone}>Call</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                        </div>
+                                                                }
+                                                                {/* </Button> */}
+                                                                {/* <Button size="small"
+                                                                    style={{marginTop:'10px'}}> */}
+                                                                {place.website &&
+                                                                    <div className="">
+                                                                        <a target="_blank" href={place.website}>Website</a>
+                                                                    </div>
+                                                                }
+                                                                {/* </Button> */}
+                                                            </Grid>
+                                                            <Grid container>
+                                                                <Button
+                                                                    style={{
+                                                                        marginTop: '20px',
+                                                                        marginBottom:'500px'
+                                                                    }}>
+                                                                    <a target="_blank" href={placeUrl}>Get Directions</a>
+                                                                </Button>
+                                                            </Grid>
+                                                        </Grid>
+                                                        <Grid item>
+                                                            <Grid container>
+                                                                <Typography 
+                                                                 style={{
+                                                                    fontWeight: 'bold'
+                                                                }}
+                                                                variant="subtitle1">
+                                                                    Address : {place.vicinity}
+                                                                </Typography>
+                                                            </Grid>
+                                                        </Grid>
+                                                    </Grid>
+                                                </CardContent>
+                                            </Card>
                                         </div>
                                     );
                                 }, this)
