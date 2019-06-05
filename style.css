@@ -231,13 +231,14 @@ input {
 
 .forecastpage{
   position: absolute;
-  top: 50%;
+  top: 65%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: bisque;
   border-radius: 3%;
   max-width: 85%;
   overflow: auto;
+  margin-bottom: 25px;
+  box-shadow: 0px 0px 2px 0px #707070;
 }
 
 .forecast_current{
