@@ -1,7 +1,7 @@
 import React from "react";
 import axios from 'axios';
 import { Link, Redirect } from "react-router-dom";
-import { TextField, Button, Paper, Dialog, DialogActions, DialogContent, DialogTitle, List, ListItem } from '@material-ui/core';
+import { TextField, Button, Paper, Dialog, DialogActions, DialogContent, DialogTitle, List, ListItem, Checkbox } from '@material-ui/core';
 
 export class RegisterComponent extends React.Component {
 
@@ -101,6 +101,17 @@ export class RegisterComponent extends React.Component {
                                     justifyContent: "center"
                                 }}>
                                 <List>
+                                    {/* Logo */}
+                                    <ListItem >
+                                        <img src="./red_bg_logo.jpg" style={{
+                                            height: "150px",
+                                            width: "150px",
+                                            borderRadius: "20%",
+                                            display: "block",
+                                            margin: "0 auto"
+                                        }} />
+                                    </ListItem>
+
                                     <ListItem>
                                         <TextField
                                             label="E-mail"
@@ -109,22 +120,6 @@ export class RegisterComponent extends React.Component {
                                             type="text"
                                             name="email" />
                                     </ListItem>
-
-                                    {/* <ListItem>
-                                        <TextField
-                                            label="Firstr Name"
-                                            margin="normal"
-                                            placeholder="Enter First Name"
-                                            type="text"
-                                            name="fname" />
-                                        &nbsp;&nbsp;&nbsp;
-                                        <TextField
-                                            label="Last Name"
-                                            margin="normal"
-                                            placeholder="Enter Last Name"
-                                            type="text"
-                                            name="lname" />
-                                    </ListItem> */}
 
                                     <ListItem>
                                         <TextField
@@ -151,6 +146,15 @@ export class RegisterComponent extends React.Component {
                                             placeholder="Confirm Password"
                                             type="password"
                                             name="password_confirm" />
+                                    </ListItem>
+
+                                    <ListItem>
+                                        <React.Fragment>
+                                            <Checkbox
+                                                nativeControlId='my-checkbox'
+                                            />
+                                            <label style={{marginBottom: "0px"}} htmlFor='my-checkbox'>Is Admin ?</label>
+                                        </React.Fragment>
                                     </ListItem>
 
                                     <ListItem

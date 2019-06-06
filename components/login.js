@@ -102,7 +102,7 @@ export class LoginComponent extends React.Component {
                         <DialogContent
                             style={{
                                 width: "600px",
-                                height: "450px",
+                                height: "500px",
                                 display: "flex",
                                 position: "relative",
                                 justifyContent: "center",
@@ -114,7 +114,7 @@ export class LoginComponent extends React.Component {
                                     <img src="./red_bg_logo.jpg" style={{
                                         height: "150px",
                                         width: "150px",
-                                        borderRadius: "50%",
+                                        borderRadius: "20%",
                                         display: "block",
                                         margin: "0 auto"
                                     }} />
@@ -136,7 +136,7 @@ export class LoginComponent extends React.Component {
                                         onChange={(e) => this.onChangeUserName(e)} />
                                 </ListItem>
 
-                                <div className="validationMessage" style={{ height: "unset" }}>
+                                <div className="validationMessage" style={{ height: "auto" }}>
                                     {this.state.userNameErrorMessage}
                                 </div>
 
@@ -156,7 +156,7 @@ export class LoginComponent extends React.Component {
 
                                 </ListItem>
 
-                                <div className="validationMessage" style={{ height: "unset" }}>
+                                <div className="validationMessage" style={{ height: "auto" }}>
                                     {this.state.passwordErrorMessage}
                                 </div>
 
@@ -176,7 +176,7 @@ export class LoginComponent extends React.Component {
                                 </ListItem>
 
                                 <div className="validationMessage loginValidationMessage" style={{
-                                    height: "unset",
+                                    height: "auto",
                                     marginBottom: "unset"
                                 }}>
                                     {this.state.loginError}
