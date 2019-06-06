@@ -80,15 +80,16 @@ export class LoginComponent extends React.Component {
 
     render() {
         return (
-            <div className="loginSection">
-                <Paper>
+            <div className="loginSection" >
+                <Paper >
                     <Dialog
                         open="TRUE"
                         style={{
                             width: "100%",
                             display: "flex",
                             position: "relative",
-                            justifyContent: "center"
+                            justifyContent: "center",
+                            maxWidth: "none"
                         }}>
                         <DialogTitle
                             id="form-dialog-title"
@@ -100,24 +101,30 @@ export class LoginComponent extends React.Component {
                         >Login</DialogTitle>
                         <DialogContent
                             style={{
-                                width: "100%",
+                                width: "600px",
+                                height: "450px",
                                 display: "flex",
                                 position: "relative",
-                                justifyContent: "center"
+                                justifyContent: "center",
+                                padding: "unset"
+
                             }}>
                             <List>
-
-                                <ListItem>
+                                <ListItem >
                                     <img src="./red_bg_logo.jpg" style={{
-                                        height: "100px",
-                                        width: "100px",
+                                        height: "150px",
+                                        width: "150px",
                                         borderRadius: "50%",
                                         display: "block",
                                         margin: "0 auto"
                                     }} />
                                 </ListItem>
 
-                                <ListItem>
+                                <ListItem style={{
+                                    paddingTop: "unset",
+                                    paddingBottom: "unset",
+                                    marginTop: "30px"
+                                }}>
                                     <TextField style={{
                                         paddingTop: "0px"
                                     }}
@@ -129,11 +136,14 @@ export class LoginComponent extends React.Component {
                                         onChange={(e) => this.onChangeUserName(e)} />
                                 </ListItem>
 
-                                <div className="validationMessage">
+                                <div className="validationMessage" style={{ height: "unset" }}>
                                     {this.state.userNameErrorMessage}
                                 </div>
 
-                                <ListItem>
+                                <ListItem style={{
+                                    paddingTop: "unset",
+                                    paddingBottom: "unset"
+                                }}>
                                     <TextField style={{
                                         paddingTop: "0px"
                                     }}
@@ -146,7 +156,7 @@ export class LoginComponent extends React.Component {
 
                                 </ListItem>
 
-                                <div className="validationMessage">
+                                <div className="validationMessage" style={{ height: "unset" }}>
                                     {this.state.passwordErrorMessage}
                                 </div>
 
@@ -155,15 +165,20 @@ export class LoginComponent extends React.Component {
                                         display: "flex",
                                         position: "relative",
                                         justifyContent: "center",
-                                        paddingTop: "0px"
+                                        paddingTop: "0px",
+
                                     }}>
                                     <Button disabled={this.state.disableButton} onClick={() => this.authenticate()}
                                         size="large"
                                         color="primary"
-                                        variant="contained">Login</Button>
+                                        variant="contained"
+                                        style={{ width: "200px" }}>Login</Button>
                                 </ListItem>
 
-                                <div className="validationMessage loginValidationMessage">
+                                <div className="validationMessage loginValidationMessage" style={{
+                                    height: "unset",
+                                    marginBottom: "unset"
+                                }}>
                                     {this.state.loginError}
                                 </div>
 
