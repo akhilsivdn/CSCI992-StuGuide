@@ -102,7 +102,7 @@ export class LoginComponent extends React.Component {
                         <DialogContent
                             style={{
                                 width: "600px",
-                                height: "500px",
+                                height: "85%",
                                 display: "flex",
                                 position: "relative",
                                 justifyContent: "center",

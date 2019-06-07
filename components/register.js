@@ -95,7 +95,7 @@ export class RegisterComponent extends React.Component {
 
                             <DialogContent
                                 style={{
-                                    width: "100%",
+                                    width: "600px",
                                     display: "flex",
                                     position: "relative",
                                     justifyContent: "center"
@@ -112,7 +112,10 @@ export class RegisterComponent extends React.Component {
                                         }} />
                                     </ListItem>
 
-                                    <ListItem>
+                                    <ListItem style={{
+                                    paddingTop: "unset",
+                                    marginTop: "20px"
+                                }}>
                                         <TextField
                                             label="E-mail"
                                             margin="dense"
@@ -121,7 +124,9 @@ export class RegisterComponent extends React.Component {
                                             name="email" />
                                     </ListItem>
 
-                                    <ListItem>
+                                    <ListItem style={{
+                                    paddingTop: "unset"
+                                }}>
                                         <TextField
                                             label="Username"
                                             margin="dense"
@@ -130,7 +135,9 @@ export class RegisterComponent extends React.Component {
                                             name="username" />
                                     </ListItem>
 
-                                    <ListItem>
+                                    <ListItem style={{
+                                    paddingTop: "unset"
+                                }}>
                                         <TextField
                                             label="Password"
                                             margin="dense"
@@ -139,7 +146,9 @@ export class RegisterComponent extends React.Component {
                                             name="password" />
                                     </ListItem>
 
-                                    <ListItem>
+                                    <ListItem style={{
+                                    paddingTop: "unset"
+                                }}>
                                         <TextField
                                             label="Confirm Password"
                                             margin="dense"
@@ -148,7 +157,9 @@ export class RegisterComponent extends React.Component {
                                             name="password_confirm" />
                                     </ListItem>
 
-                                    <ListItem>
+                                    <ListItem style={{
+                                    paddingTop: "unset"
+                                }}>
                                         <React.Fragment>
                                             <Checkbox
                                                 nativeControlId='my-checkbox'
@@ -187,33 +198,7 @@ export class RegisterComponent extends React.Component {
                             </DialogActions>
                         </Dialog>
                     </Paper>
-                    {/* <TextField margin=" normal" label="Username" margin="dense" placeholder="Enter Username" className="inputfield" type="text" name="username" />
-
-                    <TextField m argin="normal" label="E-mail" margin="dense" placeholder="Enter e-mail" className="inputfield" type="text" name="email" />
-
-                    <TextFi eld label="Password" margin="dense" placeholder="Enter Password" className="inputfield pos" type="password" name="password" />
-            
-                    <TextField label="Confirm Password" margin="dense" placeholder="Confirm Password" className="inputfield pos" type="password" name="password_confirm" />
-
-                    <div>
-                        <Link to={'/'}>
-                            <Button size="small" color="primary" variant="contained" className="pos">Login</Button>
-                        </Link>
-                        <Link to={'/register'}>
-                            <Button size="small" color="secondary" variant="contained" className="pos">Cancel</Button>
-                        </Link>
-                    </div> */}
-
                 </div>
-
-                {/* <div className="loginSection">
-                    <input placeholder="User name" className="inputfield" type="text" name="username" />
-                    <input placeholder="Email" className="inputfield" type="text" name="email" />
-                    < input placeholder="Password" className="inputfield" type="password" name="password" />
-                    <input placeholder="Confirm password" className="inputfield" type="password"
-                    name="password_confirm" />
-                    <button className="pos">Submit</button>
-                </div> */}
             </form>
 
         );
