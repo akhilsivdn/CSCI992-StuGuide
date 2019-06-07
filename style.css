@@ -12,6 +12,8 @@ body {
 
 @import '~bootstrap/dist/css/bootstrap.css';
 @import "@material/button/mdc-button";
+@import 'react-tabs/style/react-tabs.css';
+
 
 .btn {
 	padding: 3px 15px 5px 15px;

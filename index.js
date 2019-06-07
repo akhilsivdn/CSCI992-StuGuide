@@ -16,7 +16,7 @@ import { PlanoftheDayComponent } from "./components/planoftheday";
 import { ForecastComponent } from "./components/forecast";
 import { NewsFeedComponent } from "./components/newsfeeds";
 import { ForgotPasswordComponent } from "./components/frgtpassword";
-
+import { AdminComponent } from "./components/admin";
 
 
 class Application extends Component {
@@ -33,6 +33,7 @@ class Application extends Component {
                         <Route path="/" component={LoginComponent} exact />
                         <Route path="/register" component={RegisterComponent} />
                         <Route path="/forgot-password" component={ForgotPasswordComponent} />
+                        <Route path="/admin" component={AdminComponent} />
                         <switch>
                             <HeaderComponent />
                             <Route path="/home" component={LandingComponent} />
