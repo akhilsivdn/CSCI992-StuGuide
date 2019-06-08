@@ -2,6 +2,12 @@ import React from "react";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { Modal } from "@material-ui/core";
 
+import Card from "@material-ui/core/Card";
+import CardHeader from '@material-ui/core/CardHeader';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+
 export class PlanoftheDayComponent extends React.Component {
     constructor() {
         super();
@@ -63,17 +69,29 @@ export class PlanoftheDayComponent extends React.Component {
                         let poi = itineraryItem.poi;
                         return (
                             <div>
-                                <div className="itinerary_title">{itineraryItem.title}</div>
-                                <hr />
-                                <img className="itinerary_image" src={poi.images[0] && poi.images[0].sizes.medium.url} height='250px' width='500px' />
-                                <div className="itinerary_place_name">{poi.name}</div>
-                                <hr />
-                                <div className="itinerary_description">{itineraryItem.description}</div>
-                                <hr />
-                                <div>
-                                    <button className="itinerary_button"><a href='' target="_blank">Get Directions</a></button>
-                                </div>
+                                <Card style={{ marginTop: "20px" }}>
 
+                                    <div style={{
+                                        float: "right",
+                                        padding: "20px"
+                                    }}>
+                                        <img className="itinerary_image" src={poi.images[0] && poi.images[0].sizes.medium.url} height='250px' width='350px' />
+                                    </div>
+
+                                    <CardContent>
+                                        <Typography variant="h5">
+                                            {itineraryItem.title}
+                                        </Typography>
+
+                                        <div className="itinerary_place_name">{poi.name}</div>
+
+                                        <div className="itinerary_description">{itineraryItem.description}</div>
+                                       
+                                        <div style={{ marginTop: "20px" }}>
+                                            <Button variant="outlined" color="primary"><a href='' target="_blank">Get Directions</a></Button>
+                                        </div>
+                                    </CardContent>
+                                </Card>
                             </div>
                         )
                     })

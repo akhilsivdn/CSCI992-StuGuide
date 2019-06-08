@@ -540,29 +540,28 @@ font-weight: 700;
   font-weight: 500 !important;
   font-variant-caps: all-petite-caps;
   font-size: xx-large;
-}
-
-.itinerary_image{
+ }
+ 
+ .itinerary_image{
   display: block;
   margin: 0 auto;
-}
-
-.itinerary_place_name{
-  margin: 15px;
+ }
+ 
+ .itinerary_place_name{
+  margin-top: 20px;
   font-size: 22px;
-}
-
-.itinerary_description{
-  margin: 15px;
+ }
+ 
+ .itinerary_description{
   font-size: 17px;
   font-style: italic;
-}
-
-.itinerary_button{
+ }
+ 
+ .itinerary_button{
   border-radius: 16px;
   padding: 5px;
   margin: 15px;
-}
+ }
 
 
 /*End - itinerary page styles*/
