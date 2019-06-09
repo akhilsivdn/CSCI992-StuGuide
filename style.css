@@ -217,6 +217,9 @@ input {
 .details{
   line-height: 30px;
   margin-left: 2%;
+  width: 600px;
+  height: 205px;
+  margin-bottom: 2px;
 }
 
 .form_search{
