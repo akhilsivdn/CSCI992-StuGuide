@@ -3,6 +3,7 @@ import { GoogleApiWrapper } from 'google-maps-react';
 import MapComponent from "./maps";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { Modal, Button } from "@material-ui/core";
+import { Card, CardActionArea, CardActions, CardContent, CardMedia, Typography, Grid } from '@material-ui/core';
 import StarRatings from 'react-star-ratings';
 import InfiniteScroll from "react-infinite-scroll-component";
 
@@ -79,14 +80,14 @@ export class CommonComponent extends React.Component {
 
         var lat2 = latitude;
         var lon2 = longitude;
-        var R = 6371; 
-        var dLat = this.DegreetoRad((lat2 - lat1))  
+        var R = 6371;
+        var dLat = this.DegreetoRad((lat2 - lat1))
         var dLon = this.DegreetoRad((lon2 - lon1));
         var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
             Math.cos(this.DegreetoRad(lat1)) * Math.cos(this.DegreetoRad(lat2)) *
             Math.sin(dLon / 2) * Math.sin(dLon / 2);
         var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        var d = R * c; 
+        var d = R * c;
         return d.toFixed(1);
     }
 
@@ -279,49 +280,64 @@ export class CommonComponent extends React.Component {
                                         imgUrl = 'https://maps.googleapis.com/maps/api/place/photo?photoreference=' + place.photos[0].photo_reference + '&sensor=false&maxheight=480&maxwidth=480&key=AIzaSyBi99vISytb1d0NAogNjpwgGy_wElH2ly0';
 
                                     return (
+
                                         <div className="searchResultsGrid">
+                                            <Card
+                                                style={{
+                                                    display: 'flex',
+                                                    // borderStyle: 'solid',
+                                                    height: '250px',
+                                                    width: '96%',
+                                                    marginInlineStart: '10px',
+                                                    padding: 'inherit',
+                                                    borderRadius: '10px',
+                                                }} >
+                                                <img src={imgUrl} height='250px' width='300px'
+                                                    onError={(e) => {
+                                                        e.target.onerror = null; e.target.src = "./nodata.png"; e.target.className = "dd"
+                                                    }}></img>
+                                                <div className="details">
+                                                    <div className="openHrs">{openHrs}</div>
+                                                    <div className="search_result_name restaurantTitle">{place.name} </div>
+                                                    <div className="search_result_address">{place.vicinity} </div>
+                                                    {place.rating && place.rating > 0 &&
+                                                        <StarRatings starDimension="20px"
+                                                            starSpacing="2px"
+                                                            rating={place.rating}
+                                                            starRatedColor="blue"
+                                                            numberOfStars={5} />
+                                                    }
 
-                                            <img src={imgUrl} height='250px' width='300px'
-                                                onError={(e) => {
-                                                    e.target.onerror = null; e.target.src = "./nodata.png"; e.target.className = "dd"
-                                                }}></img>
-                                            <div className="details">
-                                                <div className="openHrs">{openHrs}</div>
-                                                <div className="search_result_name restaurantTitle">{place.name} </div>
-                                                <div className="search_result_address">{place.vicinity} </div>
-                                                {place.rating && place.rating > 0 &&
-                                                    <StarRatings starDimension="20px"
-                                                        starSpacing="2px"
-                                                        rating={place.rating}
-                                                        starRatedColor="blue"
-                                                        numberOfStars={5} />
-                                                }
-
-                                                <div style={{ display: "flex", alignItems: "center" }}>
-                                                    <div className="price">{price}</div>
-                                                    <div style={{
-                                                        height: "8px",
-                                                        width: "8px",
-                                                        background: "#212529",
-                                                        borderRadius: "50%",
-                                                        marginLeft: "10px",
-                                                        marginRight: "10px",
-                                                        opacity: "0.8"
-                                                    }}></div>
-                                                    <div className="price">{place.distance} km</div>
+                                                    <div style={{ display: "flex", alignItems: "center" }}>
+                                                        <div className="price">{price}</div>
+                                                        <div style={{
+                                                            height: "8px",
+                                                            width: "8px",
+                                                            background: "#212529",
+                                                            borderRadius: "50%",
+                                                            marginLeft: "10px",
+                                                            marginRight: "10px",
+                                                            opacity: "0.8"
+                                                        }}></div>
+                                                        <div className="price">{place.distance} km</div>
+                                                    </div>
+                                                    <div style={{ display: "flex", alignItems: "center" }}>
+                                                        {place.phone &&
+                                                            <div className="price" onClick={(e) => this.ClickPhone(place.phone, e)}>
+                                                                <a target="_blank" href={place.phone}>Call</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            </div>
+                                                        }
+                                                        {place.website &&
+                                                            <div className="price">
+                                                                <a target="_blank" href={place.website}>Website</a>
+                                                            </div>
+                                                        }
+                                                    </div>
+                                                    <div>
+                                                        <Button variant="contained" color="primary"><a target="_blank" href={placeUrl} style={{ color: 'white' }}>Get Directions</a></Button>
+                                                    </div>
                                                 </div>
-                                                {place.phone &&
-                                                    <div className="price" onClick={(e) => this.ClickPhone(place.phone, e)}>
-                                                        <a target="_blank" href={place.phone}>Call</a>
-                                                    </div>
-                                                }
-                                                {place.website &&
-                                                    <div className="price">
-                                                        <a target="_blank" href={place.website}>Website</a>
-                                                    </div>
-                                                }
-                                                <button><a target="_blank" href={placeUrl}>Get Directions</a></button>
-                                            </div>
+                                            </Card>
                                         </div>
                                     );
                                 }, this)
