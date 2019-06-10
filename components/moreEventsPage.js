@@ -43,7 +43,7 @@ export class MoreEventsPageComponent extends React.Component {
                                                 component="img"
                                                 alt={event.name.text}
                                                 height="125px"
-                                                src={event.logo.url}
+                                                src={event.logo && event.logo.url}
                                             />
                                             <CardContent
                                                 style={{
