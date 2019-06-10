@@ -1,8 +1,5 @@
 import React from "react";
 import axios from 'axios';
-import AvatarMUI from '@material-ui/core/Avatar';
-import Chip from '@material-ui/core/Chip';
-import FaceIcon from '@material-ui/icons/Face';
 import Avatar from 'react-avatar-edit';
 import { List, ListItem } from "@material-ui/core";
 import TextField from '@material-ui/core/TextField';
@@ -11,7 +8,7 @@ import ExpansionPanelActions from "@material-ui/core/ExpansionPanelActions";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import { Divider, Typography, Button } from "@material-ui/core";
+import { Divider, Button } from "@material-ui/core";
 
 export class SettingsComponent extends React.Component {
     constructor(props) {
