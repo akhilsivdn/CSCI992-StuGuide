@@ -10,35 +10,45 @@ export class TripPlannerComponent extends React.Component {
         super();
         this.state = {
             data: [],
-            queryLocaltion: ''
+            queryLocaltion: '',
+            noResultsAvailable: false
         }
     }
 
     SetLocation(e) {
         e.preventDefault();
         this.setState({
-            queryLocaltion: e.target.value
+            queryLocaltion: e.target.value,
+            noResultsAvailable: false,
+            data: []
         });
     }
 
     UseMyLocation(e) {
         var loc = localStorage.getItem('locationName');
         this.setState({
-            queryLocaltion: loc
+            queryLocaltion: loc,
+            noResultsAvailable: false,
+            data: []
         });
         this.FilteredList(loc);
     }
 
-    FetchResult() {
-        var loc = this.state.queryLocaltion;
-        this.FilteredList(loc);
+
+    OnKeyUp(e) {
+        if (e.keyCode == 13 && this.state.queryLocaltion) {
+            e.preventDefault();
+            var loc = this.state.queryLocaltion;
+            this.FilteredList(loc);
+        }
     }
 
     FilteredList(e) {
         this.setState({
             data: [],
             pos: [],
-            isLoading: true
+            isLoading: true,
+            noResultsAvailable: false
         });
 
         const url = 'https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=things+to+do+in+' + e + '&language=en&key=AIzaSyBi99vISytb1d0NAogNjpwgGy_wElH2ly0';
@@ -47,7 +57,8 @@ export class TripPlannerComponent extends React.Component {
             .then(res => res.json())
             .then(data => this.setState({
                 data: data.results,
-                isLoading: false
+                isLoading: false,
+                noResultsAvailable: data.status == "ZERO_RESULTS"
             }))
     }
 
@@ -87,17 +98,12 @@ export class TripPlannerComponent extends React.Component {
             console.log(error);
         }
 
-        this.state.pos = pos1;     
-        return (
-            <div>
-                <input type="text" className="form-control form-control-lg" placeholder="Enter location to explore"
-                    onChange={(e) => this.SetLocation(e)} />
-                <button className="btns" onClick={(e) => { this.FetchResult(e) }}>Fetch</button>
+        this.state.pos = pos1;
 
-                <button className="btns" onClick={(e) => { this.UseMyLocation(e) }}>Use current location</button>
+        var template = '';
 
-                <MapComponent markers={this.state.pos} zoom={10} />
-
+        if (this.state.data.length > 0) {
+            template = (
                 <div className="searchResults">
                     {
                         this.state.data && this.state.data.map(function (place) {
@@ -135,6 +141,33 @@ export class TripPlannerComponent extends React.Component {
                         }, this)
                     }
                 </div>
+            );
+
+        }
+        if (this.state.noResultsAvailable) {
+            template = (
+                <div className="searchResults" style={{ textAlign: "center" }}>
+                    <span style={{
+                        display: "block",
+                        fontSize: "24px",
+                        fontWeight: "500",
+                        marginBottom: "20px"
+                    }}>Oops ! No results found</span>
+                    <img src="./noresults.png" width="250px" height="250px" />
+                </div>
+            );
+        }
+        
+        return (
+            <div>
+                <input type="text" onKeyUp={(e) => this.OnKeyUp(e)} className="form-control form-control-lg" placeholder="Enter location to explore"
+                    value={this.state.queryLocaltion} onChange={(e) => this.SetLocation(e)} />
+
+                <button className="btns" onClick={(e) => { this.UseMyLocation(e) }}>Use current location</button>
+
+                <MapComponent markers={this.state.pos} zoom={10} />
+
+                {template}
             </div >
         )
     }
