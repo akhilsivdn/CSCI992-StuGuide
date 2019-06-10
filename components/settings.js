@@ -4,7 +4,7 @@ import AvatarMUI from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
 import FaceIcon from '@material-ui/icons/Face';
 import Avatar from 'react-avatar-edit';
-import Grid from '@material-ui/core/Grid';
+import { List, ListItem } from "@material-ui/core";
 import TextField from '@material-ui/core/TextField';
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelActions from "@material-ui/core/ExpansionPanelActions";
@@ -76,26 +76,43 @@ export class SettingsComponent extends React.Component {
                     <ExpansionPanel
                         style={{ marginBottom: '10px' }}>
                         <ExpansionPanelSummary
+
                             style={{
                                 fontSize: 'large',
-                                fontWeight: '400'
+                                fontWeight: '400',
+                                backgroundColor: 'rgba(0, 0, 0, .03)',
+                                borderBottom: '1px solid rgba(0, 0, 0, .125)'
                             }}
                             expandIcon={<ExpandMoreIcon />}>
-                            Update Profile Picture
+                            Update Username
                         </ExpansionPanelSummary>
 
                         <ExpansionPanelDetails>
-                            Current:
-                        </ExpansionPanelDetails>
-
-                        <ExpansionPanelDetails>
-                            Preview:
+                            <List>
+                                <ListItem style={{
+                                    paddingTop: "unset",
+                                    marginTop: "10px"
+                                }}>
+                                    Current:
+                                </ListItem>
+                                <ListItem style={{
+                                    paddingTop: "unset",
+                                    marginTop: "10px"
+                                }}>
+                                    <TextField
+                                        style={{ marginTop: "10px" }}
+                                        label="New Username"
+                                        placeholder="Enter New Username"
+                                        type="text"
+                                        name="Username"
+                                        margin="Dense"
+                                    />
+                                </ListItem>
+                            </List>
                         </ExpansionPanelDetails>
 
                         <Divider />
-
                         <ExpansionPanelActions>
-                            <Button size="small">Cancel</Button>
                             <Button size="small" color="primary">
                                 Save
                             </Button>
@@ -109,77 +126,59 @@ export class SettingsComponent extends React.Component {
                         <ExpansionPanelSummary
                             style={{
                                 fontSize: 'large',
-                                fontWeight: '400'
+                                fontWeight: '400',
+                                backgroundColor: 'rgba(0, 0, 0, .03)',
+                                borderBottom: '1px solid rgba(0, 0, 0, .125)'
                             }}
-                            expandIcon={<ExpandMoreIcon />}>
-                            Update Username
-                        </ExpansionPanelSummary>
-
-                        <ExpansionPanelDetails>
-                            <div style={{marginLeft:"10px"}}>Current: </div>{/* <Chip label="Username" /> */}
-                            <TextField
-                                style={{marginTop:"10px"}}
-                                label="Enter New Username"
-                                placeholder="Enter New Username"
-                                type="text"
-                                name="Username"
-                                margin="Dense"
-                            />
-                        </ExpansionPanelDetails>
-
-                        <ExpansionPanelDetails>
-                            {/* <TextField
-                                label="Enter New Username"
-                                placeholder="Enter New Username"
-                                type="text"
-                                name="Username"
-                                margin="Dense"
-                            /> */}
-                        </ExpansionPanelDetails>
-                        <Divider />
-                        <ExpansionPanelActions>
-                            <Button size="small">Cancel</Button>
-                            <Button size="small" color="primary">
-                                Save
-                            </Button>
-                        </ExpansionPanelActions>
-                    </ExpansionPanel>
-                </div>
-
-                <div>
-                    <ExpansionPanel
-                        style={{ marginBottom: '10px' }}>
-                        <ExpansionPanelSummary style={{
-                            fontSize: 'large',
-                            fontWeight: '400'
-                        }}
                             expandIcon={<ExpandMoreIcon />}>
                             Update Password
                         </ExpansionPanelSummary>
 
                         <ExpansionPanelDetails>
-                            Current:
-                        </ExpansionPanelDetails>
-
-                        <ExpansionPanelDetails>
-                            New:
-                        </ExpansionPanelDetails>
-
-                        <ExpansionPanelDetails>
-                            Confirm:
+                            <List>
+                                <ListItem style={{
+                                    paddingTop: "unset",
+                                    marginTop: "10px"
+                                }}>
+                                    Current:
+                                </ListItem>
+                                <ListItem style={{
+                                    paddingTop: "unset",
+                                    marginTop: "10px"
+                                }}>
+                                    <TextField
+                                        style={{ marginTop: "10px" }}
+                                        label="New Password"
+                                        placeholder="Enter New Password"
+                                        type="password"
+                                        name="Password"
+                                        margin="Dense"
+                                    />
+                                </ListItem>
+                                <ListItem style={{
+                                    paddingTop: "unset",
+                                    marginTop: "10px"
+                                }}>
+                                    <TextField
+                                        style={{ marginTop: "10px" }}
+                                        label="Confrim Password"
+                                        placeholder="Condfirm Password"
+                                        type="password"
+                                        name="ConfirmPassword"
+                                        margin="Dense"
+                                    />
+                                </ListItem>
+                            </List>
                         </ExpansionPanelDetails>
 
                         <Divider />
-
                         <ExpansionPanelActions>
-                            <Button size="small">Cancel</Button>
                             <Button size="small" color="primary">
                                 Save
                             </Button>
                         </ExpansionPanelActions>
                     </ExpansionPanel>
                 </div>
-
 
                 <div>
                     <Button variant="contained" size="small" color="secondary">Deactivate</Button>
