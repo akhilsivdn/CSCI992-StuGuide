@@ -13,24 +13,21 @@ export class LoginComponent extends React.Component {
             errorMessage: '',
             userName: '',
             password: '',
-            isLoading: false,
-            disableButton: true
+            isLoading: false
         }
     }
 
     onChangeUserName(e) {
         if (e.target.value.length > 12) {
             this.setState({
-                userNameErrorMessage: "Oops! maximum limit for username is 12",
-                disableButton: true
+                userNameErrorMessage: "Oops! maximum limit for username is 12"
             })
         }
         else {
             this.setState({
                 userName: e.target.value,
                 userNameErrorMessage: '',
-                loginValidationMessage: '',
-                disableButton: e.target.value.length == 0 ? true : false
+                loginValidationMessage: ''
             })
         }
     }
@@ -42,7 +39,6 @@ export class LoginComponent extends React.Component {
         this.setState({
             password: e.target.value,
             passwordErrorMessage: e.target.value.length == 0 || e.target.value.length > 15 ? "Oops! Enter a password to continue" : '',
-            disableButton: e.target.value.length == 0 || e.target.value.length > 15 ? true : false,
             loginValidationMessage: ''
         })
     }
@@ -79,7 +75,7 @@ export class LoginComponent extends React.Component {
                         isLoading: false
                     });
 
-                    var token = res.headers.authorization.split(' ')[1];
+                    var token = res.headers.authorization;
                     // store the authentication key send from server response
                     localStorage.setItem('key', token);
                     _this.props.history.push("/home");
@@ -212,7 +208,8 @@ export class LoginComponent extends React.Component {
                                         paddingTop: "0px",
 
                                     }}>
-                                    <Button disabled={this.state.disableButton} onClick={() => this.authenticate()}
+                                    <Button disabled={this.state.userName.length == 0 ||
+                                        this.state.password.length == 0} onClick={() => this.authenticate()}
                                         size="large"
                                         color="primary"
                                         variant="contained"
