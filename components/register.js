@@ -2,6 +2,7 @@ import React from "react";
 import axios from 'axios';
 import { Link, Redirect } from "react-router-dom";
 import { TextField, Button, Paper, Dialog, DialogActions, DialogContent, DialogTitle, List, ListItem } from '@material-ui/core';
+import ReCAPTCHA from "react-google-recaptcha";
 
 export class RegisterComponent extends React.Component {
 
@@ -16,7 +17,8 @@ export class RegisterComponent extends React.Component {
             passwordErrorMessage: "",
             confirmPasswordErrorMessage: "",
             usernameErrorMessage: "",
-            registerationErrorMessage: ""
+            registerationErrorMessage: "",
+            recaptchaValid: false
         };
     }
 
@@ -77,14 +79,14 @@ export class RegisterComponent extends React.Component {
             }
         }
         ).then(function (response) {
-            if (response.data.status === 'success') {           
+            if (response.data.status === 'success') {
             } else {
                 this.setState({
                     registerationErrorMessage: response.data.payload.error
                 })
             }
         }).catch(function (error) {
-             console.log(error);
+            console.log(error);
         });
     }
 
@@ -132,6 +134,12 @@ export class RegisterComponent extends React.Component {
         })
     }
 
+    onChangeRecaptcha() {
+        this.setState({
+            recaptchaValid: true
+        })
+    }
+    
     render() {
         return (
             <div className="loginSection">
@@ -201,6 +209,10 @@ export class RegisterComponent extends React.Component {
                                 <div className="validationMessage" style={{ height: "auto" }}>
                                     {this.state.usernameErrorMessage}
                                 </div>
+                                <ReCAPTCHA
+                                    sitekey="6LeeYagUAAAAAAD2QaI4B8C3XoJL8q4mT-Sx9fJw"
+                                    onChange={this.onChangeRecaptcha}
+                                />
                                 <ListItem style={{
                                     paddingTop: "unset"
                                 }}>
@@ -236,7 +248,7 @@ export class RegisterComponent extends React.Component {
                                     <Button disabled={this.state.emailID.length == 0 ||
                                         this.state.username.length == 0 ||
                                         this.state.password.length == 0 ||
-                                        this.state.confirmpassword.length == 0}
+                                        this.state.confirmpassword.length == 0 || this.state.recaptchaValid}
                                         size="large"
                                         color="primary"
                                         variant="contained" onClick={() => this.handleSubmit()}>Register</Button>
