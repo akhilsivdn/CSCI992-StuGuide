@@ -1,8 +1,10 @@
 import React from "react";
 import axios from 'axios';
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { TextField, Button, Paper, Dialog, DialogActions, DialogContent, DialogTitle, List, ListItem } from '@material-ui/core';
 import ReCAPTCHA from "react-google-recaptcha";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import { Modal } from "@material-ui/core";
 
 export class RegisterComponent extends React.Component {
 
@@ -18,7 +20,8 @@ export class RegisterComponent extends React.Component {
             confirmPasswordErrorMessage: "",
             usernameErrorMessage: "",
             registerationErrorMessage: "",
-            recaptchaValid: false
+            recaptchaValid: false,
+            isLoading: false
         };
     }
 
@@ -60,6 +63,10 @@ export class RegisterComponent extends React.Component {
             return;
         }
 
+        this.setState({
+            isLoading: true
+        })
+
         const transformRequest = (jsonData = {}) =>
             Object.entries(jsonData)
                 .map(x => `${encodeURIComponent(x[0])}=${encodeURIComponent(x[1])}`)
@@ -73,19 +80,36 @@ export class RegisterComponent extends React.Component {
         };
 
         var url = "https://cors-anywhere.herokuapp.com/" + localStorage.getItem("baseUrl") + "api/v1/auth/register"
+        var _this = this;
+
         axios.post(url, transformRequest(postBody), {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
             }
         }
         ).then(function (response) {
-            if (response.data.status === 'success') {
-            } else {
-                this.setState({
-                    registerationErrorMessage: response.data.payload.error
+            if (response.data.status == 'success') {
+                _this.setState({
+                    isLoading: false
+                })
+                _this.props.history.push("/"); //send user to login page
+            }
+            else if (response.data.code == 500 || response.data.status == 'error') {
+                _this.setState({
+                    registerationErrorMessage: "User details already found in Database. Please try again",
+                    isLoading: false
+                })
+            }
+            else {
+                _this.setState({
+                    registerationErrorMessage: response.data.payload.error,
+                    isLoading: false
                 })
             }
         }).catch(function (error) {
+            this.setState({
+                isLoading: false
+            })
             console.log(error);
         });
     }
@@ -139,8 +163,31 @@ export class RegisterComponent extends React.Component {
             recaptchaValid: true
         })
     }
-    
+
     render() {
+        if (this.state.isLoading) {
+            return (
+                <div className="loadingBar">
+                    <Modal
+                        open={this.state.isLoading}
+                        style={{
+                            transitionDuration: '800ms',
+                            transitionDelay: '800ms'
+                        }}>
+                        <CircularProgress
+                            style={{
+                                position: 'absolute',
+                                top: '45%',
+                                left: '47%',
+                                color: '#1f41fa',
+                            }}
+                            thickness={4}
+                            size={70}
+                        />
+                    </Modal>
+                </div>
+            )
+        }
         return (
             <div className="loginSection">
                 <Paper>
@@ -187,7 +234,7 @@ export class RegisterComponent extends React.Component {
                                 }}>
                                     <TextField
                                         label="E-mail" onChange={(e) => this.onChangeEmail(e)}
-                                        margin="dense"
+                                        value={this.state.emailID} margin="dense"
                                         placeholder="Enter e-mail"
                                         type="text"
                                         name="email" />
@@ -200,7 +247,7 @@ export class RegisterComponent extends React.Component {
                                     paddingTop: "unset"
                                 }}>
                                     <TextField onChange={(e) => this.onChangeUsername(e)}
-                                        label="Username"
+                                        value={this.state.username} label="Username"
                                         margin="dense"
                                         placeholder="Enter Username"
                                         type="text"
@@ -217,7 +264,7 @@ export class RegisterComponent extends React.Component {
                                     paddingTop: "unset"
                                 }}>
                                     <TextField onChange={(e) => this.onChangePassword(e)}
-                                        label="Password"
+                                        value={this.state.password} label="Password"
                                         margin="dense"
                                         placeholder="Enter Password"
                                         type="password"
@@ -230,7 +277,7 @@ export class RegisterComponent extends React.Component {
                                     paddingTop: "unset"
                                 }}>
                                     <TextField onChange={(e) => this.onChangeConfirmPwd(e)}
-                                        label="Confirm Password"
+                                        value={this.state.confirmpassword} label="Confirm Password"
                                         margin="dense"
                                         placeholder="Confirm Password"
                                         type="password"
