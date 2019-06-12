@@ -79,7 +79,7 @@ export class RegisterComponent extends React.Component {
             password_confirm: this.state.confirmpassword
         };
 
-        var url = "https://cors-anywhere.herokuapp.com/" + localStorage.getItem("baseUrl") + "api/v1/auth/register"
+        var url = localStorage.getItem("baseUrl") + "api/v1/auth/register"
         var _this = this;
 
         axios.post(url, transformRequest(postBody), {
