@@ -15,13 +15,11 @@ export class RegisterComponent extends React.Component {
             password: "",
             username: "",
             confirmpassword: "",
-            emailErrorMessage: "",
-            passwordErrorMessage: "",
-            confirmPasswordErrorMessage: "",
-            usernameErrorMessage: "",
             registerationErrorMessage: "",
             recaptchaValid: false,
-            isLoading: false
+            isLoading: false,
+            firstName: "",
+            lastName: ""
         };
     }
 
@@ -34,31 +32,45 @@ export class RegisterComponent extends React.Component {
             })
         }
 
+        if (this.state.firstName.length < 3) {
+            this.setState({
+                registerationErrorMessage: "first name too small"
+            })
+            return;
+        }
+
+        if (this.state.lastName.length < 3) {
+            this.setState({
+                registerationErrorMessage: "last name too small"
+            })
+            return;
+        }
+
         var regEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if (!regEx.test(String(this.state.emailID).toLowerCase())) {
             this.setState({
-                emailErrorMessage: "please enter a valid email address"
+                registerationErrorMessage: "please enter a valid email address"
             })
             return;
         }
 
         if (this.state.username.length < 5 || this.state.username.length > 12) {
             this.setState({
-                usernameErrorMessage: "user name must be 5-12 characters long"
+                registerationErrorMessage: "user name must be 5-12 characters long"
             })
             return;
         }
 
         if (this.state.password.length < 5) {
             this.setState({
-                passwordErrorMessage: "password too small. minimum 5 characters needed"
+                registerationErrorMessage: "password too small. minimum 5 characters needed"
             })
             return;
         }
 
         if (this.state.password != this.state.confirmpassword) {
             this.setState({
-                confirmPasswordErrorMessage: "passwords don't match"
+                registerationErrorMessage: "passwords don't match"
             })
             return;
         }
@@ -116,9 +128,9 @@ export class RegisterComponent extends React.Component {
     }
 
     onChangeEmail(e) {
-        if (this.state.emailErrorMessage.length > 0) {
+        if (this.state.registerationErrorMessage.length > 0) {
             this.setState({
-                emailErrorMessage: ""
+                registerationErrorMessage: ""
             })
         }
         this.setState({
@@ -127,9 +139,9 @@ export class RegisterComponent extends React.Component {
     }
 
     onChangePassword(e) {
-        if (this.state.passwordErrorMessage.length > 0) {
+        if (this.state.registerationErrorMessage.length > 0) {
             this.setState({
-                passwordErrorMessage: ""
+                registerationErrorMessage: ""
             })
         }
         this.setState({
@@ -138,9 +150,9 @@ export class RegisterComponent extends React.Component {
     }
 
     onChangeUsername(e) {
-        if (this.state.usernameErrorMessage.length > 0) {
+        if (this.state.registerationErrorMessage.length > 0) {
             this.setState({
-                usernameErrorMessage: ""
+                registerationErrorMessage: ""
             })
         }
         this.setState({
@@ -149,9 +161,9 @@ export class RegisterComponent extends React.Component {
     }
 
     onChangeConfirmPwd(e) {
-        if (this.state.confirmPasswordErrorMessage.length > 0) {
+        if (this.state.registerationErrorMessage.length > 0) {
             this.setState({
-                confirmPasswordErrorMessage: ""
+                registerationErrorMessage: ""
             })
         }
         this.setState({
@@ -162,6 +174,28 @@ export class RegisterComponent extends React.Component {
     onChangeRecaptcha() {
         this.setState({
             recaptchaValid: true
+        })
+    }
+
+    onChangeFName(e) {
+        if (this.state.registerationErrorMessage.length > 0) {
+            this.setState({
+                registerationErrorMessage: ""
+            })
+        }
+        this.setState({
+            firstName: e.target.value
+        })
+    }
+
+    onChangeLName(e) {
+        if (this.state.registerationErrorMessage.length > 0) {
+            this.setState({
+                registerationErrorMessage: ""
+            })
+        }
+        this.setState({
+            lastName: e.target.value
         })
     }
 
@@ -234,6 +268,38 @@ export class RegisterComponent extends React.Component {
                                     marginTop: "20px"
                                 }}>
                                     <TextField
+                                        label="First Name" onChange={(e) => this.onChangeFName(e)}
+                                        value={this.state.firstName} margin="dense"
+                                        placeholder="Enter first name"
+                                        type="text"
+                                        name="firstname" />
+
+                                </ListItem>
+
+
+                                <ListItem style={{
+                                    paddingTop: "unset",
+                                    marginTop: "20px"
+                                }}>
+                                    <TextField
+                                        label="Last Name" onChange={(e) => this.onChangeLName(e)}
+                                        value={this.state.lastName} margin="dense"
+                                        placeholder="Enter last name"
+                                        type="text"
+                                        name="lastname" />
+
+                                </ListItem>
+
+                                <ReCAPTCHA
+                                    sitekey="6LeeYagUAAAAAAD2QaI4B8C3XoJL8q4mT-Sx9fJw"
+                                    onChange={this.onChangeRecaptcha}
+                                />
+
+                                <ListItem style={{
+                                    paddingTop: "unset",
+                                    marginTop: "20px"
+                                }}>
+                                    <TextField
                                         label="E-mail" onChange={(e) => this.onChangeEmail(e)}
                                         value={this.state.emailID} margin="dense"
                                         placeholder="Enter e-mail"
@@ -241,9 +307,7 @@ export class RegisterComponent extends React.Component {
                                         name="email" />
 
                                 </ListItem>
-                                <div className="validationMessage" style={{ height: "auto" }}>
-                                    {this.state.emailErrorMessage}
-                                </div>
+
                                 <ListItem style={{
                                     paddingTop: "unset"
                                 }}>
@@ -254,13 +318,8 @@ export class RegisterComponent extends React.Component {
                                         type="text"
                                         name="username" />
                                 </ListItem>
-                                <div className="validationMessage" style={{ height: "auto" }}>
-                                    {this.state.usernameErrorMessage}
-                                </div>
-                                <ReCAPTCHA
-                                    sitekey="6LeeYagUAAAAAAD2QaI4B8C3XoJL8q4mT-Sx9fJw"
-                                    onChange={this.onChangeRecaptcha}
-                                />
+
+
                                 <ListItem style={{
                                     paddingTop: "unset"
                                 }}>
@@ -271,9 +330,7 @@ export class RegisterComponent extends React.Component {
                                         type="password"
                                         name="password" />
                                 </ListItem>
-                                <div className="validationMessage" style={{ height: "auto" }}>
-                                    {this.state.passwordErrorMessage}
-                                </div>
+
                                 <ListItem style={{
                                     paddingTop: "unset"
                                 }}>
@@ -284,16 +341,16 @@ export class RegisterComponent extends React.Component {
                                         type="password"
                                         name="password_confirm" />
                                 </ListItem>
-                                <div className="validationMessage" style={{ height: "auto" }}>
-                                    {this.state.confirmPasswordErrorMessage}
-                                </div>
+
                                 <ListItem
                                     style={{
                                         display: "flex",
                                         position: "relative",
                                         justifyContent: "center"
                                     }}>
-                                    <Button disabled={this.state.emailID.length == 0 ||
+                                    <Button disabled={this.state.firstName.length == 0 ||
+                                        this.state.lastName.length == 0 ||
+                                        this.state.emailID.length == 0 ||
                                         this.state.username.length == 0 ||
                                         this.state.password.length == 0 ||
                                         this.state.confirmpassword.length == 0 || this.state.recaptchaValid}
