@@ -17,6 +17,12 @@ export class LoginComponent extends React.Component {
         }
     }
 
+    componentDidMount(){
+        if (localStorage.getItem("key") != null) {
+            this.props.history.push("/home");
+        }
+    }
+
     onChangeUserName(e) {
         if (e.target.value.length > 12) {
             this.setState({

@@ -58,8 +58,8 @@ class DrawerComponent extends React.Component {
 	}
 
 	handleLogout() {
-		if (localStorage.getItem('user-session')) {
-			localStorage.removeItem('user-session');
+		if (localStorage.getItem('key')) {
+			localStorage.removeItem('key');
 		}
 		this.setState({
 			isOpen: false
