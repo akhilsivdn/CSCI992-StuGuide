@@ -130,6 +130,13 @@ export class SearchComponent extends React.Component {
                             {
                                 this.state.data.map(function (place, i) {
                                     var placeUrl = 'https://www.google.com/maps/place/?q=place_id:' + place.place_id;
+
+                                    var ratingBlock = place.rating > 1 ? (<StarRatings starDimension="25px"
+                                        starSpacing="8px"
+                                        rating={place.rating}
+                                        starRatedColor="blue"
+                                        numberOfStars={5} />) : (<div style={{ height: "25px" }}></div>);
+
                                     return (
                                         <div className="searchResultsGrid">
                                             <Paper style={{
@@ -157,13 +164,7 @@ export class SearchComponent extends React.Component {
                                                     marginBottom: "30px"
                                                 }}>
                                                     <div className="search_result_name serachpageresultName" >{place.name} </div>
-                                                    {place.rating && place.rating > 0 &&
-                                                        <StarRatings starDimension="25px"
-                                                            starSpacing="8px"
-                                                            rating={place.rating}
-                                                            starRatedColor="blue"
-                                                            numberOfStars={5} />
-                                                    }
+                                                    {ratingBlock}
                                                     <div className="search_result_address" >{place.vicinity} </div>
                                                 </div>
 

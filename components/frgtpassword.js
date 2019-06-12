@@ -108,11 +108,10 @@ export class ForgotPasswordComponent extends React.Component {
 
             axios.post(url, transformRequest(postBody), {
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Content-Type': 'application/x-www-form-urlencoded'
                 }
             }
             ).then(function (response) {
-                debugger
                 this.setState({
                     otpVerified: true
                 })

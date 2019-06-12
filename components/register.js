@@ -109,7 +109,7 @@ export class RegisterComponent extends React.Component {
         }).catch(function (error) {
             _this.setState({
                 isLoading: false,
-                registerationErrorMessage: error
+                registerationErrorMessage: error.message
             })
             console.log(error);
         });
