@@ -46,9 +46,10 @@ export class MoreEventComponent extends React.Component {
         if (!this.state.data) {
             return <Redirect push to="/home" />;
         }
+        var logoUrl = this.state.data.logo ? this.state.data.logo.url : "./nodata.png";   
         return (
             <div className="eventdetail">
-                <img src={this.state.data.logo.url} height='250px'></img>
+                <img src={logoUrl} height='250px'></img>
                 <div>
                     <MuiThemeProvider theme={theme}>
 

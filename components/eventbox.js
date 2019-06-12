@@ -90,6 +90,7 @@ export class EventBoxComponent extends React.Component {
                     {
                         this.state.data.map(function (event, i) {
                             if (i <= 4) {
+                                var logoUrl = event.logo ? event.logo.url : "./nodata.png";
                                 return (
                                     <div className="event">
                                         <Card
@@ -111,7 +112,7 @@ export class EventBoxComponent extends React.Component {
                                                     component="img"
                                                     alt={event.name.text}
                                                     height="125px"
-                                                    src={event.logo && event.logo.url}
+                                                    src={logoUrl}
                                                 />
                                                 <CardContent
                                                     style={{

@@ -23,6 +23,7 @@ export class MoreEventsPageComponent extends React.Component {
                 <div className="grid">
                     {
                         this.state.data.map(function (event, i) {
+                            var logoUrl = event.logo ? event.logo.url : "./nodata.png";
                             return (
                                 <div>
                                     <Card
@@ -43,7 +44,7 @@ export class MoreEventsPageComponent extends React.Component {
                                                 component="img"
                                                 alt={event.name.text}
                                                 height="125px"
-                                                src={event.logo.url}
+                                                src={logoUrl}
                                             />
                                             <CardContent
                                                 style={{
