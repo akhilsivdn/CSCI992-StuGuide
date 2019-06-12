@@ -205,6 +205,7 @@ export class TripPlannerComponent extends React.Component {
                             marginLeft: 8,
                             flex: 1
                         }}
+                        onKeyUp={(e) => this.OnKeyUp(e)}
                         value={this.state.queryLocaltion}
                         onChange={(e) => this.SetLocation(e)}
                         placeholder="Enter location to explore"
@@ -216,9 +217,7 @@ export class TripPlannerComponent extends React.Component {
                         margin: 4,
                     }} />
 
-                    <Tooltip
-                        title="Current Location"
-                    >
+                    <Tooltip title={localStorage.getItem('locationName')}>
                         <IconButton color="primary"
                             style={{
                                 padding: 10,
@@ -231,6 +230,27 @@ export class TripPlannerComponent extends React.Component {
 
                 </Paper>
 
+                {/* <Paper
+                    style={{
+                        marginBottom: '10px'
+                    }}
+                    onClick={(e) => { this.UseMyLocation(e) }}
+                    >
+                    <Tooltip title="Current Location">
+                        <IconButton color="primary"
+                            style={{
+                                padding: '6px 0 7px',
+                                marginTop: '5px',
+                                marginBottom: '5px',
+                                marginLeft: '10px',
+                                marginRight: '20px',
+                            }}>
+                            <LocationIcon />
+                        </IconButton>
+                    </Tooltip>
+                    {localStorage.getItem('locationName')}
+                </Paper> */}
+
 
                 {/* <input type="text" onKeyUp={(e) => this.OnKeyUp(e)} className="form-control form-control-lg" placeholder="Enter location to explore"
                     value={this.state.queryLocaltion} onChange={(e) => this.SetLocation(e)} /> */}
@@ -238,7 +258,6 @@ export class TripPlannerComponent extends React.Component {
                 {/* <button className="btns" onClick={(e) => { this.UseMyLocation(e) }}>Use current location</button> */}
 
                 <MapComponent markers={this.state.pos} zoom={10} />
-
                 {template}
             </div >
         )
