@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { TextField, Button, Paper, Dialog, DialogActions, DialogContent, DialogTitle, List, ListItem } from '@material-ui/core';
-import jwt from 'jsonwebtoken';
+import axios from 'axios';
+import CircularProgress from "@material-ui/core/CircularProgress";
+import { Modal } from "@material-ui/core";
 
 export class LoginComponent extends React.Component {
 
@@ -11,7 +13,8 @@ export class LoginComponent extends React.Component {
             errorMessage: '',
             userName: '',
             password: '',
-            disableButton: false //Set to true when API is up.
+            isLoading: false,
+            disableButton: true
         }
     }
 
@@ -44,41 +47,80 @@ export class LoginComponent extends React.Component {
         })
     }
 
-    /**
-    * Authenticate for user login
-    * 
-    * @return void
-    */
     authenticate() {
+        this.setState({
+            isLoading: true
+        });
 
-        //TODO: remove this check
-        const isDebug = true;
-        if (isDebug) {
-            this.props.history.push("/home");
-        }
-        else {
-            axios.get('http://124.168.104.121:8080/api/v1/auth/login', data)
-                .then((res) => {
-                    if (res.status == 200) {
-                        // verify token here
-                        jwt.verify('token', {})
+        const transformRequest = (jsonData = {}) =>
+            Object.entries(jsonData)
+                .map(x => `${encodeURIComponent(x[0])}=${encodeURIComponent(x[1])}`)
+                .join('&');
 
-                        // store the authentication key send from server response
-                        localStorage.setItem('_key', res.headers.authentication);
+        const postBody = {
+            username: this.state.userName,
+            password: this.state.password
+        };
 
-                        // redirect to dashboard
-                        this.props.history.push("/home");
-                    } else {
-                        console.log('authentication error!');
-                        this.setState({
-                            loginError: "Authentication Error: please check username/password combination"
-                        })
-                    }
-                })
-        }
+        const axiosConfig = {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        };
+
+        var _this = this;
+
+        var url = "https://cors-anywhere.herokuapp.com/" + localStorage.getItem("baseUrl") + "api/v1/auth/login";
+
+        axios.post(url, transformRequest(postBody), axiosConfig)
+            .then((res) => {
+                if (res.status == 200) {
+                    _this.setState({
+                        isLoading: false
+                    });
+
+                    var token = res.headers.authorization.split(' ')[1];
+                    // store the authentication key send from server response
+                    localStorage.setItem('key', token);
+                    _this.props.history.push("/home");
+                } else {
+                    _this.setState({
+                        loginError: "Authentication Error: please check username/password combination"
+                    })
+                }
+            }).catch(function (error) {
+                _this.setState({
+                    isLoading: false,
+                    loginError: "Authentication Error: please check username/password combination"
+                });
+                console.log(error);
+            });
     }
 
     render() {
+        if (this.state.isLoading) {
+            return (
+                <div className="loadingBar">
+                    <Modal
+                        open={this.state.isLoading}
+                        style={{
+                            transitionDuration: '800ms',
+                            transitionDelay: '800ms'
+                        }}>
+                        <CircularProgress
+                            style={{
+                                position: 'absolute',
+                                top: '45%',
+                                left: '47%',
+                                color: '#1f41fa',
+                            }}
+                            thickness={4}
+                            size={70}
+                        />
+                    </Modal>
+                </div>
+            )
+        }
         return (
             <div className="loginSection" >
                 <Paper >
@@ -129,6 +171,7 @@ export class LoginComponent extends React.Component {
                                         paddingTop: "0px"
                                     }}
                                         label="Username"
+                                        value={this.state.userName}
                                         margin="dense"
                                         placeholder="Enter Username"
                                         type="text"
@@ -148,6 +191,7 @@ export class LoginComponent extends React.Component {
                                         paddingTop: "0px"
                                     }}
                                         label="Password"
+                                        value={this.state.password}
                                         margin="dense"
                                         placeholder="Enter Password"
                                         type="password"
