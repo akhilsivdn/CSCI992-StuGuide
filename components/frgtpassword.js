@@ -28,31 +28,35 @@ export class ForgotPasswordComponent extends React.Component {
             return;
         }
 
-        this.setState({
-            isMailSent: true
-        })
+        const transformRequest = (jsonData = {}) =>
+            Object.entries(jsonData)
+                .map(x => `${encodeURIComponent(x[0])}=${encodeURIComponent(x[1])}`)
+                .join('&');
 
-        // const transformRequest = (jsonData = {}) =>
-        //     Object.entries(jsonData)
-        //         .map(x => `${encodeURIComponent(x[0])}=${encodeURIComponent(x[1])}`)
-        //         .join('&');
+        const postBody = {
+            email: this.state.emailID
+        }
 
-        // const postBody = {
-        //     email: this.state.emailID
-        // }
+        var _this = this;
 
-        // var url = "https://cors-anywhere.herokuapp.com/" + localStorage.getItem("baseUrl") + "api/v1/auth/validationpassword"
-        // axios.post(url, transformRequest(postBody), {
-        //     headers: {
-        //         'Content-Type': 'application/x-www-form-urlencoded',
-        //     }
-        // }
-        // ).then(function (response) {
-        //     debugger
-        //     this.setState({
-        //         isMailSent: true
-        //     })
-        // });
+        var url = "https://cors-anywhere.herokuapp.com/" + localStorage.getItem("baseUrl") + "api/v1/auth/validationpassword"
+        axios.post(url, transformRequest(postBody), {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            }
+        }
+        ).then(function (response) {
+            if (response.data.code == 400 || response.data.status == "fail" || response.data.payload.error == "request too often") {
+                _this.setState({
+                    emailErrorMessage: "You have to wait 5 minutes to receive another OTP"
+                })
+            }
+            else {
+                _this.setState({
+                    isMailSent: true
+                })
+            }
+        });
     }
 
     SetEmailID(e) {
@@ -90,30 +94,29 @@ export class ForgotPasswordComponent extends React.Component {
     VerifyOtp() {
         if (this.state.otp.length == 4) {
 
-            this.setState({
-                otpVerified: true
-            })
+            const transformRequest = (jsonData = {}) =>
+                Object.entries(jsonData)
+                    .map(x => `${encodeURIComponent(x[0])}=${encodeURIComponent(x[1])}`)
+                    .join('&');
 
-            // const transformRequest = (jsonData = {}) =>
-            //     Object.entries(jsonData)
-            //         .map(x => `${encodeURIComponent(x[0])}=${encodeURIComponent(x[1])}`)
-            //         .join('&');
+            const postBody = {
+                email: this.state.emailID,
+                otp: this.state.otp
+            }
 
-            // const postBody = {
-            //     email: this.state.emailID,
-            //     otp: this.state.otp
-            // }
+            var url = "https://cors-anywhere.herokuapp.com/" + localStorage.getItem("baseUrl") + "api/v1/auth/compareValidationPassword"
 
-            // var url = "https://cors-anywhere.herokuapp.com/" + localStorage.getItem("baseUrl") + "api/v1/auth/compareValidationPassword"
-
-            // axios.post(url, transformRequest(postBody), {
-            //     headers: {
-            //         'Content-Type': 'application/x-www-form-urlencoded',
-            //     }
-            // }
-            // ).then(function (response) {
-            //     debugger
-            // });
+            axios.post(url, transformRequest(postBody), {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                }
+            }
+            ).then(function (response) {
+                debugger
+                this.setState({
+                    otpVerified: true
+                })
+            });
         }
     }
 

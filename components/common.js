@@ -296,7 +296,7 @@ export class CommonComponent extends React.Component {
                                                     onError={(e) => {
                                                         e.target.onerror = null; e.target.src = "./nodata.png"; e.target.className = "dd"
                                                     }}></img>
-                                                <div className="details">
+                                                <div className="details detailsCommon">
                                                     <div className="openHrs">{openHrs}</div>
                                                     <div className="search_result_name restaurantTitle">{place.name} </div>
                                                     <div className="search_result_address">{place.vicinity} </div>

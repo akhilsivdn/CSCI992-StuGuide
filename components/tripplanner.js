@@ -5,6 +5,14 @@ import StarRatings from 'react-star-ratings';
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { Modal } from "@material-ui/core";
 
+import { Card, Button } from '@material-ui/core';
+import Tooltip from '@material-ui/core/Tooltip';
+import Paper from '@material-ui/core/Paper';
+import InputBase from '@material-ui/core/InputBase';
+import Divider from '@material-ui/core/Divider';
+import IconButton from '@material-ui/core/IconButton';
+import LocationIcon from '@material-ui/icons/GpsFixed';  //LocationOn
+
 export class TripPlannerComponent extends React.Component {
     constructor() {
         super();
@@ -104,42 +112,64 @@ export class TripPlannerComponent extends React.Component {
 
         if (this.state.data.length > 0) {
             template = (
-                <div className="searchResults">
-                    {
-                        this.state.data && this.state.data.map(function (place) {
+                <div>
+                    <div className="searchResults">
+                        {
+                            this.state.data && this.state.data.map(function (place) {
 
-                            var openHrs = 'Opening hours not available';
+                                var openHrs = 'Opening hours not available';
 
-                            openHrs = place.opening_hours && (place.opening_hours.open_now ? "Open" : "Closed");
+                                openHrs = place.opening_hours && (place.opening_hours.open_now ? "Open" : "Closed");
 
-                            pos1.push({ latitude: place.geometry.location.lat, longitude: place.geometry.location.lng });
+                                pos1.push({ latitude: place.geometry.location.lat, longitude: place.geometry.location.lng });
 
-                            var placeUrl = 'https://www.google.com/maps/place/?q=place_id:' + place.place_id;
+                                var placeUrl = 'https://www.google.com/maps/place/?q=place_id:' + place.place_id;
 
-                            var imgUrl = '';
-                            if (place.photos && place.photos[0])
-                                imgUrl = 'https://maps.googleapis.com/maps/api/place/photo?photoreference=' + place.photos[0].photo_reference + '&sensor=false&maxheight=480&maxwidth=480&key=AIzaSyBi99vISytb1d0NAogNjpwgGy_wElH2ly0';
+                                var imgUrl = '';
+                                if (place.photos && place.photos[0])
+                                    imgUrl = 'https://maps.googleapis.com/maps/api/place/photo?photoreference=' + place.photos[0].photo_reference + '&sensor=false&maxheight=480&maxwidth=480&key=AIzaSyBi99vISytb1d0NAogNjpwgGy_wElH2ly0';
 
-                            return (
-                                <div className="searchResultsGrid">
-                                    <img src={imgUrl} height='250px' width='250px'></img>
-                                    <div className="details">
-                                        <div className="openHrs">{openHrs}</div>
-                                        <div className="search_result_name restaurantTitle">{place.name} </div>
-                                        <div className="search_result_address">{place.formatted_address} </div>
-                                        <StarRatings starDimension="25px"
-                                            starSpacing="8px"
-                                            rating={place.rating}
-                                            starRatedColor="blue"
-                                            numberOfStars={5} />
-                                        <div>
-                                            <button><a target="_blank" href={placeUrl}>Get Directions</a></button>
-                                        </div>
+                                return (
+                                    <div className="searchResultsGrid">
+                                        <Card
+                                            style={{
+                                                display: 'flex',
+                                                // borderStyle: 'solid',
+                                                height: '250px',
+                                                width: '96%',
+                                                marginInlineStart: '10px',
+                                                padding: 'inherit',
+                                                borderRadius: '10px',
+                                            }} >
+                                            <img src={imgUrl} height='250px' width='250px'></img>
+                                            <div className="details">
+                                                <div style={{ marginTop: '5px' }}
+                                                    className="openHrs">{openHrs}</div>
+                                                <div className="search_result_name restaurantTitle">{place.name} </div>
+                                                <div className="search_result_address">{place.formatted_address} </div>
+                                                <StarRatings starDimension="25px"
+                                                    starSpacing="8px"
+                                                    rating={place.rating}
+                                                    starRatedColor="blue"
+                                                    numberOfStars={5} />
+
+                                                <div>
+                                                    <Button
+                                                        style={{ marginTop: '60px' }}
+                                                        variant="contained" color="primary">
+                                                        <a target="_blank" href={placeUrl} style={{ color: 'white' }}>Get Directions</a>
+                                                    </Button>
+                                                </div>
+                                                {/* <div>
+                                                <button><a target="_blank" href={placeUrl}>Get Directions</a></button>
+                                            </div> */}
+                                            </div>
+                                        </Card>
                                     </div>
-                                </div>
-                            );
-                        }, this)
-                    }
+                                );
+                            }, this)
+                        }
+                    </div>
                 </div>
             );
 
@@ -157,16 +187,75 @@ export class TripPlannerComponent extends React.Component {
                 </div>
             );
         }
-        
+
         return (
             <div>
-                <input type="text" onKeyUp={(e) => this.OnKeyUp(e)} className="form-control form-control-lg" placeholder="Enter location to explore"
-                    value={this.state.queryLocaltion} onChange={(e) => this.SetLocation(e)} />
+                <div className="title_page">Things To Do..</div>
+                <Paper style={{
+                    padding: '2px 4px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    marginBottom: '10px'
+                }}>
 
-                <button className="btns" onClick={(e) => { this.UseMyLocation(e) }}>Use current location</button>
+                    <InputBase
+                        style={{
+                            marginLeft: 8,
+                            flex: 1
+                        }}
+                        onKeyUp={(e) => this.OnKeyUp(e)}
+                        value={this.state.queryLocaltion}
+                        onChange={(e) => this.SetLocation(e)}
+                        placeholder="Enter location to explore"
+                    />
+
+                    <Divider style={{
+                        width: 1,
+                        height: 28,
+                        margin: 4,
+                    }} />
+
+                    <Tooltip title={localStorage.getItem('locationName')}>
+                        <IconButton color="primary"
+                            style={{
+                                padding: 10,
+                            }}
+                            onClick={(e) => { this.UseMyLocation(e) }}
+                        >
+                            <LocationIcon />
+                        </IconButton>
+                    </Tooltip>
+
+                </Paper>
+
+                {/* <Paper
+                    style={{
+                        marginBottom: '10px'
+                    }}
+                    onClick={(e) => { this.UseMyLocation(e) }}
+                    >
+                    <Tooltip title="Current Location">
+                        <IconButton color="primary"
+                            style={{
+                                padding: '6px 0 7px',
+                                marginTop: '5px',
+                                marginBottom: '5px',
+                                marginLeft: '10px',
+                                marginRight: '20px',
+                            }}>
+                            <LocationIcon />
+                        </IconButton>
+                    </Tooltip>
+                    {localStorage.getItem('locationName')}
+                </Paper> */}
+
+
+                {/* <input type="text" onKeyUp={(e) => this.OnKeyUp(e)} className="form-control form-control-lg" placeholder="Enter location to explore"
+                    value={this.state.queryLocaltion} onChange={(e) => this.SetLocation(e)} /> */}
+
+                {/* <button className="btns" onClick={(e) => { this.UseMyLocation(e) }}>Use current location</button> */}
 
                 <MapComponent markers={this.state.pos} zoom={10} />
-
                 {template}
             </div >
         )

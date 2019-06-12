@@ -24,7 +24,7 @@ class Application extends Component {
         super();
 
         //change here for base url changes
-        localStorage.setItem("baseUrl", "http://124.168.127.82:8080/");
+        localStorage.setItem("baseUrl", "http://124.168.57.73:8080/");
     }
 
     render() {
