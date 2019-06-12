@@ -22,6 +22,9 @@ import { AdminComponent } from "./components/admin";
 class Application extends Component {
     constructor() {
         super();
+
+        //change here for base url changes
+        localStorage.setItem("baseUrl", "http://124.168.127.82:8080/");
     }
 
     render() {
