@@ -2,6 +2,7 @@ import React from "react";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { Modal, Button } from "@material-ui/core";
 import DataTable from 'react-data-table-component';
+import axios from 'axios';
 
 export class AdminComponent extends React.Component {
 
@@ -12,12 +13,30 @@ export class AdminComponent extends React.Component {
         }
     }
 
-    BlockUser(){
+    BlockUser() {
         //Add code to block user
     }
 
-    EmailUser(){
+    EmailUser() {
         //Add code to block user
+    }
+
+    componentDidMount() {
+        debugger
+        var _this = this;
+        var url = localStorage.getItem("baseUrl") + "api/v1/admin/users";
+
+        axios.post(url,{}, {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': localStorage.getItem("key")
+            }
+        }).then((res) => {
+            debugger
+            if (res.status == 200) {
+              
+            }
+        })
     }
 
     render() {
@@ -53,7 +72,7 @@ export class AdminComponent extends React.Component {
                 selector: 'email'
             },
         ];
-        
+
         if (this.state.isLoading) {
             return (
                 <div className="loadingBar">

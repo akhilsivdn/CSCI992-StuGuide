@@ -1,7 +1,10 @@
 import React from "react";
 import OtpInput from 'react-otp-input';
 import axios from 'axios';
-import { TextField, Button, Paper, Dialog, DialogActions, DialogContent, DialogTitle, List, ListItem } from '@material-ui/core';
+import { Button, Dialog, DialogActions, DialogTitle } from '@material-ui/core';
+import { Link } from "react-router-dom";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import { Modal } from "@material-ui/core";
 
 export class ForgotPasswordComponent extends React.Component {
     constructor() {
@@ -13,9 +16,7 @@ export class ForgotPasswordComponent extends React.Component {
             otp: '',
             otpErrorMessage: '',
             otpVerified: false,
-            confirmPassword: '',
-            password: '',
-            passwordChangeError: ''
+            isLoading: false
         }
     }
 
@@ -37,6 +38,9 @@ export class ForgotPasswordComponent extends React.Component {
             email: this.state.emailID
         }
 
+        this.setState({
+            isLoading: true
+        })
         var _this = this;
 
         var url = "https://cors-anywhere.herokuapp.com/" + localStorage.getItem("baseUrl") + "api/v1/auth/validationpassword"
@@ -48,14 +52,21 @@ export class ForgotPasswordComponent extends React.Component {
         ).then(function (response) {
             if (response.data.code == 400 || response.data.status == "fail" || response.data.payload.error == "request too often") {
                 _this.setState({
-                    emailErrorMessage: "You have to wait 5 minutes to receive another OTP"
+                    emailErrorMessage: "You have to wait 5 minutes to receive another OTP",
+                    isLoading: false
                 })
             }
             else {
                 _this.setState({
-                    isMailSent: true
+                    isMailSent: true,
+                    isLoading: false
                 })
             }
+        }).catch(function (error) {
+            _this.setState({
+                emailErrorMessage: "This email address does not belong to our records. Please confirm email address",
+                isLoading: false
+            })
         });
     }
 
@@ -93,6 +104,9 @@ export class ForgotPasswordComponent extends React.Component {
 
     VerifyOtp() {
         if (this.state.otp.length == 4) {
+            this.setState({
+                isLoading: true
+            })
 
             const transformRequest = (jsonData = {}) =>
                 Object.entries(jsonData)
@@ -104,6 +118,8 @@ export class ForgotPasswordComponent extends React.Component {
                 otp: this.state.otp
             }
 
+            var _this = this;
+
             var url = "https://cors-anywhere.herokuapp.com/" + localStorage.getItem("baseUrl") + "api/v1/auth/compareValidationPassword"
 
             axios.post(url, transformRequest(postBody), {
@@ -112,8 +128,22 @@ export class ForgotPasswordComponent extends React.Component {
                 }
             }
             ).then(function (response) {
-                this.setState({
-                    otpVerified: true
+                if (response.data.code != 200) {
+                    _this.setState({
+                        otpErrorMessage: "OTP you entered is incorrect. Please check your email or try resending it",
+                        isLoading: false
+                    })
+                }
+                else {
+                    _this.setState({
+                        otpVerified: true,
+                        isLoading: false
+                    })
+                }
+            }).catch(function (error) {
+                _this.setState({
+                    otpErrorMessage: "OTP you entered is incorrect. Please check your email or try resending it",
+                    isLoading: false
                 })
             });
         }
@@ -125,42 +155,37 @@ export class ForgotPasswordComponent extends React.Component {
         })
     }
 
-    updatePassword(e) {
-        if (this.state.passwordChangeError.length > 0) {
-            this.setState({
-                passwordChangeError: ""
-            })
-        }
+    handleClose() {
         this.setState({
-            password: e.target.value
+            otpVerified: false
         })
     }
-
-    updateconfirmPassword(e) {
-        if (this.state.passwordChangeError.length > 0) {
-            this.setState({
-                passwordChangeError: ""
-            })
-        }
-        this.setState({
-            confirmPassword: e.target.value
-        })
-    }
-
-
-    changePassword() {
-        if (this.state.password != this.state.confirmPassword) {
-            this.setState({
-                passwordChangeError: "These passwords don't match. Try again?"
-            })
-            return;
-        }
-
-        //Add API calls here and take back to login
-    }
-
 
     render() {
+        if (this.state.isLoading) {
+            return (
+                <div className="loadingBar">
+                    <Modal
+                        open={this.state.isLoading}
+                        style={{
+                            transitionDuration: '800ms',
+                            transitionDelay: '800ms'
+                        }}>
+                        <CircularProgress
+                            style={{
+                                position: 'absolute',
+                                top: '45%',
+                                left: '47%',
+                                color: '#1f41fa',
+                            }}
+                            thickness={4}
+                            size={70}
+                        />
+                    </Modal>
+                </div>
+            )
+        }
+
         if (!this.state.isMailSent) {
             return (
                 <div className="loginSection" style={{
@@ -247,46 +272,20 @@ export class ForgotPasswordComponent extends React.Component {
                 </div>
             )
         }
-        else if (this.state.otpVerified) {
+        else {
             return (
-                <div className="loginSection" style={{
-                    width: "50%",
-                    height: "85%",
-                    borderStyle: "dashed",
-                    borderColor: "antiquewhite"
-                }}>
-                    <img src="./red_bg_logo.jpg" style={{
-                        height: "150px",
-                        width: "150px",
-                        borderRadius: "20%",
-                        display: "block",
-                        margin: "0 auto",
-                        marginTop: "10px"
-                    }} />
-                    <div className="title_page" style={{
-                        margin: "0 auto"
-                    }}>Reset password</div>
-                    <div style={{
-                        margin: "0 auto",
-                        maxWidth: "50%"
-                    }}>Enter a new password for your account</div>
-                    <div className="forgotPasswordSection" style={{
-                        alignItems: "center"
-                    }}>
-                        <input type="password" className="form-control form-control-lg form_search" placeholder="Enter new password"
-                            onChange={(e) => this.updatePassword(e)} style={{ marginTop: "25%", marginBottom: "10px" }} />
-                        <input type="password" className="form-control form-control-lg form_search" placeholder="Confirm new password"
-                            onChange={(e) => this.updateconfirmPassword(e)} style={{ marginTop: "15px", marginBottom: "10px" }} />
-
-                        <button disabled={this.state.otp.length < 4} style={{
-                            marginLeft: "15px",
-                            width: "250px",
-                            height: "3em",
-                            marginRight: "15px"
-                        }} onClick={() => this.changePassword()}>Change Password</button>
-                    </div>
-                    <span className="forgotPasswordSection" style={{ marginTop: "20%", color: "red" }}>{this.state.passwordChangeError}</span>
-                </div>
+                <Dialog
+                    open={true}
+                    onClose={() => this.handleClose()}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description">
+                    <DialogTitle id="alert-dialog-title">{"New password is sent to your email address"}</DialogTitle>
+                    <DialogActions>
+                        <Button color="primary">
+                            <Link to="/">Ok</Link>
+                        </Button>
+                    </DialogActions>
+                </Dialog>
             )
         }
     }

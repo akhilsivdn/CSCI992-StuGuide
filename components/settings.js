@@ -23,7 +23,8 @@ export class SettingsComponent extends React.Component {
             currentUserName: '',
             password: '',
             confirmPassword: '',
-            isLoading: false
+            isLoading: false,
+            fullName: ''
         };
     }
 
@@ -44,7 +45,8 @@ export class SettingsComponent extends React.Component {
             if (res.status == 200) {
                 _this.setState({
                     isLoading: false,
-                    currentUserName: res.data.payload.username
+                    currentUserName: res.data.payload.username,
+                    fullName: res.data.payload.first_name + " " + res.data.payload.last_name
                 })
             }
         })
@@ -183,10 +185,11 @@ export class SettingsComponent extends React.Component {
                 </div>
             )
         }
-        
+
         return (
             <div>
                 <div className="title_page">Account Settings</div>
+                <div className="title_page" style={{fontWeight: "400"}}>Hi, {this.state.fullName}</div>
 
                 <div>
                     <Dialog

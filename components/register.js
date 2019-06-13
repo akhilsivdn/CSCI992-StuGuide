@@ -88,7 +88,9 @@ export class RegisterComponent extends React.Component {
             username: this.state.username,
             email: this.state.emailID,
             password: this.state.password,
-            password_confirm: this.state.confirmpassword
+            password_confirm: this.state.confirmpassword,
+            first_name: this.state.firstName,
+            last_name: this.state.lastName
         };
 
         var url = localStorage.getItem("baseUrl") + "api/v1/auth/register"
