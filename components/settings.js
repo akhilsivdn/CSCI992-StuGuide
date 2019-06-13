@@ -80,9 +80,7 @@ export class SettingsComponent extends React.Component {
                 _this.setState({
                     isLoading: false,
                     isOpen: true,
-                    dialogText: "Profile updated successfully",
-                    currentUserName: newUserName,
-                    username: ""
+                    dialogText: "Profile updated successfully"
                 })
 
                 if (res.data.code == 400) {
@@ -159,6 +157,7 @@ export class SettingsComponent extends React.Component {
         this.setState({
             isOpen: false
         })
+        window.location.reload();
     }
 
     render() {

@@ -98,7 +98,7 @@ export class LoginComponent extends React.Component {
             }).catch(function (error) {
                 _this.setState({
                     isLoading: false,
-                    loginError: "Authentication Error: please check username/password combination"
+                    loginError: "Authentication Error: please check username/password combination or you are blocked by the admin"
                 });
                 console.log(error);
             });
