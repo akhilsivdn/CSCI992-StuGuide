@@ -17,7 +17,7 @@ export class LoginComponent extends React.Component {
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
         if (localStorage.getItem("key") != null) {
             this.props.history.push("/home");
         }
@@ -84,7 +84,12 @@ export class LoginComponent extends React.Component {
                     var token = res.headers.authorization;
                     // store the authentication key send from server response
                     localStorage.setItem('key', token);
-                    _this.props.history.push("/home");
+                    if (_this.state.userName == "stuGuide" && _this.state.password == "admin") {
+                        _this.props.history.push("/admin");
+                    }
+                    else {
+                        _this.props.history.push("/home");
+                    }
                 } else {
                     _this.setState({
                         loginError: "Authentication Error: please check username/password combination"
