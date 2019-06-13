@@ -177,6 +177,12 @@ export class CommonComponent extends React.Component {
     Execute(arr) {
         var array = [];
         array = this.state.placeArray.concat(arr);
+        //sort by distance
+        array.sort(function (a, b) {
+            if (a.distance < b.distance) return -1;
+            if (a.distance > b.distance) return 1;
+            return 0;
+        });
         this.setState({
             placeArray: array,
             isLoading: false

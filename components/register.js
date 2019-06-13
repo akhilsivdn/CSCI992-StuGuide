@@ -23,7 +23,6 @@ export class RegisterComponent extends React.Component {
         };
     }
 
-
     handleSubmit() {
 
         if (this.state.registerationErrorMessage.length > 0) {
@@ -226,7 +225,7 @@ export class RegisterComponent extends React.Component {
             )
         }
         return (
-            <div className="loginSection">
+            <div className="loginSection" >
                 <Paper>
                     <Dialog
                         open="TRUE"
@@ -265,9 +264,11 @@ export class RegisterComponent extends React.Component {
                                     }} />
                                 </ListItem>
 
-                                <ListItem style={{
+                                <div style={{
                                     paddingTop: "unset",
-                                    marginTop: "20px"
+                                    marginTop: "5px",
+                                    float: "left",
+                                    marginLeft: "80px"
                                 }}>
                                     <TextField
                                         label="First Name" onChange={(e) => this.onChangeFName(e)}
@@ -275,13 +276,13 @@ export class RegisterComponent extends React.Component {
                                         placeholder="Enter first name"
                                         type="text"
                                         name="firstname" />
+                                </div>
 
-                                </ListItem>
-
-
-                                <ListItem style={{
+                                <div style={{
                                     paddingTop: "unset",
-                                    marginTop: "20px"
+                                    marginTop: "5px",
+                                    float: "right",
+                                    marginRight: "60px"
                                 }}>
                                     <TextField
                                         label="Last Name" onChange={(e) => this.onChangeLName(e)}
@@ -289,17 +290,28 @@ export class RegisterComponent extends React.Component {
                                         placeholder="Enter last name"
                                         type="text"
                                         name="lastname" />
+                                </div>
 
-                                </ListItem>
 
-                                <ReCAPTCHA
-                                    sitekey="6LeeYagUAAAAAAD2QaI4B8C3XoJL8q4mT-Sx9fJw"
-                                    onChange={this.onChangeRecaptcha}
-                                />
 
-                                <ListItem style={{
+                                <div style={{
                                     paddingTop: "unset",
-                                    marginTop: "20px"
+                                    float: "left",
+                                    marginLeft: "80px"
+                                }}>
+                                    <TextField onChange={(e) => this.onChangeUsername(e)}
+                                        value={this.state.username} label="Username"
+                                        margin="dense"
+                                        placeholder="Enter Username"
+                                        type="text"
+                                        name="username" />
+                                </div>
+
+                                <div style={{
+                                    paddingTop: "unset",
+                                    float: "right",
+                                    marginRight: "60px"
+
                                 }}>
                                     <TextField
                                         label="E-mail" onChange={(e) => this.onChangeEmail(e)}
@@ -308,22 +320,12 @@ export class RegisterComponent extends React.Component {
                                         type="text"
                                         name="email" />
 
-                                </ListItem>
+                                </div>
 
-                                <ListItem style={{
-                                    paddingTop: "unset"
-                                }}>
-                                    <TextField onChange={(e) => this.onChangeUsername(e)}
-                                        value={this.state.username} label="Username"
-                                        margin="dense"
-                                        placeholder="Enter Username"
-                                        type="text"
-                                        name="username" />
-                                </ListItem>
-
-
-                                <ListItem style={{
-                                    paddingTop: "unset"
+                                <div style={{
+                                    paddingTop: "unset",
+                                    float: "left",
+                                    marginLeft: "80px"
                                 }}>
                                     <TextField onChange={(e) => this.onChangePassword(e)}
                                         value={this.state.password} label="Password"
@@ -331,10 +333,12 @@ export class RegisterComponent extends React.Component {
                                         placeholder="Enter Password"
                                         type="password"
                                         name="password" />
-                                </ListItem>
+                                </div>
 
-                                <ListItem style={{
-                                    paddingTop: "unset"
+                                <div style={{
+                                    paddingTop: "unset",
+                                    float: "right",
+                                    marginRight: "60px"
                                 }}>
                                     <TextField onChange={(e) => this.onChangeConfirmPwd(e)}
                                         value={this.state.confirmpassword} label="Confirm Password"
@@ -342,34 +346,46 @@ export class RegisterComponent extends React.Component {
                                         placeholder="Confirm Password"
                                         type="password"
                                         name="password_confirm" />
-                                </ListItem>
-
-                                <ListItem
-                                    style={{
-                                        display: "flex",
-                                        position: "relative",
-                                        justifyContent: "center"
-                                    }}>
-                                    <Button disabled={this.state.firstName.length == 0 ||
-                                        this.state.lastName.length == 0 ||
-                                        this.state.emailID.length == 0 ||
-                                        this.state.username.length == 0 ||
-                                        this.state.password.length == 0 ||
-                                        this.state.confirmpassword.length == 0 || this.state.recaptchaValid}
-                                        size="large"
-                                        color="primary"
-                                        variant="contained" onClick={() => this.handleSubmit()}>Register</Button>
-                                </ListItem>
-                                <div className="validationMessage" style={{ height: "auto" }}>
-                                    {this.state.registerationErrorMessage}
                                 </div>
                             </List>
                         </DialogContent>
-                        <DialogActions
+                        <div style={{
+                            width: "227px",
+                            height: "68px",
+                            paddingLeft: "150px",
+                            marginTop: "10px"
+                        }}>
+                            <ReCAPTCHA
+                                sitekey="6LeeYagUAAAAAAD2QaI4B8C3XoJL8q4mT-Sx9fJw"
+                                onChange={this.onChangeRecaptcha}
+                            />
+                        </div>
+
+                        <div style={{
+                            display: "flex",
+                            position: "relative",
+                            justifyContent: "center",
+                            marginTop: "30px"
+                        }}>
+                            <Button disabled={this.state.firstName.length == 0 ||
+                                this.state.lastName.length == 0 ||
+                                this.state.emailID.length == 0 ||
+                                this.state.username.length == 0 ||
+                                this.state.password.length == 0 ||
+                                this.state.confirmpassword.length == 0 || this.state.recaptchaValid}
+                                size="large"
+                                color="primary"
+                                variant="contained" onClick={() => this.handleSubmit()}>Register</Button>
+                        </div>
+                        <div className="validationMessage" style={{ height: "auto" }}>
+                            {this.state.registerationErrorMessage}
+                        </div>
+                        <div
                             style={{
                                 display: "flex",
                                 position: "relative",
-                                justifyContent: "center"
+                                justifyContent: "center",
+                                marginTop: "30px"
                             }}>
                             <span>
                                 Already a member?&nbsp;
@@ -377,7 +393,7 @@ export class RegisterComponent extends React.Component {
                                     Sign In
                             </Link>
                             </span>
-                        </DialogActions>
+                        </div>
                     </Dialog>
                 </Paper>
             </div>
