@@ -24,32 +24,45 @@ export class LoginComponent extends React.Component {
     }
 
     onChangeUserName(e) {
-        if (e.target.value.length > 12) {
+        if (this.state.errorMessage.length > 0) {
             this.setState({
-                userNameErrorMessage: "Oops! maximum limit for username is 12"
+                errorMessage: ""
             })
         }
-        else {
-            this.setState({
-                userName: e.target.value,
-                userNameErrorMessage: '',
-                loginValidationMessage: ''
-            })
-        }
+        this.setState({
+            userName: e.target.value
+        })
     }
 
 
     onChangePassword(e) {
-
-        //TODO: Now max length set to 15, change later
+        if (this.state.errorMessage.length > 0) {
+            this.setState({
+                errorMessage: ""
+            })
+        }
         this.setState({
-            password: e.target.value,
-            passwordErrorMessage: e.target.value.length == 0 || e.target.value.length > 15 ? "Oops! Enter a password to continue" : '',
-            loginValidationMessage: ''
+            password: e.target.value
         })
     }
 
     authenticate() {
+
+        if (this.state.userName.length < 5) {
+            this.setState({
+                errorMessage: "Username too small. You need to enter 5 characters."
+            })
+            return;
+        }
+
+        if (this.state.password.length < 5) {
+            this.setState({
+                errorMessage: "Password too small. You need to enter 5 characters."
+            })
+            return;
+        }
+
+
         this.setState({
             isLoading: true
         });
@@ -82,7 +95,6 @@ export class LoginComponent extends React.Component {
                     });
 
                     var token = res.headers.authorization;
-                    // store the authentication key send from server response
                     localStorage.setItem('key', token);
                     if (_this.state.userName == "stuGuide" && _this.state.password == "admin") {
                         _this.props.history.push("/admin");
@@ -92,14 +104,22 @@ export class LoginComponent extends React.Component {
                     }
                 } else {
                     _this.setState({
-                        loginError: "Authentication Error: please check username/password combination"
+                        errorMessage: "Authentication Error: please check username/password combination"
                     })
                 }
             }).catch(function (error) {
-                _this.setState({
-                    isLoading: false,
-                    loginError: "Authentication Error: please check username/password combination or you are blocked by the admin"
-                });
+                if (error.message == "Network Error") {
+                    _this.setState({
+                        isLoading: false,
+                        errorMessage: "Network error. Please try again after some time."
+                    });
+                }
+                else {
+                    _this.setState({
+                        isLoading: false,
+                        errorMessage: "Authentication Error: please check username/password combination or you are blocked by the admin"
+                    });
+                }
                 console.log(error);
             });
     }
@@ -152,11 +172,10 @@ export class LoginComponent extends React.Component {
                                 borderBottom: '1px solid rgba(0, 0, 0, .125)'
                             }}
                         >Login</DialogTitle>
-                        <Divider/>
+                        <Divider />
                         <DialogContent
                             style={{
                                 width: "600px",
-                                height: "85%",
                                 display: "flex",
                                 position: "relative",
                                 justifyContent: "center",
@@ -166,8 +185,8 @@ export class LoginComponent extends React.Component {
                             <List>
                                 <ListItem >
                                     <img src="./red_bg_logo.jpg" style={{
-                                        height: "150px",
-                                        width: "150px",
+                                        height: "125px",
+                                        width: "125px",
                                         borderRadius: "20%",
                                         display: "block",
                                         margin: "0 auto"
@@ -191,10 +210,6 @@ export class LoginComponent extends React.Component {
                                         onChange={(e) => this.onChangeUserName(e)} />
                                 </ListItem>
 
-                                <div className="validationMessage" style={{ height: "auto" }}>
-                                    {this.state.userNameErrorMessage}
-                                </div>
-
                                 <ListItem style={{
                                     paddingTop: "unset",
                                     paddingBottom: "unset"
@@ -212,10 +227,6 @@ export class LoginComponent extends React.Component {
 
                                 </ListItem>
 
-                                <div className="validationMessage" style={{ height: "auto" }}>
-                                    {this.state.passwordErrorMessage}
-                                </div>
-
                                 <ListItem
                                     style={{
                                         display: "flex",
@@ -229,14 +240,14 @@ export class LoginComponent extends React.Component {
                                         size="large"
                                         color="primary"
                                         variant="contained"
-                                        style={{ width: "200px" }}>Login</Button>
+                                        style={{ width: "100%", marginTop: "3%" }}>Login</Button>
                                 </ListItem>
 
                                 <div className="validationMessage loginValidationMessage" style={{
                                     height: "auto",
                                     marginBottom: "unset"
                                 }}>
-                                    {this.state.loginError}
+                                    {this.state.errorMessage}
                                 </div>
 
                                 <ListItem

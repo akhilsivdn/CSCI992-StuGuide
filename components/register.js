@@ -2,7 +2,6 @@ import React from "react";
 import axios from 'axios';
 import { Link } from "react-router-dom";
 import { TextField, Button, Paper, Dialog, DialogActions, DialogContent, DialogTitle, List, ListItem, Divider } from '@material-ui/core';
-import ReCAPTCHA from "react-google-recaptcha";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { Modal } from "@material-ui/core";
 
@@ -16,7 +15,6 @@ export class RegisterComponent extends React.Component {
             username: "",
             confirmpassword: "",
             registerationErrorMessage: "",
-            recaptchaValid: false,
             isLoading: false,
             firstName: "",
             lastName: ""
@@ -172,12 +170,6 @@ export class RegisterComponent extends React.Component {
         })
     }
 
-    onChangeRecaptcha() {
-        this.setState({
-            recaptchaValid: true
-        })
-    }
-
     onChangeFName(e) {
         if (this.state.registerationErrorMessage.length > 0) {
             this.setState({
@@ -229,11 +221,10 @@ export class RegisterComponent extends React.Component {
                 <Paper>
                     <Dialog
                         open="TRUE"
-                        // scroll={scroll}
                         style={{
                             width: "100%",
                             display: "flex",
-                            position: "center",
+                            position: "relative",
                             justifyContent: "center"
                         }}>
                         <DialogTitle
@@ -249,9 +240,8 @@ export class RegisterComponent extends React.Component {
                             }}>
                             Register
                             </DialogTitle>
-                            <Divider/>
+                        <Divider />
                         <DialogContent
-                            // dividers={scroll==='paper'}
                             style={{
                                 width: "600px",
                                 display: "flex",
@@ -262,8 +252,8 @@ export class RegisterComponent extends React.Component {
                                 {/* Logo */}
                                 <ListItem >
                                     <img src="./red_bg_logo.jpg" style={{
-                                        height: "150px",
-                                        width: "150px",
+                                        height: "125px",
+                                        width: "125px",
                                         borderRadius: "20%",
                                         display: "block",
                                         margin: "0 auto"
@@ -274,7 +264,7 @@ export class RegisterComponent extends React.Component {
                                     paddingTop: "unset",
                                     marginTop: "5px",
                                     float: "left",
-                                    marginLeft: "30px"
+                                    marginLeft: "5%"
                                 }}>
                                     <TextField
                                         label="First Name" onChange={(e) => this.onChangeFName(e)}
@@ -288,7 +278,7 @@ export class RegisterComponent extends React.Component {
                                     paddingTop: "unset",
                                     marginTop: "5px",
                                     float: "right",
-                                    marginRight: "60px"
+                                    marginRight: "5%"
                                 }}>
                                     <TextField
                                         label="Last Name" onChange={(e) => this.onChangeLName(e)}
@@ -303,7 +293,7 @@ export class RegisterComponent extends React.Component {
                                 <div style={{
                                     paddingTop: "unset",
                                     float: "left",
-                                    marginLeft: "30px"
+                                    marginLeft: "5%"
                                 }}>
                                     <TextField onChange={(e) => this.onChangeUsername(e)}
                                         value={this.state.username} label="Username"
@@ -316,7 +306,7 @@ export class RegisterComponent extends React.Component {
                                 <div style={{
                                     paddingTop: "unset",
                                     float: "right",
-                                    marginRight: "60px"
+                                    marginRight: "5%"
 
                                 }}>
                                     <TextField
@@ -331,7 +321,7 @@ export class RegisterComponent extends React.Component {
                                 <div style={{
                                     paddingTop: "unset",
                                     float: "left",
-                                    marginLeft: "30px"
+                                    marginLeft: "5%"
                                 }}>
                                     <TextField onChange={(e) => this.onChangePassword(e)}
                                         value={this.state.password} label="Password"
@@ -344,7 +334,7 @@ export class RegisterComponent extends React.Component {
                                 <div style={{
                                     paddingTop: "unset",
                                     float: "right",
-                                    marginRight: "60px"
+                                    marginRight: "5%"
                                 }}>
                                     <TextField onChange={(e) => this.onChangeConfirmPwd(e)}
                                         value={this.state.confirmpassword} label="Confirm Password"
@@ -356,29 +346,16 @@ export class RegisterComponent extends React.Component {
                             </List>
                         </DialogContent>
                         <div style={{
-                            width: "227px",
-                            height: "68px",
-                            paddingLeft: "150px",
-                            marginTop: "10px"
-                        }}>
-                            <ReCAPTCHA
-                                sitekey="6LeeYagUAAAAAAD2QaI4B8C3XoJL8q4mT-Sx9fJw"
-                                onChange={this.onChangeRecaptcha}
-                            />
-                        </div>
-
-                        <div style={{
                             display: "flex",
                             position: "relative",
                             justifyContent: "center",
-                            marginTop: "30px"
                         }}>
                             <Button disabled={this.state.firstName.length == 0 ||
                                 this.state.lastName.length == 0 ||
                                 this.state.emailID.length == 0 ||
                                 this.state.username.length == 0 ||
                                 this.state.password.length == 0 ||
-                                this.state.confirmpassword.length == 0 || this.state.recaptchaValid}
+                                this.state.confirmpassword.length == 0}
                                 size="large"
                                 color="primary"
                                 variant="contained" onClick={() => this.handleSubmit()}>Register</Button>
@@ -391,8 +368,7 @@ export class RegisterComponent extends React.Component {
                                 display: "flex",
                                 position: "relative",
                                 justifyContent: "center",
-                                marginTop: "30px",
-                                marginBottom:"20px"
+                                marginBottom: "20px"
                             }}>
                             <span>
                                 Already a member?&nbsp;

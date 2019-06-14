@@ -339,7 +339,6 @@ export class AdminComponent extends React.Component {
                         border: "gray",
                         borderStyle: "solid"
                     }}
-                        selectableRows={true}
                         title="List of users"
                         columns={columns}
                         data={this.state.userList}

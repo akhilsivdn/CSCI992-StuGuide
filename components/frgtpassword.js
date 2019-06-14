@@ -190,13 +190,11 @@ export class ForgotPasswordComponent extends React.Component {
             return (
                 <div className="loginSection" style={{
                     width: "50%",
-                    height: "85%",
-                    borderStyle: "dashed",
-                    borderColor: "antiquewhite"
+                    height: "85%"
                 }}>
                     <img src="./red_bg_logo.jpg" style={{
-                        height: "150px",
-                        width: "150px",
+                        height: "125px",
+                        width: "125px",
                         borderRadius: "20%",
                         display: "block",
                         margin: "0 auto",
@@ -230,13 +228,11 @@ export class ForgotPasswordComponent extends React.Component {
             return (
                 <div className="loginSection" style={{
                     width: "50%",
-                    height: "85%",
-                    borderStyle: "dashed",
-                    borderColor: "antiquewhite"
+                    height: "85%"
                 }}>
                     <img src="./red_bg_logo.jpg" style={{
-                        height: "150px",
-                        width: "150px",
+                        height: "125px",
+                        width: "125px",
                         borderRadius: "20%",
                         display: "block",
                         margin: "0 auto",
