@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { TextField, Button, Paper, Dialog, DialogActions, DialogContent, DialogTitle, List, ListItem } from '@material-ui/core';
+import { TextField, Button, Paper, Dialog, DialogActions, DialogContent, DialogTitle, Divider, List, ListItem } from '@material-ui/core';
 import axios from 'axios';
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { Modal } from "@material-ui/core";
@@ -145,9 +145,14 @@ export class LoginComponent extends React.Component {
                             style={{
                                 display: "flex",
                                 position: "relative",
-                                justifyContent: "center"
+                                justifyContent: "center",
+                                fontSize: 'large',
+                                fontWeight: '400',
+                                backgroundColor: 'rgba(0, 0, 0, .03)',
+                                borderBottom: '1px solid rgba(0, 0, 0, .125)'
                             }}
                         >Login</DialogTitle>
+                        <Divider/>
                         <DialogContent
                             style={{
                                 width: "600px",

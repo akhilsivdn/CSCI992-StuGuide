@@ -1,7 +1,7 @@
 import React from "react";
 import axios from 'axios';
 import { Link } from "react-router-dom";
-import { TextField, Button, Paper, Dialog, DialogActions, DialogContent, DialogTitle, List, ListItem } from '@material-ui/core';
+import { TextField, Button, Paper, Dialog, DialogActions, DialogContent, DialogTitle, List, ListItem, Divider } from '@material-ui/core';
 import ReCAPTCHA from "react-google-recaptcha";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { Modal } from "@material-ui/core";
@@ -229,10 +229,11 @@ export class RegisterComponent extends React.Component {
                 <Paper>
                     <Dialog
                         open="TRUE"
+                        // scroll={scroll}
                         style={{
                             width: "100%",
                             display: "flex",
-                            position: "relative",
+                            position: "center",
                             justifyContent: "center"
                         }}>
                         <DialogTitle
@@ -240,12 +241,17 @@ export class RegisterComponent extends React.Component {
                             style={{
                                 display: "flex",
                                 position: "relative",
-                                justifyContent: "center"
+                                justifyContent: "center",
+                                fontSize: 'large',
+                                fontWeight: '400',
+                                backgroundColor: 'rgba(0, 0, 0, .03)',
+                                borderBottom: '1px solid rgba(0, 0, 0, .125)'
                             }}>
                             Register
                             </DialogTitle>
-
+                            <Divider/>
                         <DialogContent
+                            // dividers={scroll==='paper'}
                             style={{
                                 width: "600px",
                                 display: "flex",
@@ -268,7 +274,7 @@ export class RegisterComponent extends React.Component {
                                     paddingTop: "unset",
                                     marginTop: "5px",
                                     float: "left",
-                                    marginLeft: "80px"
+                                    marginLeft: "30px"
                                 }}>
                                     <TextField
                                         label="First Name" onChange={(e) => this.onChangeFName(e)}
@@ -297,7 +303,7 @@ export class RegisterComponent extends React.Component {
                                 <div style={{
                                     paddingTop: "unset",
                                     float: "left",
-                                    marginLeft: "80px"
+                                    marginLeft: "30px"
                                 }}>
                                     <TextField onChange={(e) => this.onChangeUsername(e)}
                                         value={this.state.username} label="Username"
@@ -325,7 +331,7 @@ export class RegisterComponent extends React.Component {
                                 <div style={{
                                     paddingTop: "unset",
                                     float: "left",
-                                    marginLeft: "80px"
+                                    marginLeft: "30px"
                                 }}>
                                     <TextField onChange={(e) => this.onChangePassword(e)}
                                         value={this.state.password} label="Password"
@@ -385,7 +391,8 @@ export class RegisterComponent extends React.Component {
                                 display: "flex",
                                 position: "relative",
                                 justifyContent: "center",
-                                marginTop: "30px"
+                                marginTop: "30px",
+                                marginBottom:"20px"
                             }}>
                             <span>
                                 Already a member?&nbsp;
