@@ -89,7 +89,9 @@ export class AdminComponent extends React.Component {
                 userid: '',
                 useremail: '',
                 username: '',
-                isOpen: false
+                isOpen: false,
+                showUseroptions: false,
+                blockConfirm: false
             })
         });
     }
@@ -145,7 +147,11 @@ export class AdminComponent extends React.Component {
     }
 
     handleClose() {
-
+        this.setState({
+            isOpen: false,
+            showUseroptions: false,
+            blockConfirm: false
+        })
     }
 
 
@@ -344,7 +350,7 @@ export class AdminComponent extends React.Component {
                         data={this.state.userList}
                         onRowClicked={(e) => this.onClickRow(e)}
                     />
-                    <Button onClick={() => this.Logout()} style={{ height: "50px", width: "75px" }}>Logout</Button>
+                    <button onClick={() => this.Logout()} style={{ height: "50px", width: "75px", marginTop: "24px" }}>Logout</button>
                 </div>
             </div>
         );
