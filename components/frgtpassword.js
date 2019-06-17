@@ -1,7 +1,7 @@
 import React from "react";
 import OtpInput from 'react-otp-input';
 import axios from 'axios';
-import { Button, Dialog, DialogActions, DialogTitle } from '@material-ui/core';
+import { Button, Paper, Dialog, DialogActions, DialogContent, DialogTitle, Divider, List, ListItem } from '@material-ui/core';
 import { Link } from "react-router-dom";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { Modal } from "@material-ui/core";
@@ -188,84 +188,261 @@ export class ForgotPasswordComponent extends React.Component {
 
         if (!this.state.isMailSent) {
             return (
-                <div className="loginSection" style={{
-                    width: "50%",
-                    height: "85%"
-                }}>
-                    <img src="./red_bg_logo.jpg" style={{
-                        height: "125px",
-                        width: "125px",
-                        borderRadius: "20%",
-                        display: "block",
-                        margin: "0 auto",
-                        marginTop: "10px"
-                    }} />
-                    <div className="title_page" style={{
-                        margin: "0 auto"
-                    }}>Forgot Password</div>
-                    <div style={{
-                        margin: "0 auto",
-                        maxWidth: "50%"
-                    }}>No Problem! Enter your email below and we will send you an email with OTP to reset your password.</div>
-                    <div className="forgotPasswordSection" style={{
+                <Dialog
+                    open="TRUE"
+                    style={{
+                        width: "100%",
                         display: "flex",
-                        alignItems: "center"
+                        position: "relative",
+                        justifyContent: "center",
+                        maxWidth: "none",
+                        maxHeight: "700px"
                     }}>
-                        <input type="text" className="form-control form-control-lg form_search" placeholder="Enter your email address"
-                            onChange={(e) => this.SetEmailID(e)} style={{ marginTop: "10px", marginBottom: "10px" }} />
-                        <button style={{
-                            marginLeft: "15px",
-                            width: "250px",
-                            height: "3em"
-                        }} onClick={() => this.SendOtp()}>Reset password</button>
-                    </div>
-                    <span className="forgotPasswordSection" style={{ marginTop: "5%", color: "red" }}>{this.state.emailErrorMessage}</span>
-                </div>
+                    <DialogTitle
+                        id="form-dialog-title"
+                        style={{
+                            display: "flex",
+                            position: "relative",
+                            justifyContent: "center",
+                            fontSize: 'large',
+                            fontWeight: '400',
+                            backgroundColor: 'rgba(0, 0, 0, .03)',
+                            borderBottom: '1px solid rgba(0, 0, 0, .125)'
+                        }}
+                    >Forgot Password</DialogTitle>
+                    <Divider />
+                    <DialogContent
+                        style={{
+                            width: "600px",
+                            display: "flex",
+                            position: "relative",
+                            justifyContent: "center",
+                            padding: "unset"
+
+                        }}>
+
+                        <List>
+                            <ListItem >
+                                <img src="./red_bg_logo.jpg" style={{
+                                    height: "125px",
+                                    width: "125px",
+                                    borderRadius: "20%",
+                                    display: "block",
+                                    margin: "0 auto",
+                                    marginTop: "10px"
+                                }} />
+                            </ListItem>
+
+                            <ListItem style={{
+                                margin: "0 auto",
+                                maxWidth: "70%"
+                            }}>
+                                No Problem! Enter your email below and we will send you an email with OTP to reset your password.
+                                </ListItem>
+
+                            <ListItem>
+                                <input type="text" className="form-control form-control-lg form_search"
+                                    placeholder="Enter your email address"
+                                    onChange={(e) => this.SetEmailID(e)}
+                                    style={{
+                                        marginTop: "10px",
+                                        marginBottom: "10px",
+                                        marginLeft: '20px',
+                                        width: '60%'
+                                    }} />
+
+                                <Button
+                                    color="primary"
+                                    variant="contained"
+                                    style={{
+                                        marginLeft: "10px",
+                                        width: " 40%",
+                                        height: "3em"
+                                    }} onClick={() => this.SendOtp()}>
+                                    Reset Password
+                                    </Button>
+                            </ListItem>
+                            <ListItem>
+                                <span className="forgotPasswordSection"
+                                    style={{
+                                        marginBottom: '5px',
+                                        color: "red"
+                                    }}>
+                                    {this.state.emailErrorMessage}
+                                </span>
+                            </ListItem>
+
+                        </List>
+                    </DialogContent>
+                </Dialog>
+
+                // <div className="loginSection" style={{
+                //     width: "50%",
+                //     height: "85%"
+                // }}>
+                //     <img src="./red_bg_logo.jpg" style={{
+                //         height: "125px",
+                //         width: "125px",
+                //         borderRadius: "20%",
+                //         display: "block",
+                //         margin: "0 auto",
+                //         marginTop: "10px"
+                //     }} />
+                //     <div className="title_page" style={{
+                //         margin: "0 auto"
+                //     }}>Forgot Password</div>
+                //     <div style={{
+                //         margin: "0 auto",
+                //         maxWidth: "50%"
+                //     }}>No Problem! Enter your email below and we will send you an email with OTP to reset your password.</div>
+                //     <div className="forgotPasswordSection" style={{
+                //         display: "flex",
+                //         alignItems: "center"
+                //     }}>
+                //         <input type="text" className="form-control form-control-lg form_search" placeholder="Enter your email address"
+                //             onChange={(e) => this.SetEmailID(e)} style={{ marginTop: "10px", marginBottom: "10px" }} />
+                //         <button style={{
+                //             marginLeft: "15px",
+                //             width: "250px",
+                //             height: "3em"
+                //         }} onClick={() => this.SendOtp()}>Reset password</button>
+                //     </div>
+                //     <span className="forgotPasswordSection" style={{ marginTop: "5%", color: "red" }}>{this.state.emailErrorMessage}</span>
+                // </div>
+
+
             )
         }
 
         else if (this.state.isMailSent && !this.state.otpVerified) {
             return (
-                <div className="loginSection" style={{
-                    width: "50%",
-                    height: "85%"
-                }}>
-                    <img src="./red_bg_logo.jpg" style={{
-                        height: "125px",
-                        width: "125px",
-                        borderRadius: "20%",
-                        display: "block",
-                        margin: "0 auto",
-                        marginTop: "10px"
-                    }} />
-                    <div className="title_page" style={{
-                        margin: "0 auto"
-                    }}>One Time Password</div>
-                    <div style={{
-                        margin: "0 auto",
-                        maxWidth: "50%"
-                    }}>
-                        <span>
-                            In case you did not receive OTP, you will be able to regenerate the OTP in 5 minutes.
-                        </span>
-                        <a onClick={() => this.CancelProcess()} style={{ color: "#007bff", marginLeft: "10px" }}>Resend OTP</a>
-                    </div>
-                    <div className="forgotPasswordSection" style={{
+
+                <Dialog
+                    open="TRUE"
+                    style={{
+                        width: "100%",
                         display: "flex",
-                        alignItems: "center"
+                        position: "relative",
+                        justifyContent: "center",
+                        maxWidth: "none",
+                        maxHeight: "700px"
                     }}>
-                        <OtpInput inputStyle={{ height: "2.5em", width: "2.5em" }}
-                            onChange={(otp) => this.SetOtp(otp)}
-                            numInputs={4}
-                            separator={<span>-</span>} />
-                        <button disabled={this.state.otp.length < 4} style={{
-                            marginLeft: "15px",
-                            width: "250px",
-                            height: "3em"
-                        }} onClick={() => this.VerifyOtp()}>Verify OTP</button>
-                    </div>
-                    <span className="forgotPasswordSection" style={{ marginTop: "5%", color: "red" }}>{this.state.otpErrorMessage}</span>
-                </div>
+                    <DialogTitle
+                        id="form-dialog-title"
+                        style={{
+                            display: "flex",
+                            position: "relative",
+                            justifyContent: "center",
+                            fontSize: 'large',
+                            fontWeight: '400',
+                            backgroundColor: 'rgba(0, 0, 0, .03)',
+                            borderBottom: '1px solid rgba(0, 0, 0, .125)'
+                        }}
+                    >One Time Password</DialogTitle>
+                    <Divider />
+                    <DialogContent
+                        style={{
+                            width: "600px",
+                            display: "flex",
+                            position: "relative",
+                            justifyContent: "center",
+                            padding: "unset"
+
+                        }}>
+
+                        <List>
+                            <ListItem >
+                                <img src="./red_bg_logo.jpg" style={{
+                                    height: "125px",
+                                    width: "125px",
+                                    borderRadius: "20%",
+                                    display: "block",
+                                    margin: "0 auto",
+                                    marginTop: "10px"
+                                }} />
+                            </ListItem>
+
+                            <ListItem style={{
+                                margin: "0 auto",
+                                maxWidth: "70%",
+                                marginBottom:"10px"
+                            }}>
+                                <span>
+                                    In case you did not receive OTP, you will be able to regenerate the OTP in 5 minutes.
+                                    <a onClick={() => this.CancelProcess()} style={{ color: "#007bff", marginLeft: "10px" }}>Resend OTP</a>
+                                </span>
+
+                            </ListItem>
+
+                            <ListItem>
+                                <OtpInput
+                                    inputStyle={{marginLeft:"10px", marginRight:"10px", height: "2.5em", width: "2.5em" }}
+                                    onChange={(otp) => this.SetOtp(otp)}
+                                    numInputs={4}
+                                    separator={<span>-</span>} />
+                                <Button
+                                    color="primary"
+                                    variant="contained"
+                                    disabled={this.state.otp.length < 4}
+                                    style={{
+                                        marginLeft: "15px",
+                                        width: "250px",
+                                        height: "3em"
+                                    }}
+                                    onClick={() => this.VerifyOtp()}>
+                                    Verify OTP
+                                </Button>
+                            </ListItem>
+                            <ListItem style={{height:"70px"}}>
+                                <span className="forgotPasswordSection" style={{
+                                    marginBottom: '5px',
+                                    color: "red"
+                                }}>{this.state.otpErrorMessage}</span>
+                            </ListItem>
+                        </List>
+                    </DialogContent>
+                </Dialog>
+
+                // <div className="loginSection" style={{
+                //     width: "50%",
+                //     height: "85%"
+                // }}>
+                //     <img src="./red_bg_logo.jpg" style={{
+                //         height: "125px",
+                //         width: "125px",
+                //         borderRadius: "20%",
+                //         display: "block",
+                //         margin: "0 auto",
+                //         marginTop: "10px"
+                //     }} />
+                //     <div className="title_page" style={{
+                //         margin: "0 auto"
+                //     }}>One Time Password</div>
+                //     <div style={{
+                //         margin: "0 auto",
+                //         maxWidth: "50%"
+                //     }}>
+                //         <span>
+                //             In case you did not receive OTP, you will be able to regenerate the OTP in 5 minutes.
+                //         </span>
+                //         <a onClick={() => this.CancelProcess()} style={{ color: "#007bff", marginLeft: "10px" }}>Resend OTP</a>
+                //     </div>
+                //     <div className="forgotPasswordSection" style={{
+                //         display: "flex",
+                //         alignItems: "center"
+                //     }}>
+                //         <OtpInput inputStyle={{ height: "2.5em", width: "2.5em" }}
+                //             onChange={(otp) => this.SetOtp(otp)}
+                //             numInputs={4}
+                //             separator={<span>-</span>} />
+                //         <button disabled={this.state.otp.length < 4} style={{
+                //             marginLeft: "15px",
+                //             width: "250px",
+                //             height: "3em"
+                //         }} onClick={() => this.VerifyOtp()}>Verify OTP</button>
+                //     </div>
+                //     <span className="forgotPasswordSection" style={{ marginTop: "5%", color: "red" }}>{this.state.otpErrorMessage}</span>
+                // </div>
             )
         }
         else {
