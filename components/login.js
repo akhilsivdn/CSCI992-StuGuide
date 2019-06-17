@@ -124,6 +124,13 @@ export class LoginComponent extends React.Component {
             });
     }
 
+    OnKeyUp(e) {
+        if (e.keyCode == 13) {
+            e.preventDefault();
+            this.authenticate();
+        }
+    }
+
     render() {
         if (this.state.isLoading) {
             return (
@@ -223,6 +230,7 @@ export class LoginComponent extends React.Component {
                                         placeholder="Enter Password"
                                         type="password"
                                         name="password"
+                                        onKeyUp={(e) => this.OnKeyUp(e)}
                                         onChange={(e) => this.onChangePassword(e)} />
 
                                 </ListItem>
@@ -236,7 +244,8 @@ export class LoginComponent extends React.Component {
 
                                     }}>
                                     <Button disabled={this.state.userName.length == 0 ||
-                                        this.state.password.length == 0} onClick={() => this.authenticate()}
+                                        this.state.password.length == 0}
+                                        onClick={() => this.authenticate()}
                                         size="large"
                                         color="primary"
                                         variant="contained"
