@@ -135,6 +135,15 @@ class DrawerComponent extends React.Component {
 
 							<ListItem button>
 								<ListItemIcon>
+									<MedicalIcon />
+								</ListItemIcon>
+								<ListItemText>
+									<Link to="/recipes">Recipes</Link>
+								</ListItemText>
+							</ListItem>
+
+							<ListItem button>
+								<ListItemIcon>
 									<TransitIcon />
 								</ListItemIcon>
 								<ListItemText>

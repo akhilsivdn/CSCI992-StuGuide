@@ -13,7 +13,7 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import LocationIcon from '@material-ui/icons/GpsFixed';  //LocationOn
 
-export class TripPlannerComponent extends React.Component {
+export class ThingsToDoComponent extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -220,40 +220,12 @@ export class TripPlannerComponent extends React.Component {
                             style={{
                                 padding: 10,
                             }}
-                            onClick={(e) => { this.UseMyLocation(e) }}
-                        >
+                            onClick={(e) => { this.UseMyLocation(e) }}>
                             <LocationIcon />
                         </IconButton>
                     </Tooltip>
 
                 </Paper>
-
-                {/* <Paper
-                    style={{
-                        marginBottom: '10px'
-                    }}
-                    onClick={(e) => { this.UseMyLocation(e) }}
-                    >
-                    <Tooltip title="Current Location">
-                        <IconButton color="primary"
-                            style={{
-                                padding: '6px 0 7px',
-                                marginTop: '5px',
-                                marginBottom: '5px',
-                                marginLeft: '10px',
-                                marginRight: '20px',
-                            }}>
-                            <LocationIcon />
-                        </IconButton>
-                    </Tooltip>
-                    {localStorage.getItem('locationName')}
-                </Paper> */}
-
-
-                {/* <input type="text" onKeyUp={(e) => this.OnKeyUp(e)} className="form-control form-control-lg" placeholder="Enter location to explore"
-                    value={this.state.queryLocaltion} onChange={(e) => this.SetLocation(e)} /> */}
-
-                {/* <button className="btns" onClick={(e) => { this.UseMyLocation(e) }}>Use current location</button> */}
 
                 <MapComponent markers={this.state.pos} zoom={10} />
                 {template}
@@ -264,4 +236,4 @@ export class TripPlannerComponent extends React.Component {
 
 export default GoogleApiWrapper({
     apiKey: 'AIzaSyBi99vISytb1d0NAogNjpwgGy_wElH2ly0'
-})(TripPlannerComponent);
+})(ThingsToDoComponent);

@@ -87,9 +87,9 @@ export class PlanoftheDayComponent extends React.Component {
 
                                         <div className="itinerary_description">{itineraryItem.description}</div>
                                        
-                                        <div style={{ marginTop: "20px" }}>
+                                        {/* <div style={{ marginTop: "20px" }}>
                                             <Button variant="outlined" color="primary"><a href='' target="_blank">Get Directions</a></Button>
-                                        </div>
+                                        </div> */}
                                     </CardContent>
                                 </Card>
                             </div>

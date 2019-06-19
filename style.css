@@ -130,13 +130,9 @@ input {
   text-align: center;
 }
 
- .event{
-  
-} 
 
 .grid{
   display: flex;
-  height: 100vh;
   align-items: flex-start;
   align-content: flex-start;
   flex-wrap: wrap;
@@ -726,3 +722,23 @@ font-weight: 700;
 }
 
 /*End - validation styles*/
+
+
+/*Start - Recipes styles */
+
+.recipeTitle{
+   display: -webkit-box !important;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 18px !important;
+  font-weight: 500 !important;
+}
+
+.recipePublisher{
+  font-size: 15px !important;
+  font-weight: 400 !important;
+}
+
+/*End - Recipes styles*/
