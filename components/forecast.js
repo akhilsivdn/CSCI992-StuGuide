@@ -57,7 +57,7 @@ export class ForecastComponent extends React.Component {
 
         this.DisplayDayoftheWeek(1);
 
-        fetch('http://api.apixu.com/v1/forecast.json?key=e7ab3fccbda843c8b4485021192303&days=6&q=' + location)
+        fetch('http://api.apixu.com/v1/forecast.json?key=e7ab3fccbda843c8b4485021192303&days=7&q=' + location)
             .then(res => res.json())
             .then(data => this.setState({
                 current: data.current,
@@ -102,76 +102,79 @@ export class ForecastComponent extends React.Component {
         }
 
         return (
-            <div className="forecastpage">
-                <div>
-                    <div align="center">
-                        <br />
-                        <img src={'https://cdn3.iconfinder.com/data/icons/unicons-vector-icons-pack/32/location-512.png'} width={'18px'} height={'18px'}></img>
-                        <br />
-                        <font size={'5'}><b>{location}</b></font>
-                    </div>
-                    <hr />
+            <div>
+                <div className="title_page">Weather forecast for the next week</div>
+                <div className="forecastpage">
+                    <div>
+                        <div align="center">
+                            <br />
+                            <img src={'https://cdn3.iconfinder.com/data/icons/unicons-vector-icons-pack/32/location-512.png'} width={'18px'} height={'18px'}></img>
+                            <br />
+                            <font size={'5'}><b>{location}</b></font>
+                        </div>
+                        <hr />
 
-                    <div align="center">
-                        <span><font size={'10'}><b>{this.state.current && this.state.current.temp_c}&#176;</b></font></span>
-                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <div align="center">
+                            <span><font size={'10'}><b>{this.state.current && this.state.current.temp_c}&#176;</b></font></span>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
                         <span>
-                            <img src={this.state.current && this.state.current.condition.icon} style={{
-                                width: "75px",
-                                height: "75px",
-                                verticalAlign: "top"
-                            }}></img>
-                        </span>
-                    </div>
+                                <img src={this.state.current && this.state.current.condition.icon} style={{
+                                    width: "75px",
+                                    height: "75px",
+                                    verticalAlign: "top"
+                                }}></img>
+                            </span>
+                        </div>
 
-                    <div align="center" style={{ color: "gray" }}>
-                        <font size={'3'}>
-                            <img src={'https://image.flaticon.com/icons/svg/727/727790.svg'} width={'18px'} height={'18px'}></img>Humidity:&nbsp;{this.state.current && this.state.current.humidity}%&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <div align="center" style={{ color: "gray" }}>
+                            <font size={'3'}>
+                                <img src={'https://image.flaticon.com/icons/svg/727/727790.svg'} width={'18px'} height={'18px'}></img>Humidity:&nbsp;{this.state.current && this.state.current.humidity}%&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <img src={'https://image.flaticon.com/icons/svg/56/56086.svg'} width={'18px'} height={'18px'}></img> Wind:&nbsp;{this.state.current && this.state.current.wind_kph}km/h
                         </font>
-                    </div>
+                        </div>
 
-                    <div align="center">
-                        <span style={{ display: 'block' }}><font size={'4'}>{this.state.current && this.state.current.condition.text}</font></span>
-                    </div>
-                    <hr />
+                        <div align="center">
+                            <span style={{ display: 'block' }}><font size={'4'}>{this.state.current && this.state.current.condition.text}</font></span>
+                        </div>
+                        <hr />
 
-                    <div align="center">
-                        {
-                            this.state.forecastDays.map(function (forecastDay, i) {
-                                if (i == 0) {
-                                    return ('');
-                                }
+                        <div align="center">
+                            {
+                                this.state.forecastDays.map(function (forecastDay, i) {
+                                    if (i == 0) {
+                                        return ('');
+                                    }
 
-                                if (this.state.day == 7) {
-                                    this.state.day = 0;
-                                }
-                                let dayString = this.DisplayDayoftheWeek(this.state.day);
-                                this.state.day++;
+                                    if (this.state.day == 7) {
+                                        this.state.day = 0;
+                                    }
+                                    let dayString = this.DisplayDayoftheWeek(this.state.day);
+                                    this.state.day++;
 
-                                return (
-                                    <div>
-                                        <div style={{ float: 'left' }}>
-                                            <div><font size={'5'}>&nbsp;&nbsp;&nbsp;&nbsp;{dayString}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></div>
-                                            <div align="left" style={{
-                                                color: "gray"
-                                            }}><font size={'3'}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{forecastDay.day.condition.text}</font></div>
-                                            <div><font size={'3'}>&nbsp;</font></div>
-                                        </div>
-                                        <div style={{ float: 'right' }}>
+                                    return (
+                                        <div>
                                             <div style={{ float: 'left' }}>
-                                                <img src={forecastDay.day.condition.icon} width={'50px'} height={'50px'}></img>
+                                                <div><font size={'5'}>&nbsp;&nbsp;&nbsp;&nbsp;{dayString}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></div>
+                                                <div align="left" style={{
+                                                    color: "gray"
+                                                }}><font size={'3'}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{forecastDay.day.condition.text}</font></div>
+                                                <div><font size={'3'}>&nbsp;</font></div>
                                             </div>
                                             <div style={{ float: 'right' }}>
-                                                <div className="conditionText"><font size={'4'}><b>{forecastDay.day.maxtemp_c}&#176;&nbsp;&nbsp;&nbsp;&nbsp;</b></font></div>
-                                                <div className="conditionText"><font size={'3'}>{forecastDay.day.mintemp_c}&#176;&nbsp;&nbsp;&nbsp;&nbsp;</font></div>
+                                                <div style={{ float: 'left' }}>
+                                                    <img src={forecastDay.day.condition.icon} width={'50px'} height={'50px'}></img>
+                                                </div>
+                                                <div style={{ float: 'right' }}>
+                                                    <div className="conditionText"><font size={'4'}><b>{forecastDay.day.maxtemp_c}&#176;&nbsp;&nbsp;&nbsp;&nbsp;</b></font></div>
+                                                    <div className="conditionText"><font size={'3'}>{forecastDay.day.mintemp_c}&#176;&nbsp;&nbsp;&nbsp;&nbsp;</font></div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                )
-                            }, this)
-                        }
-                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                    )
+                                }, this)
+                            }
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
                     </div>
                 </div>
             </div>

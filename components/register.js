@@ -65,6 +65,15 @@ export class RegisterComponent extends React.Component {
             return;
         }
 
+        var validPassword = (/^([a-zA-Z0-9]+)$/.test(this.state.password.toLowerCase()) && /\d/.test(this.state.password.toLowerCase()) &&
+            /[A-Z]/i.test(this.state.password.toLowerCase()))
+        if (!validPassword) {
+            this.setState({
+                registerationErrorMessage: "Please should be a combination of characters and numbers"
+            })
+            return;
+        }
+
         if (this.state.password != this.state.confirmpassword) {
             this.setState({
                 registerationErrorMessage: "passwords don't match"

@@ -24,7 +24,9 @@ export class SettingsComponent extends React.Component {
             password: '',
             confirmPassword: '',
             isLoading: false,
-            fullName: ''
+            fullName: '',
+            passwordErrorMessage: '',
+            usernameErrorMessage: ''
         };
     }
 
@@ -53,6 +55,12 @@ export class SettingsComponent extends React.Component {
     }
 
     updateUsername() {
+        if (this.state.username.length < 5 || this.state.username.length > 12) {
+            this.setState({
+                usernameErrorMessage: "user name must be 5-12 characters long"
+            });
+            return;
+        }
         const transformRequest = (jsonData = {}) =>
             Object.entries(jsonData)
                 .map(x => `${encodeURIComponent(x[0])}=${encodeURIComponent(x[1])}`)
@@ -95,12 +103,37 @@ export class SettingsComponent extends React.Component {
     }
 
     changeUserName(e) {
+        if (this.state.usernameErrorMessage.length > 0) {
+            this.setState({
+                usernameErrorMessage: ""
+            })
+        }
         this.setState({
             username: e.target.value
         })
     }
 
     UpdatePassword() {
+        if (this.state.password.length < 5) {
+            this.setState({
+                passwordErrorMessage: "password too small. minimum 5 characters needed"
+            });
+            return;
+        }
+        if (this.state.password != this.state.confirmPassword) {
+            this.setState({
+                passwordErrorMessage: "passwords don't match"
+            });
+            return;
+        }
+        var validPassword = (/^([a-zA-Z0-9]+)$/.test(this.state.password.toLowerCase()) && /\d/.test(this.state.password.toLowerCase()) &&
+            /[A-Z]/i.test(this.state.password.toLowerCase()))
+        if (!validPassword) {
+            this.setState({
+                passwordErrorMessage: "Please should be a combination of characters and numbers"
+            });
+            return;
+        }
         const transformRequest = (jsonData = {}) =>
             Object.entries(jsonData)
                 .map(x => `${encodeURIComponent(x[0])}=${encodeURIComponent(x[1])}`)
@@ -142,12 +175,22 @@ export class SettingsComponent extends React.Component {
     }
 
     changePassword(e) {
+        if (this.state.passwordErrorMessage.length > 0) {
+            this.setState({
+                passwordErrorMessage: ""
+            })
+        }
         this.setState({
             password: e.target.value
         })
     }
 
     changeRePassword(e) {
+        if (this.state.passwordErrorMessage.length > 0) {
+            this.setState({
+                passwordErrorMessage: ""
+            })
+        }
         this.setState({
             confirmPassword: e.target.value
         })
@@ -188,7 +231,7 @@ export class SettingsComponent extends React.Component {
         return (
             <div>
                 <div className="title_page">Account Settings</div>
-                <div className="title_page" style={{fontWeight: "400"}}>Hi, {this.state.fullName}</div>
+                <div className="title_page" style={{ fontWeight: "400" }}>Hi, {this.state.fullName}</div>
 
                 <div>
                     <Dialog
@@ -240,6 +283,14 @@ export class SettingsComponent extends React.Component {
                                         name="Username"
                                         margin="Dense"
                                     />
+                                </ListItem>
+                                <ListItem style={{
+                                    paddingTop: "unset",
+                                    marginTop: "10px"
+                                }}>
+                                    <div className="validationMessage" style={{ height: "auto" }}>
+                                        {this.state.usernameErrorMessage}
+                                    </div>
                                 </ListItem>
                             </List>
                         </ExpansionPanelDetails>
@@ -298,6 +349,14 @@ export class SettingsComponent extends React.Component {
                                         name="ConfirmPassword"
                                         margin="Dense"
                                     />
+                                </ListItem>
+                                <ListItem style={{
+                                    paddingTop: "unset",
+                                    marginTop: "10px"
+                                }}>
+                                    <div className="validationMessage" style={{ height: "auto" }}>
+                                        {this.state.passwordErrorMessage}
+                                    </div>
                                 </ListItem>
                             </List>
                         </ExpansionPanelDetails>
