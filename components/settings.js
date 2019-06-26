@@ -1,6 +1,5 @@
 import React from "react";
 import axios from 'axios';
-import Avatar from 'react-avatar-edit';
 import { List, ListItem } from "@material-ui/core";
 import TextField from '@material-ui/core/TextField';
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";

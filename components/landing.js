@@ -93,6 +93,7 @@ export class LandingComponent extends React.Component {
         }
         return (
             <div>
+                <div className="title_page"></div>
                 <WeatherComponent />
                 <MapComponent zoom={14} markers={pos1} />
                 <EventBoxComponent />

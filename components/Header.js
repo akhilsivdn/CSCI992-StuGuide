@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, BrowserRouter as Router } from "react-router-dom";
+import { Link } from "react-router-dom";
 import DrawerComponent from "./drawer";
 import { AppBar, Toolbar, IconButton, Typography, Button } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -40,23 +40,22 @@ export class HeaderComponent extends React.Component {
     render() {
         return (
             <div>
-                <AppBar position="relative">
+                <AppBar>
                     <Toolbar>
                         <IconButton
                             color="inherit"
                             onClick={() => this.openDrawer()}
-                            style={{ flex: 0, alignItems: 'center', justifyContent: 'center' }}
-
-                        >
+                            style={{ flex: 0, alignItems: 'center', justifyContent: 'center' }}>
                             <MenuIcon />
                         </IconButton>
-                        <Typography variant="h5" color="inherit" noWrap style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                        <Typography variant="h5" color="inherit" noWrap
+                            style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                             <Link to="/home" style={{
                                 color: 'white',
                                 textDecoration: 'none'
                             }} >
                                 StuGuide
-                </Link>
+                            </Link>
                         </Typography>
 
                         <Link to="/search">
@@ -82,5 +81,5 @@ export class HeaderComponent extends React.Component {
                 />
             </div>
         );
-}
+    }
 }
