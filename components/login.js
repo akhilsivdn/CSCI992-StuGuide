@@ -4,6 +4,7 @@ import { TextField, Button, Paper, Dialog, DialogActions, DialogContent, DialogT
 import axios from 'axios';
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { Modal } from "@material-ui/core";
+import { DemoCarousel } from "./onboarding";
 
 export class LoginComponent extends React.Component {
 
@@ -268,7 +269,7 @@ export class LoginComponent extends React.Component {
                                     <span >
                                         <Link to={'/forgot-password'}>
                                             Forgot Password?
-                                </Link>
+                                   </Link>
                                     </span>
                                 </ListItem>
                             </List>
@@ -281,14 +282,15 @@ export class LoginComponent extends React.Component {
                             }}>
                             <span>
                                 Need an account?&nbsp;
-                            <Link to={'/register'}>
+                               <Link to={'/register'}>
                                     Sign up
-                            </Link>
+                               </Link>
                             </span>
                         </DialogActions>
                     </Dialog>
                 </Paper>
-            </div >
+                <DemoCarousel />
+            </div>
 
         );
     }
