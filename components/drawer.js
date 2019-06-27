@@ -7,6 +7,7 @@ import ThingsToDoIcon from "@material-ui/icons/Assignment";
 import NewsIcon from "@material-ui/icons/Event";
 import PlanIcon from "@material-ui/icons/Schedule"; //Commute
 import TransitIcon from "@material-ui/icons/DirectionsTransit";
+import RestaurantIcon from "@material-ui/icons/LocalPizza";
 import ShopIcon from "@material-ui/icons/LocalDining";
 import GroceryIcon from "@material-ui/icons/LocalGroceryStore";
 import LocalStoreIcon from "@material-ui/icons/LocalConvenienceStore";
@@ -16,7 +17,6 @@ import ParkingIcon from "@material-ui/icons/LocalParkingRounded";
 import WeatherIcon from "@material-ui/icons/Cloud";
 import SettingsIcon from "@material-ui/icons/Settings";
 import LogoutIcon from "@material-ui/icons/ExitToApp";
-
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -133,7 +133,7 @@ class DrawerComponent extends React.Component {
 
 							<ListItem button>
 								<ListItemIcon>
-									<MedicalIcon />
+									<ShopIcon />
 								</ListItemIcon>
 								<ListItemText>
 									<Link to="/recipes">Recipes</Link>
@@ -151,7 +151,7 @@ class DrawerComponent extends React.Component {
 
 							<ListItem button>
 								<ListItemIcon>
-									<ShopIcon />
+									<RestaurantIcon />
 								</ListItemIcon>
 								<ListItemText>
 									<Link to="/restaurants">Restaurants</Link>
