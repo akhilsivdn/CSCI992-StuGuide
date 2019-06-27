@@ -7,8 +7,8 @@ import ThingsToDoIcon from "@material-ui/icons/Assignment";
 import NewsIcon from "@material-ui/icons/Event";
 import PlanIcon from "@material-ui/icons/Schedule"; //Commute
 import TransitIcon from "@material-ui/icons/DirectionsTransit";
-import RestaurantIcon from "@material-ui/icons/LocalPizza";
-import ShopIcon from "@material-ui/icons/LocalDining";
+import RestaurantIcon from "@material-ui/icons/LocalDining";//LocalPizza
+import RecipeIcon from "@material-ui/icons/LocalPizza";
 import GroceryIcon from "@material-ui/icons/LocalGroceryStore";
 import LocalStoreIcon from "@material-ui/icons/LocalConvenienceStore";
 import MedicalIcon from "@material-ui/icons/LocalHospital";
@@ -106,42 +106,6 @@ class DrawerComponent extends React.Component {
 
 							<ListItem button>
 								<ListItemIcon>
-									<ThingsToDoIcon />
-								</ListItemIcon>
-								<ListItemText>
-									<Link to="/things-to-do">Things to do</Link>
-								</ListItemText>
-							</ListItem>
-
-							<ListItem button>
-								<ListItemIcon>
-									<NewsIcon />
-								</ListItemIcon>
-								<ListItemText>
-									<Link to="/news-headlines">News Headlines</Link>
-								</ListItemText>
-							</ListItem>
-
-							<ListItem button>
-								<ListItemIcon>
-									<PlanIcon />
-								</ListItemIcon>
-								<ListItemText>
-									<Link to="/plan-for-the-day">Plan for the day</Link>
-								</ListItemText>
-							</ListItem>
-
-							<ListItem button>
-								<ListItemIcon>
-									<ShopIcon />
-								</ListItemIcon>
-								<ListItemText>
-									<Link to="/recipes">Recipes</Link>
-								</ListItemText>
-							</ListItem>
-
-							<ListItem button>
-								<ListItemIcon>
 									<TransitIcon />
 								</ListItemIcon>
 								<ListItemText>
@@ -178,6 +142,15 @@ class DrawerComponent extends React.Component {
 
 							<ListItem button>
 								<ListItemIcon>
+									<RecipeIcon />
+								</ListItemIcon>
+								<ListItemText>
+									<Link to="/recipes">Recipes</Link>
+								</ListItemText>
+							</ListItem>
+
+							<ListItem button>
+								<ListItemIcon>
 									<MedicalIcon />
 								</ListItemIcon>
 								<ListItemText>
@@ -205,10 +178,37 @@ class DrawerComponent extends React.Component {
 
 							<ListItem button>
 								<ListItemIcon>
+									<NewsIcon />
+								</ListItemIcon>
+								<ListItemText>
+									<Link to="/news-headlines">News Headlines</Link>
+								</ListItemText>
+							</ListItem>
+
+							<ListItem button>
+								<ListItemIcon>
 									<WeatherIcon />
 								</ListItemIcon>
 								<ListItemText>
 									<Link to="/weather-forecast">Weather Forecast</Link>
+								</ListItemText>
+							</ListItem>
+
+							<ListItem button>
+								<ListItemIcon>
+									<PlanIcon />
+								</ListItemIcon>
+								<ListItemText>
+									<Link to="/plan-for-the-day">Plan for the day</Link>
+								</ListItemText>
+							</ListItem>
+
+							<ListItem button>
+								<ListItemIcon>
+									<ThingsToDoIcon />
+								</ListItemIcon>
+								<ListItemText>
+									<Link to="/things-to-do">Things to do</Link>
 								</ListItemText>
 							</ListItem>
 
@@ -229,6 +229,7 @@ class DrawerComponent extends React.Component {
 									<Link>Logout</Link>
 								</ListItemText>
 							</ListItem>
+
 						</List>
 					</div>
 				</Paper>
