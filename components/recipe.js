@@ -4,6 +4,7 @@ import { Modal } from "@material-ui/core";
 import InputBase from '@material-ui/core/InputBase';
 import Paper from '@material-ui/core/Paper';
 import { Card, CardActionArea, CardActions, CardContent, CardMedia, Button, Typography } from '@material-ui/core';
+import ScrollToTop from "react-scroll-up";
 
 export class RecipeComponent extends React.Component {
     constructor() {
@@ -13,7 +14,7 @@ export class RecipeComponent extends React.Component {
             isLoading: false,
             recipeKeyword: '',
             noResults: false,
-            noResultText:''
+            noResultText: ''
         }
     }
 
@@ -37,7 +38,7 @@ export class RecipeComponent extends React.Component {
                         recipes: data.recipes,
                         noResults: data.recipes && data.recipes.length == 0,
                         isLoading: false,
-                        noResultText:'Oops ! No recipes found'
+                        noResultText: 'Oops ! No recipes found'
                     })
                 }
             })
@@ -136,6 +137,11 @@ export class RecipeComponent extends React.Component {
                         onChange={(e) => this.SetKeyword(e)}
                         placeholder="Search your recipe" />
                 </Paper>
+
+                <ScrollToTop showUnder={500} duration={1000}>
+                    <img src="https://cdn2.iconfinder.com/data/icons/essential-web-1-1/50/arrow-circle-up-angle-top-256.png"
+                        style={{ height: "50px", width: "50px" }} />
+                </ScrollToTop>
 
                 <div className="grid">
                     {

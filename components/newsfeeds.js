@@ -2,6 +2,7 @@ import React from "react";
 import { Paper, Grid, ButtonBase, GridList, Typography, Button } from "@material-ui/core";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { Modal } from "@material-ui/core";
+import ScrollToTop from "react-scroll-up";
 
 const styles = theme => ({
     paper: {
@@ -68,6 +69,10 @@ export class NewsFeedComponent extends React.Component {
         return (
             <div>
                 <div className="title_page">News Headlines</div>
+                <ScrollToTop showUnder={500} duration={1000}>
+                    <img src="https://cdn2.iconfinder.com/data/icons/essential-web-1-1/50/arrow-circle-up-angle-top-256.png"
+                        style={{ height: "50px", width: "50px" }} />
+                </ScrollToTop>
                 <GridList cellHeight='auto' className={styles.gridList} cols={1}>
                     {this.state.newsArticles.map(function (article, i) {
                         var published = article.publishedAt;

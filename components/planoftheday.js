@@ -7,6 +7,7 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import ScrollToTop from "react-scroll-up";
 
 export class PlanoftheDayComponent extends React.Component {
     constructor() {
@@ -64,6 +65,12 @@ export class PlanoftheDayComponent extends React.Component {
         return (
             <div>
                 <div className="title_page">Plan for the day</div>
+
+                <ScrollToTop showUnder={500} duration={1000}>
+                    <img src="https://cdn2.iconfinder.com/data/icons/essential-web-1-1/50/arrow-circle-up-angle-top-256.png"
+                        style={{ height: "50px", width: "50px" }} />
+                </ScrollToTop>
+
                 {
                     this.state.itineraryItems.map(function (itineraryItem, i) {
                         let poi = itineraryItem.poi;

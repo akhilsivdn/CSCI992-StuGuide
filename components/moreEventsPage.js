@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import { Card, CardActionArea, CardActions, CardContent, CardMedia, Button, Typography, Grid } from '@material-ui/core';
+import ScrollToTop from "react-scroll-up";
 
 export class MoreEventsPageComponent extends React.Component {
 
@@ -20,6 +21,10 @@ export class MoreEventsPageComponent extends React.Component {
         return (
             <div>
                 <div className="title_page">More events near {location}..</div>
+                <ScrollToTop showUnder={500} duration={1000}>
+                    <img src="https://cdn2.iconfinder.com/data/icons/essential-web-1-1/50/arrow-circle-up-angle-top-256.png"
+                        style={{ height: "50px", width: "50px" }} />
+                </ScrollToTop>
                 <div className="grid">
                     {
                         this.state.data.map(function (event, i) {

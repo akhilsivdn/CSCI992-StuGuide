@@ -6,6 +6,7 @@ import Paper from '@material-ui/core/Paper';
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { Modal } from "@material-ui/core";
+import ScrollToTop from "react-scroll-up";
 
 export class SearchComponent extends React.Component {
     constructor() {
@@ -122,6 +123,11 @@ export class SearchComponent extends React.Component {
                         <div className="title_page">Search for a place to know more..</div>
 
                         <MapComponent markers={this.state.pos} zoom={10} />
+                      
+                        <ScrollToTop showUnder={500} duration={1000}>
+                            <img src="https://cdn2.iconfinder.com/data/icons/essential-web-1-1/50/arrow-circle-up-angle-top-256.png"
+                                style={{ height: "50px", width: "50px" }} />
+                        </ScrollToTop>
 
                         <input type="text" className="form-control form-control-lg form_search" placeholder="Search for a place"
                             onChange={(e) => this.FilteredList(e)} value={this.state.queryString} />

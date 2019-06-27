@@ -6,6 +6,7 @@ import { Modal, Button } from "@material-ui/core";
 import { Card, CardActionArea, CardActions, CardContent, CardMedia, Typography, Grid } from '@material-ui/core';
 import StarRatings from 'react-star-ratings';
 import InfiniteScroll from "react-infinite-scroll-component";
+import ScrollToTop from "react-scroll-up";
 
 export class CommonComponent extends React.Component {
     constructor(props) {
@@ -235,6 +236,11 @@ export class CommonComponent extends React.Component {
                         <div className="title_page">{this.state.title}</div>
 
                         <MapComponent markers={this.state.pos} zoom={10} />
+
+                        <ScrollToTop showUnder={500} duration={1000}>
+                            <img src="https://cdn2.iconfinder.com/data/icons/essential-web-1-1/50/arrow-circle-up-angle-top-256.png"
+                                style={{ height: "50px", width: "50px" }} />
+                        </ScrollToTop>
 
                         <InfiniteScroll
                             dataLength={this.state.placeArray.length}

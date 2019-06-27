@@ -12,6 +12,7 @@ import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import LocationIcon from '@material-ui/icons/GpsFixed';  //LocationOn
+import ScrollToTop from "react-scroll-up";
 
 export class ThingsToDoComponent extends React.Component {
     constructor() {
@@ -160,9 +161,6 @@ export class ThingsToDoComponent extends React.Component {
                                                         <a target="_blank" href={placeUrl} style={{ color: 'white' }}>Get Directions</a>
                                                     </Button>
                                                 </div>
-                                                {/* <div>
-                                                <button><a target="_blank" href={placeUrl}>Get Directions</a></button>
-                                            </div> */}
                                             </div>
                                         </Card>
                                     </div>
@@ -228,6 +226,10 @@ export class ThingsToDoComponent extends React.Component {
                 </Paper>
 
                 <MapComponent markers={this.state.pos} zoom={10} />
+                <ScrollToTop showUnder={500} duration={1000}>
+                            <img src="https://cdn2.iconfinder.com/data/icons/essential-web-1-1/50/arrow-circle-up-angle-top-256.png"
+                                style={{ height: "50px", width: "50px" }} />
+                        </ScrollToTop>
                 {template}
             </div >
         )

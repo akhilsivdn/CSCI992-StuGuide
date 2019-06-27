@@ -70,20 +70,12 @@ export class EventBoxComponent extends React.Component {
                     }} size="medium" color="default">
                         <span style={{
                             fontSize: '20px',
-                            fontStyle: 'italic',
-                            fontFamily: 'cursive',
-                            fontWeight: '600'
+                            fontWeight: '400'
                         }}>Events Nearby</span>
-
-                        {/* Replace the icon with material icon */}
-
-                        {this.state.data && this.state.data.length > 5 && <span style={{
-                            fontSize: '28px',
-                            fontStyle: 'italic',
-                            fontFamily: 'cursive',
-                            fontWeight: '600',
-                            padding: '5px'
-                        }}>&#62;</span>}
+                        {this.state.data && this.state.data.length > 5 &&
+                            <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-arrow-right-256.png"
+                                style={{ width: "30px", height: "30px" }} />
+                        }
                     </Button>
                 </Link>
                 <div className="abc">
