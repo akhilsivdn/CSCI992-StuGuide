@@ -92,7 +92,7 @@ export class WeatherComponent extends React.Component {
                 </div>
             )
         }
-        
+
         let newDate = new Date();
         let dayText = this.DisplayDayoftheWeek(newDate.getDay());
 
@@ -103,7 +103,11 @@ export class WeatherComponent extends React.Component {
             }}>
                 {/* LOGO */}
                 <img className="logo" src="./white_bg_logo.png"
-                    height='180px' width='180px' />
+                    height='180px' width='180px' style={{
+                        border: "#3f51b5",
+                        borderStyle: "double",
+                        borderRadius: "50%"
+                    }} />
                 <div className="weatherDiv">
 
                     <div>
