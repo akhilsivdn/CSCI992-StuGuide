@@ -184,8 +184,17 @@ export class CommonComponent extends React.Component {
             if (a.distance > b.distance) return 1;
             return 0;
         });
+
+        //Avoid redundancy
+        var results = [];
+        for (var i = 0; i < array.length - 1; i++) {
+            if (array[i].phone != array[i + 1].phone) {
+                results.push(array[i]);
+            }
+        }
+
         this.setState({
-            placeArray: array,
+            placeArray: results,
             isLoading: false
         })
     }
@@ -246,9 +255,6 @@ export class CommonComponent extends React.Component {
                             dataLength={this.state.placeArray.length}
                             next={(e) => this.LoadMoreResults(e)}
                             hasMore={this.state.nextPageToken}
-                            endMessage={<Button style={{
-                                margin: '10px'
-                            }} onClick={this.scrollTop}>Take me to top!</Button>}
                             loader={<h4 style={{
                                 margin: '10px',
                                 fontSize: '18px',
